@@ -1,0 +1,28 @@
+.good_content{
+    width:940px;
+    float: right;
+}
+.good{
+    padding:0 17px;
+    width:234px;
+    height:250px;
+    float:left;
+}
+.good img{
+    width:200px;
+    height: 200px;
+}
+.good .good-name{
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    line-height: 25px;
+}
+.good_saleprice{
+    font-size: 18px;
+    color: #be2924;
+}
+.good .goods-price{
+    font-size: 12px;
+    color: gray;
+}
