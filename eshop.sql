@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.7.21-log)
-# Date: 2018-03-21 17:22:13
+# Date: 2018-03-21 17:26:51
 # Generator: MySQL-Front 6.0  (Build 2.20)
 
 
@@ -8,7 +8,7 @@
 #
 
 CREATE TABLE `area` (
-  `Id` bigint(1) unsigned NOT NULL AUTO_INCREMENT,
+  `Id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `area_id` int(11) unsigned NOT NULL DEFAULT '0',
   `area_name` varchar(60) NOT NULL DEFAULT '',
   `parent` int(11) unsigned NOT NULL DEFAULT '0',
