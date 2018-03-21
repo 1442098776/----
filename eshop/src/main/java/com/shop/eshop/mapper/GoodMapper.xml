@@ -15,10 +15,34 @@
         <result column="create_time" jdbcType="DATE" property="createTime" />
         <result column="start_time" jdbcType="DATE" property="startTime" />
         <result column="end_time" jdbcType="DATE" property="endTime" />
+        <!--得到商品的同时级联查询所有的图片-->
+        <collection property="goodPics" column="id" ofType="com.shop.eshop.model.GoodPic" select="getGoodPicByGoodId"/>
     </resultMap>
 
+    <resultMap id="GoodPicMap" type="com.shop.eshop.model.GoodPic">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="pic_name" jdbcType="VARCHAR" property="picName" />
+        <result column="grade" jdbcType="BIT" property="grade" />
+        <result column="good_id" jdbcType="INTEGER" property="goodId" />
+    </resultMap>
+
+
+    <!-- 得到所有的商品 -->
     <select id="getAllGood" resultMap="GoodMap">
         SELECT * from good
     </select>
+    <!-- 根据商品id获取商品-->
+    <select id="getGoodById" parameterType="int" resultMap="GoodMap">
+        SELECT * from good where id = #{id}
+    </select>
+    <!-- 根据商品id获取商品图片-->
+    <select id="getGoodPicByGoodId" resultMap="GoodPicMap" parameterType="int">
+        SELECT * from good_pic where good_id = #{id}
+    </select>
+    <!-- 获取销量前10的商品信息-->
+    <select id="getGoodBySaleNum" resultMap="GoodMap">
+        SELECT * FROM good ORDER BY sale_num limit 1,10
+    </select>
+
 
 </mapper>

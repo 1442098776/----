@@ -16,4 +16,14 @@ public class GoodServiceImpl implements GoodService {
     public List<Good> getAllGood() {
         return goodMapper.getAllGood();
     }
+
+    @Override
+    public Good getGoodById(Integer id) {
+        return goodMapper.getGoodById(id);
+    }
+
+    @Override
+    public List<Good> getGoodBySaleNum() {
+        return goodMapper.getGoodBySaleNum();
+    }
 }

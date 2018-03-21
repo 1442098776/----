@@ -3,7 +3,7 @@ package com.shop.eshop.model;
 import java.util.Date;
 
 public class GoodPic {
-    private Short id;
+    private Long id;
 
     private String picName;
 
@@ -13,11 +13,11 @@ public class GoodPic {
 
     private Integer goodId;
 
-    public Short getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

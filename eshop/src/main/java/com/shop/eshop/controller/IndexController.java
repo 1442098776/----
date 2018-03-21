@@ -25,7 +25,7 @@ public class IndexController {
     private MenuService menuService;
     @Autowired
     private GoodService goodService;
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
         List<Menu> menuList=menuService.getMenuByParentId(0);

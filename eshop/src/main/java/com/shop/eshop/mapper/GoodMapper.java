@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface GoodMapper {
     List<Good> getAllGood();
+    Good getGoodById(Integer id);
+    List<Good> getGoodBySaleNum();
 }
