@@ -54,14 +54,6 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px #fff inset;}
 .am-cf input{width: 100%;font-size: 14px;}
 .login-links{max-width:320px;margin:20px auto ;font-size:14px;}
 
-/*合作账号*/
-.partner{width: 100%;max-width:320px;margin:20px auto ;font-size:14px;}
-.partner h3{text-align: center;}
-.am-btn-group{display: block;overflow: hidden;}
-.am-btn-group li{width:33.333% ;display: block;float: left;}
-.am-btn-group i{margin:0px auto ;display: block;width: 42px;height: 42px;border-radius: 42px;line-height:42px ;padding-left: 10px;border:1px solid #eee ;background:#fff ;color: #0e90d2;}
-.am-btn-group span{display: none;}
-
 
 /*注册*/
 .verification {position: relative;}

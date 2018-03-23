@@ -1,5 +1,6 @@
 package com.shop.eshop.service.Impl;
 
+import com.shop.eshop.dto.TypeCondition;
 import com.shop.eshop.mapper.GoodMapper;
 import com.shop.eshop.model.Good;
 import com.shop.eshop.service.GoodService;
@@ -25,5 +26,10 @@ public class GoodServiceImpl implements GoodService {
     @Override
     public List<Good> getGoodBySaleNum() {
         return goodMapper.getGoodBySaleNum();
+    }
+
+    @Override
+    public List<Good> getGoodByCondition(TypeCondition tp) {
+        return goodMapper.getGoodByCondition(tp);
     }
 }

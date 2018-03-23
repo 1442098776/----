@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-//    @RequestMapping("/{page}")
-//    public String pageController(@PathVariable String page){
-//        return page;
-//    }
+    @RequestMapping("/{page}")
+    public String pageController(@PathVariable String page){
+        return "person/"+page;
+    }
     @RequestMapping("/login")
     public String login(){
         return "login";

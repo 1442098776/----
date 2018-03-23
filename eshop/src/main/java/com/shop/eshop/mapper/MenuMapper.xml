@@ -10,6 +10,7 @@
         <result column="img" property="img"/>
         <result column="create_time" property="createTime"/>
         <collection property="child" ofType="com.shop.eshop.model.Menu" column="id" select="getMenuByParentId"/>
+        <collection property="goodTypes" ofType="com.shop.eshop.model.GoodType" column="id" select="com.shop.eshop.mapper.GoodTypeMapper.getGoodTypeByMenuId"/>
     </resultMap>
     <select id="getMenuByParentId" resultMap="MenuMap" parameterType="Integer">
         SELECT * from menu WHERE parent_id = #{id}

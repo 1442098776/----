@@ -1,5 +1,6 @@
 package com.shop.eshop.controller;
 
+import com.shop.eshop.dto.TypeCondition;
 import com.shop.eshop.model.Good;
 import com.shop.eshop.model.Menu;
 import com.shop.eshop.service.GoodService;
@@ -7,6 +8,7 @@ import com.shop.eshop.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -29,16 +31,23 @@ public class IndexController {
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
         List<Menu> menuList=menuService.getMenuByParentId(0);
-        List<Good> goods=goodService.getAllGood();
-        List<Good> goodList=new ArrayList<Good>();
-        for(Good good:goods){
-            String googsub=good.getName().substring(0,14);
-            good.setName(googsub);
-            goodList.add(good);
-        }
+//        List<Good> goods=goodService.getAllGood();
+//        List<Good> goodList=new ArrayList<Good>();
+//        for(Good good:goods){
+//            String googsub=good.getName().substring(0,14);
+//            good.setName(googsub);
+//            goodList.add(good);
+//        }
         mv.addObject("menuList",menuList);
-        mv.addObject("goodList",goodList);
+//        mv.addObject("goodList",goodList);
         mv.setViewName("index");
         return mv;
+    }
+
+    @RequestMapping("/getGoodByType")
+    @ResponseBody
+    public List<Good> getGoodByType(TypeCondition type){
+        List<Good> goodList = goodService.getGoodByCondition(type);
+        return goodList;
     }
 }

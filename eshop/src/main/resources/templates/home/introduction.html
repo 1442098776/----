@@ -55,10 +55,6 @@
 							<ul>
 								<li class="index"><a href="/">首页</a></li>
 							</ul>
-							<div class="nav-extra">
-								<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-								<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-							</div>
 						</div>
 			</div>
 			<script type="text/javascript">
@@ -163,22 +159,109 @@
 							<div class="clear"></div>
 						</div>
 
+						<script type="text/javascript">
+							<!--获取省-->
+                            function getProvince() {
+                                var province = window.document.getElementById("province");
+                                var str = '<option value="null">--请选择--</option>';
+                                $.ajax({
+                                    url:'/province',
+                                    type:'POST',
+                                    dateType:'json',
+
+                                    success:function(data) {
+                                        console.info(data);
+                                        for(var i=0; i < data.length; i++){
+                                            str += "<option id = "+data[i].provinceId+" value="+data[i].provinceName+">"+data[i].provinceName+"</option>"
+										}
+										console.info(str);
+                                        province.innerHTML = str;
+                                    }
+                                })
+
+                            }
+                            function getCity() {
+                                //得到select对象
+								var select = window.document.getElementById("province");
+								//得到被选的option的下标
+								var index = select.selectedIndex;
+								//得到option对象
+								var option = select.options[index];
+								//获取option的id
+								var id = option.id;
+								//获取option的value
+								var value = option.value;
+								// alert(id)
+								// alert(value);
+                                var city = window.document.getElementById("city");
+                                var area = window.document.getElementById("area");
+                                area.innerHTML = '<option value="null">--请选择--</option>';
+                                var str = '<option value="null">--请选择--</option>';
+								$.ajax({
+									url:'/city',
+									data:{
+									    province_id:id
+									},
+									type:'POST',
+									dataType:'json',
+									success:function (data) {
+                                        for(var i=0; i < data.length; i++){
+                                            str += "<option id = "+data[i].cityId+" value="+data[i].cityName+">"+data[i].cityName+"</option>"
+                                        }
+                                        console.info(str);
+                                        city.innerHTML = str;
+                                    }
+								})
+                            }
+
+                            function getArea() {
+                                //得到select对象
+                                var select = window.document.getElementById("city");
+                                //得到被选的option的下标
+                                var index = select.selectedIndex;
+                                //得到option对象
+                                var option = select.options[index];
+                                //获取option的id
+                                var id = option.id;
+                                //获取option的value
+                                var value = option.value;
+                                // alert(id)
+                                // alert(value);
+                                var area = window.document.getElementById("area");
+                                var str = '<option value="null">--请选择--</option>';
+                                $.ajax({
+                                    url:'/area',
+                                    data:{
+                                        city_id:id
+                                    },
+                                    type:'POST',
+                                    dataType:'json',
+                                    success:function (data) {
+                                        for(var i=0; i < data.length; i++){
+                                            str += "<option id = "+data[i].areaId+" value="+data[i].areaName+">"+data[i].areaName+"</option>"
+                                        }
+                                        console.info(str);
+                                        area.innerHTML = str;
+                                    }
+                                })
+                            }
+                            $(function () {
+								getProvince();
+                            })
+
+						</script>
 						<!--地址-->
 						<dl class="iteminfo_parameter freight">
 							<dt>配送至</dt>
 							<div class="iteminfo_freprice">
-								<div class="am-form-content address">
-									<select data-am-selected>
-										<option value="a">浙江省</option>
-										<option value="b">湖北省</option>
+								<div class="address">
+									<select id = "province" onchange="getCity()">
 									</select>
-									<select data-am-selected>
-										<option value="a">温州市</option>
-										<option value="b">武汉市</option>
+									<select id="city" type="hide" onchange="getArea()">
+										<option value="null">--请选择--</option>
 									</select>
-									<select data-am-selected>
-										<option value="a">瑞安区</option>
-										<option value="b">洪山区</option>
+									<select id="area">
+										<option value="null">--请选择--</option>
 									</select>
 								</div>
 								<div class="pay-logis">

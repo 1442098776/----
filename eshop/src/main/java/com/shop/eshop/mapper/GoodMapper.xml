@@ -22,10 +22,26 @@
     <resultMap id="GoodPicMap" type="com.shop.eshop.model.GoodPic">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="pic_name" jdbcType="VARCHAR" property="picName" />
+        <result column="create_time" jdbcType="DATE" property="createTime" />
         <result column="grade" jdbcType="BIT" property="grade" />
         <result column="good_id" jdbcType="INTEGER" property="goodId" />
     </resultMap>
 
+
+    <!--根据类型得到商品-->
+    <select id="getGoodByCondition" resultMap="GoodMap" parameterType="com.shop.eshop.dto.TypeCondition">
+        SELECT g.* FROM good AS g WHERE 1 = 1
+        <if test = "menuId != null">
+            and g.type in (SELECT gt2.id from good_type as gt2 where gt2.menu_id =  #{menuId})
+        </if>
+        <if test = "typeId != null">
+            and g.type = #{typeId}
+            <if test="count != null">
+                limit 0,8
+            </if>
+        </if>
+
+    </select>
 
     <!-- 得到所有的商品 -->
     <select id="getAllGood" resultMap="GoodMap">
@@ -42,6 +58,10 @@
     <!-- 获取销量前10的商品信息-->
     <select id="getGoodBySaleNum" resultMap="GoodMap">
         SELECT * FROM good ORDER BY sale_num limit 1,10
+    </select>
+
+    <select id="getGoodByType" resultMap="GoodMap" parameterType="java.lang.Integer">
+        SELECT * from good where type = #{id} limit 0,8
     </select>
 
 

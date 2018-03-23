@@ -31,10 +31,10 @@
 					<div class="clear"></div>
 
 					<div class="login-form">
-						<form>
+						<form id="loginform">
 						  <div class="user-name">
 								<label for="user"><i class="am-icon-user"></i></label>
-								<input type="text" name="username" id="user" placeholder="手机/用户名">
+								<input type="text" name="phone" id="user" placeholder="手机">
 						  </div>
 						  <div class="user-pass">
 								<label for="password"><i class="am-icon-lock"></i></label>
@@ -42,7 +42,7 @@
 						  </div>
 							<div class="user-code">
 								<label for="password"><i class="am-icon-neuter"></i></label>
-								<input type="text" name="" size="4px" id="code" placeholder="请输入验证码">
+								<input type="text" name="" size="4px" id="code" onchange="blurForVerityCode()" placeholder="请输入验证码">
 								<a id="btn_changeVerityImg" href=" "><img style="position: absolute;" src="/verity/verityImg" class="verityImg" id="myVerityImg"/></a>
 							</div>
 						</form>
@@ -57,7 +57,7 @@
 						<br />
 					</div>
 					<div class="am-cf">
-						<input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm">
+						<input type="button" id="login" name="" value="登 录" onclick="return checkVerityCode()" class="am-btn am-btn-primary am-btn-sm">
 					</div>
 				</div>
 			</div>

@@ -73,10 +73,10 @@ flex: 1 1 0%;line-height: 16px;cursor: pointer;}
 
 /*地址*/
 .address{margin-right:80px ;}
-.am-selected {width:32%;max-width: 200px;float: left;margin-right:1%;}
-.address .am-btn {font-size:12px ;}
-.address select {float: left;width: 32%;margin-right: 1%;}
-.pay-logis{padding-top:5px ;text-align: right;padding-right:10px ;}
+/*.am-selected {width:32%;max-width: 200px;float: left;margin-right:1%;}*/
+.address{float:left;width:70%;padding-top: 5px;padding-left: 20px;}
+.address select {width: 30%;margin-right: 1%;}
+.pay-logis{float:left;width:15%;padding-top:5px ;text-align: right;padding-right:10px ;}
 /*规格*/
 .theme-signin .btn-op.act{display: none;}
 .theme-signin .btn-op.act .btn{width:50%;float: left;}
@@ -206,7 +206,7 @@ ul.am-tabs-nav.am-nav.am-nav-tabs {right:0px ;left: 10px;width: auto;}
 .scoll{float: left;width:45%;max-width:360px;padding-right:10px ;}
 .clearfixRight{float:left;width:55%;min-height: 350px;}
 .scoll{padding-right:10px ;}
-.iteminfo_parameter.freight{display: block;margin-top: 10px;margin-bottom:10px ;}
+.iteminfo_parameter.freight{display: block;margin-top: 10px;margin-bottom:10px ; width: 100%;}
 .iteminfo_parameter.freight dt{margin-left:-70px ;float: left;margin-right:10px ;padding-top:5px ;padding-bottom:20px ;}
 .pay{position: static;}
 ul.am-avg-sm-4.am-tabs-nav.am-nav.am-nav-tabs {width: auto;}

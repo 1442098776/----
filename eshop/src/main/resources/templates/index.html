@@ -44,19 +44,7 @@
 		<div class="nav-cont">
 			<ul>
 				<li class="index"><a href="/index">首页</a></li>
-				<!--
-                <li class="qc"><a href="#">闪购</a></li>
-                <li class="qc"><a href="#">限时抢</a></li>
-                <li class="qc"><a href="#">团购</a></li>
-                <li class="qc last"><a href="#">大包装</a></li>
-                -->
 			</ul>
-			<!--
-            <div class="nav-extra">
-                <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-                <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-            </div>
-            -->
 		</div>
 
 		<!--侧边导航 -->
@@ -68,7 +56,7 @@
 							<!--<c:forEach items="${ MenuList}" var="menu">-->
 								<li class="appliance js_toggle relative first" th:each="menu:${menuList}" th:value="${menu.id}">
 									<div class="category-info">
-										<h3 class="category-name b-category-name"><i><img th:src="@{'img/'+${menu.img}}" src=></i><a class="ml-22" th:title="${menu.name }" th:text = "${menu.name }"></a></h3>
+										<h3 class="category-name b-category-name"><i><img th:src="@{'img/'+${menu.img}}" src=></i><a th:href="@{'/search/'+${menu.id}}" class="ml-22" th:title="${menu.name }" th:text = "${menu.name }"></a></h3>
 										<em>&gt;</em></div>
 									<div class="menu-item menu-in top">
 										<div class="area-in">
@@ -78,7 +66,7 @@
 														<dl class="dl-sort">
 															<dt><span th:title="${menu.name}" th:text="${menu.name}"></span></dt>
 															<!--<c:forEach items="${menu.list }" var="sonmenu">-->
-																<dd th:each="sonMenu:${menu.child}"><a th:title="${sonMenu.name}" href="#"><span th:text="${sonMenu.name }"></span></a></dd>
+																<dd th:each="sonMenu:${menu.child}"><a th:title="${sonMenu.name}" th:href="@{'/search/'+${menu.id}+'/'+${sonMenu.id}}"><span th:text="${sonMenu.name }"></span></a></dd>
 															<!--</c:forEach>-->
 														</dl>
 													</div>
@@ -320,23 +308,36 @@
 				<div class="triangle-topright"></div>
 			</div>
 
-			<div class="good_content">
-				<div class="good" th:each="good:${goodList} " th:if="${good.type}eq${menu.id}">
+			<script type="text/javascript">
+				var good_name = window.document.getElementsByClassName('good_name');
+				function getGood(){
 
-					<a th:href="@{'/introduction/'+${good.id}}"><img th:each="goodpic : ${good.goodPics}" th:if="!${goodpic.grade}" th:src="@{'img/'+${good.id}+'/'+${goodpic.picName}}"/>
-						<div>
-							<div class="good_name"  th:text="${good.name}"></div>
-							<div th:if="${good.salePrice} != null">
-								<span class="good_saleprice" th:text="'￥'+${good.salePrice}"></span>
-								<s><span class="good_price" th:text="'￥'+${good.price}"></span></s>
+				    for(var i = 0;i<good_name.length;i++){
+				        var name = good_name[i].innerText.substring(0,14);
+				        console.info(name);
+				        good_name[i].innerText = name;
+                    }
+                }
+                $(function () {
+					getGood();
+                })
+			</script>
+			<div class="good_content" th:each="goodType,status:${menu.goodTypes}" th:if="${status.index} lt 1">
+					<div class="good" th:each="good:${goodType.good} " >
+						<a th:href="@{'/introduction/'+${good.id}}"><img th:each="goodpic : ${good.goodPics}" th:if="!${goodpic.grade}" th:src="@{'img/'+${good.id}+'/'+${goodpic.picName}}"/>
+							<div>
+								<div class="good_name"  th:text="${good.name}"></div>
+								<div th:if="${good.salePrice} != null">
+									<span class="good_saleprice" th:text="'￥'+${good.salePrice}"></span>
+									<s><span class="good_price" th:text="'￥'+${good.price}"></span></s>
+								</div>
+								<div th:if="${good.salePrice} == null">
+									<span class="good_saleprice" th:text="'￥'+${good.price}"></span>
+									<!--<s><span class="good_price" th:text="'￥'+${good.price}"></span></s>-->
+								</div>
 							</div>
-                            <div th:if="${good.salePrice} == null">
-                                <span class="good_saleprice" th:text="'￥'+${good.price}"></span>
-                                <!--<s><span class="good_price" th:text="'￥'+${good.price}"></span></s>-->
-                            </div>
-						</div>
-					</a>
-				</div>
+						</a>
+					</div>
 			</div>
 		</div>
 		<div class="clear "></div>

@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">>
-
-<head lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <link rel="stylesheet" href="AmazeUI-2-4-2/assets/css/amazeui.min.css"/>
-    <link href="css/loginstyle.css" rel="stylesheet" type="text/css">
-    <script src="mazeUI-2-4-2/assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="AmazeUI-2-4-2/assets/css/amazeui.min.css" type="text/css"/>
+    <link href="css/loginstyle.css" rel="stylesheet" type="text/css"/>
+    <script src="AmazeUI-2-4-2/assets/js/jquery.min.js"></script>
     <script src="AmazeUI-2-4-2/assets/js/amazeui.min.js"></script>
+    <script type="text/javascript" src="js/register.js"></script>
+    <link rel="stylesheet" href="css/register.css" type="text/css"/>
 
 </head>
 
 <body>
 <div class="login-boxtitle">
-    <a href="home/demo.html"><img alt="" src="../images/logobig.png"/></a>
+    <a href="/"><img alt="" src="../images/logobig.png"/></a>
 </div>
 <div class="res-banner">
     <div class="res-main">
@@ -29,17 +30,55 @@
 
             <div class="am-tabs" id="doc-my-tabs">
                 <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
-                    <li><a href="">手机号注册</a></li>
+                    <li><a href="">注册</a></li>
                 </ul>
 
                 <div class="am-tabs-bd">
 
                     <div class="am-tab-panel am-active">
-                        <form class="register" method="post">
+                        <form class="register" id="registerform" method="post">
+                            <div class="user-name2">
+                                <span></span>
+                            </div>
+                            <div class="user-name">
+                                <label for="username"><i class="am-icon-user am-icon-md"></i></label>
+                                <input type="tel" name="userName" class="syncVerity" id="username" placeholder="请输入用户名">
+                                <span></span>
+                            </div>
+
+                            <div class="user-pass2">
+                                <span></span>
+                            </div>
+
+                            <div class="user-pass">
+                                <label for="password"><i class="am-icon-lock"></i></label>
+                                <input type="password" name="password" class="password" id="password" placeholder="设置密码">
+                                <span></span>
+                            </div>
+
+                            <div class="user-pass2">
+                                <span></span>
+                            </div>
+                            <div class="user-pass">
+                                <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                <input type="password" name="" class="password" id="passwordRepeat" placeholder="确认密码">
+                                <span></span>
+                            </div>
+
+                            <div class="user-phone2">
+                                <span></span>
+                            </div>
+
                             <div class="user-phone">
                                 <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
-                                <input type="tel" name="" id="phone" placeholder="请输入手机号">
+                                <input type="tel" name="phone" class="syncVerity" id="phone" placeholder="请输入手机号">
+                                <span></span>
                             </div>
+
+                            <div class="verification2">
+                                <span></span>
+                            </div>
+
                             <div class="verification">
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
                                 <input type="tel" name="" id="code" placeholder="请输入验证码">
@@ -47,29 +86,30 @@
                                    id="sendMobileCode">
                                     <span id="dyMobileButton">获取</span></a>
                             </div>
-                            <div class="user-pass">
-                                <label for="password"><i class="am-icon-lock"></i></label>
-                                <input type="password" name="" id="password" placeholder="设置密码">
-                            </div>
-                            <div class="user-pass">
-                                <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-                                <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
-                            </div>
+
                         </form>
                         <div class="login-links">
                             <label for="reader-me">
-                                <input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
+                                <input id="reader-me" type="checkbox" onclick="register()"> 点击表示您同意商城《服务协议》
                             </label>
                         </div>
                         <div class="am-cf">
-                            <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+                            <input type="submit" disabled="true" id="register" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
                         </div>
-
-                        <hr>
+                        <!--<hr>-->
                     </div>
 
                     <script>
-                        $(function () {
+                        function register() {
+                            var checkbox=window.document.getElementById("reader-me");
+                            var register=window.document.getElementById("register")
+                            if(checkbox.checked == true){
+                                register.disabled=false;
+                            }else{
+                                register.disabled=true;
+                            }
+                        }
+                        $(function(){
                             $('#doc-my-tabs').tabs();
                         })
                     </script>

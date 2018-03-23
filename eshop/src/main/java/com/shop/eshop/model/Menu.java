@@ -16,6 +16,15 @@ public class Menu {
     private String img;
     private Date createTime;
     private List<Menu> child;
+    private List<GoodType> goodTypes;
+
+    public List<GoodType> getGoodTypes() {
+        return goodTypes;
+    }
+
+    public void setGoodTypes(List<GoodType> goodTypes) {
+        this.goodTypes = goodTypes;
+    }
 
     @Override
     public String toString() {
