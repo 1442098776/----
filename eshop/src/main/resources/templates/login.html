@@ -12,7 +12,9 @@
 
 		<link rel="stylesheet" href="AmazeUI-2-4-2/assets/css/amazeui.css" />
 		<link href="css/loginstyle.css" rel="stylesheet" type="text/css">
+		<link href="css/login.css" rel="stylesheet" type="text/css">
 		<script th:src="@{js/login.js}" type="text/javascript"></script>
+		<script th:src="@{js/jquery-3.1.1.js}" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -32,16 +34,25 @@
 
 					<div class="login-form">
 						<form id="loginform">
-						  <div class="user-name">
+							<div class="user-name2">
+								<span></span>
+							</div>
+							<div class="user-name">
 								<label for="user"><i class="am-icon-user"></i></label>
 								<input type="text" name="phone" id="user" placeholder="手机">
-						  </div>
-						  <div class="user-pass">
+							</div>
+							<div class="user-pass2">
+								<span></span>
+							</div>
+						    <div class="user-pass">
 								<label for="password"><i class="am-icon-lock"></i></label>
 								<input type="password" name="password" id="password" placeholder="请输入密码">
-						  </div>
+						    </div>
+							<div class="user-code2">
+								<span></span>
+							</div>
 							<div class="user-code">
-								<label for="password"><i class="am-icon-neuter"></i></label>
+								<label for="code"><i class="am-icon-neuter"></i></label>
 								<input type="text" name="" size="4px" id="code" onchange="blurForVerityCode()" placeholder="请输入验证码">
 								<a id="btn_changeVerityImg" href=" "><img style="position: absolute;" src="/verity/verityImg" class="verityImg" id="myVerityImg"/></a>
 							</div>
@@ -57,7 +68,7 @@
 						<br />
 					</div>
 					<div class="am-cf">
-						<input type="button" id="login" name="" value="登 录" onclick="return checkVerityCode()" class="am-btn am-btn-primary am-btn-sm">
+						<input type="button" id="login" name="" value="登 录" onclick="checkVerityCode()" class="am-btn am-btn-primary am-btn-sm">
 					</div>
 				</div>
 			</div>

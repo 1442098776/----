@@ -9,6 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+/**
+ * 菜单的显示
+ * @author zhanguo.huang
+ * @date 2018/03/10
+ */
 @Controller
 public class MenuController {
 

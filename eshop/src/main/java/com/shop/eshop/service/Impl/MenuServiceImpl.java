@@ -15,6 +15,12 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuMapper;
 
+    /**
+     * 更具父级id无限级联获取菜单
+     * @param id
+     * @return
+     */
+
     @Override
     public List<Menu> getMenuByParentId(Integer id) {
         return menuMapper.getMenuByParentId(id);

@@ -123,14 +123,18 @@
 							<a href="person/index.html">
 								<img src="images/getAvatar.do.jpg">
 							</a>
-							<em>
+							<em th:if="${session.user} ne null">
+								Hi,<span class="s-name" th:text="${session.user.userName}">小叮当</span>
+								<a href="#"><p>点击更多优惠活动</p></a>
+							</em>
+							<em th:if="${session.user} eq null">
 								Hi,<span class="s-name">小叮当</span>
 								<a href="#"><p>点击更多优惠活动</p></a>
 							</em>
 						</div>
-						<div class="member-logout">
-							<a class="am-btn-warning btn" href="login.html">登录</a>
-							<a class="am-btn-warning btn" href="register.html">注册</a>
+						<div class="member-logout" th:if="${session.user} eq null">
+							<a class="am-btn-warning btn" href="/login">登录</a>
+							<a class="am-btn-warning btn" href="/register">注册</a>
 						</div>
 						<div class="member-login">
 							<a href="#"><strong>0</strong>待收货</a>
@@ -314,7 +318,7 @@
 
 				    for(var i = 0;i<good_name.length;i++){
 				        var name = good_name[i].innerText.substring(0,14);
-				        console.info(name);
+				        // console.info(name);
 				        good_name[i].innerText = name;
                     }
                 }
@@ -347,13 +351,7 @@
 
 </div>
 </div>
-<!--&lt;!&ndash;引导 &ndash;&gt;-->
-<!--<div class="navCir">-->
-	<!--<li class="active"><a href="index.html"><i class="am-icon-home "></i>首页</a></li>-->
-	<!--<li><a href="home/sort.html"><i class="am-icon-list"></i>分类</a></li>-->
-	<!--<li><a href="home/shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>-->
-	<!--<li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>-->
-<!--</div>-->
+
 <!-- 引入右侧导航栏 -->
 <div th:include="common/rightnav::rightnav"></div>
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.eshop.mapper.GoodTypeMapper">
+  <resultMap id="BaseResultMap" type="com.shop.eshop.model.GoodType">
+    <id column="id" jdbcType="SMALLINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_id" jdbcType="SMALLINT" property="parentId" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="menu_id" jdbcType="SMALLINT" property="menuId" />
+    <collection property="goodTypes" ofType="com.shop.eshop.model.GoodType" column="id" select="getGoodTypeByParentId" />
+  </resultMap>
+
+  <resultMap id="BaseResultMap2" type="com.shop.eshop.model.GoodType">
+    <id column="id" jdbcType="SMALLINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_id" jdbcType="SMALLINT" property="parentId" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="menu_id" jdbcType="SMALLINT" property="menuId" />
+    <collection property="goodTypes" ofType="com.shop.eshop.model.GoodType" column="id" select="getGoodTypeByParentId" />
+    <collection property="good" ofType="com.shop.eshop.model.Good" column="id" select="com.shop.eshop.mapper.GoodMapper.getGoodByType" />  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, parent_id, create_time, menu_id
+  </sql>
+
+  <!--根据菜单id获取商品类型-->
+  <select id="getGoodTypeByMenuId" resultMap="BaseResultMap2" parameterType="java.lang.Integer">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM good_type WHERE menu_id = #{menuId}
+  </select>
+
+  <!--根据父级id获取商品类型-->
+  <select id="getGoodTypeByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM good_type WHERE parent_id = #{id}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from good_type
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from good_type
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.shop.eshop.model.GoodType">
+    insert into good_type (id, name, parent_id, 
+      create_time, menu_id)
+    values (#{id,jdbcType=SMALLINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=SMALLINT}, 
+      #{createTime,jdbcType=DATE}, #{menuId,jdbcType=SMALLINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shop.eshop.model.GoodType">
+    update good_type
+    set name = #{name,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=DATE},
+      menu_id = #{menuId,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+</mapper>

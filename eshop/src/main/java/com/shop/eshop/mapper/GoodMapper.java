@@ -13,7 +13,7 @@ public interface GoodMapper {
 
     List<Good> getAllGood();
 
-    Good getGoodById(Integer id);
+    Good getGoodById(Long id);
 
     List<Good> getGoodBySaleNum();
 

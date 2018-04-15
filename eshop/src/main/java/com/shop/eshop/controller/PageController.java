@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-    @RequestMapping("/{page}")
-    public String pageController(@PathVariable String page){
-        return "person/"+page;
-    }
+//    @RequestMapping("/{page}")
+//    public String pageController(@PathVariable String page){
+//        return "home/"+page;
+//    }
     @RequestMapping("/login")
     public String login(){
         return "login";
@@ -24,5 +24,13 @@ public class PageController {
     @RequestMapping("/register")
     public String register(){
         return "register";
+    }
+    @RequestMapping("/success")
+    public String paySuccess(){
+        return "home/success";
+    }
+    @RequestMapping("/person/{pageName}")
+    public String personPage(@PathVariable String pageName){
+        return "person/"+pageName;
     }
 }

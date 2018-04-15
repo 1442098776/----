@@ -1,0 +1,20 @@
+.login-box{
+    width: 100%;
+    max-width:360px;
+    height: 460px;
+    position: absolute;
+    background:#f8f8f8;
+    margin:20px auto;
+    padding:10px 20px;}
+
+.login-form .user-phone2,.login-form .user-name2,.login-form .user-pass2,.login-form .user-code2,.login-form .verification{
+    position: relative;
+    height: 20px;
+    margin-bottom:5px;}
+
+.login-form .user-phone2 span,.login-form .user-name2 span,.login-form .user-pass2 span,.login-form .user-code2 span,.login-form .verification2 span{
+    font-size: 12px;}
+.login-banner,.login-banner{width:100%;height:500px; background:#fd7a72;}
+.login-main,.login-main{max-width:1000px;height:500px; margin:0px auto; position:relative;}
+
+.login-banner-bg{display:block;float:left; margin-top: 70px;}

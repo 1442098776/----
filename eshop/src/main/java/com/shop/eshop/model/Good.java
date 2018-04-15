@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Good {
-    private Integer id;
+    private Long id;
 
     /**
      * 名称
@@ -37,17 +37,17 @@ public class Good {
      */
     private Integer saleNum;
 
-    private String advise;
+    private Integer advise;
 
     /**
      * 活动
      */
-    private Boolean activity;
+    private Integer activity;
 
     /**
      * 上下架
      */
-    private String status;
+    private Integer status;
 
     /**
      * 创建时间
@@ -77,11 +77,11 @@ public class Good {
         this.goodPics = goodPics;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -133,27 +133,27 @@ public class Good {
         this.saleNum = saleNum;
     }
 
-    public String getAdvise() {
+    public Integer getAdvise() {
         return advise;
     }
 
-    public void setAdvise(String advise) {
+    public void setAdvise(Integer advise) {
         this.advise = advise;
     }
 
-    public Boolean getActivity() {
+    public Integer getActivity() {
         return activity;
     }
 
-    public void setActivity(Boolean activity) {
+    public void setActivity(Integer activity) {
         this.activity = activity;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

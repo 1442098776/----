@@ -13,21 +13,40 @@ public class GoodServiceImpl implements GoodService {
 
     @Autowired
     private GoodMapper goodMapper;
+
+    /**
+     * 获取所以的商品
+     * @return
+     */
     @Override
     public List<Good> getAllGood() {
         return goodMapper.getAllGood();
     }
 
+    /**
+     * 根据商品id获取该商品
+     * @param id
+     * @return
+     */
     @Override
-    public Good getGoodById(Integer id) {
+    public Good getGoodById(Long id) {
         return goodMapper.getGoodById(id);
     }
 
+    /**
+     * 根据销量获取商品详细
+     * @return
+     */
     @Override
     public List<Good> getGoodBySaleNum() {
         return goodMapper.getGoodBySaleNum();
     }
 
+    /**
+     * 根据类型获取商品
+     * @param tp
+     * @return
+     */
     @Override
     public List<Good> getGoodByCondition(TypeCondition tp) {
         return goodMapper.getGoodByCondition(tp);

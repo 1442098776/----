@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.eshop.mapper.GoodMapper">
+    <resultMap id="GoodPicMap" type="com.shop.eshop.model.GoodPic">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="pic_name" jdbcType="VARCHAR" property="picName" />
+        <result column="create_time" jdbcType="DATE" property="createTime" />
+        <result column="grade" jdbcType="BIT" property="grade" />
+        <result column="good_id" jdbcType="BIGINT" property="goodId" />
+    </resultMap>
+
+    <select id="getAllGoodPic" resultMap="GoodPicMap" parameterType="int">
+        SELECT * from good_pic where good_id = #{id}
+    </select>
+
+</mapper>

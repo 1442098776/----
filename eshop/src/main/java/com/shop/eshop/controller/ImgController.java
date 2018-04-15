@@ -2,6 +2,8 @@ package com.shop.eshop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,7 @@ import java.util.Random;
 
 /**
  * 图片Controller
- * @author NingKui
+ * @author zhanguo.huang
  * @date 2018/3/14 23:33
  **/
 @Controller
@@ -86,6 +88,27 @@ public class ImgController {
         int g = fc + random.nextInt(bc - fc);
         int b = fc + random.nextInt(bc - fc);
         return new Color(r,g,b);
+    }
+
+    /**
+     * 验证 ---登录前的验证码问题
+     * @param verityCode
+     * @param request
+     * @param response
+     * @return
+     */
+    @PostMapping("/verity/beforeLoginForVerityCode")
+    @ResponseBody
+    public String login(String verityCode,HttpServletRequest request, HttpServletResponse response) {
+        // 获得存在session的验证码
+        String session_VerityCode = (String)request.getSession().getAttribute("strCode");
+
+        if (session_VerityCode != null &&
+                verityCode != null &&
+                session_VerityCode.trim().equals(verityCode.trim())) {
+            return "1";
+        }
+        return "0";
     }
 
 }

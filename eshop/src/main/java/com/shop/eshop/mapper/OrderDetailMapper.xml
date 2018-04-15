@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.eshop.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.shop.eshop.model.OrderDetail">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="good_id" jdbcType="BIGINT" property="goodId" />
+    <result column="good_count" jdbcType="INTEGER" property="goodCount" />
+    <result column="good_price" jdbcType="FLOAT" property="goodPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, good_id, good_count, good_price
+  </sql>
+
+  <!--添加订单详情-->
+  <insert id="addOrderDetail" parameterType="com.shop.eshop.model.OrderDetail" >
+    INSERT INTO order_detail(order_id, good_id, good_count, good_price)
+    VALUES (#{orderId}, #{goodId}, #{goodCount}, #{goodPrice})
+  </insert>
+
+</mapper>

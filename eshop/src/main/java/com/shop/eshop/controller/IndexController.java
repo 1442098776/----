@@ -3,6 +3,8 @@ package com.shop.eshop.controller;
 import com.shop.eshop.dto.TypeCondition;
 import com.shop.eshop.model.Good;
 import com.shop.eshop.model.Menu;
+import com.shop.eshop.model.User;
+import com.shop.eshop.service.CartService;
 import com.shop.eshop.service.GoodService;
 import com.shop.eshop.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +31,23 @@ public class IndexController {
     private MenuService menuService;
     @Autowired
     private GoodService goodService;
+
+    @Autowired
+    private CartService cartService;
+
+    /**
+     * 加载首页数据
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/")
-    public ModelAndView index(){
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response){
         ModelAndView mv = new ModelAndView();
         List<Menu> menuList=menuService.getMenuByParentId(0);
+        //获取用户登录的user
+        User user = (User) request.getSession().getAttribute("user");
+        Integer cartCount = cartService.getCountByUserId(user);
 //        List<Good> goods=goodService.getAllGood();
 //        List<Good> goodList=new ArrayList<Good>();
 //        for(Good good:goods){
@@ -38,12 +55,19 @@ public class IndexController {
 //            good.setName(googsub);
 //            goodList.add(good);
 //        }
+//        mv.addObject("user",user);
         mv.addObject("menuList",menuList);
 //        mv.addObject("goodList",goodList);
+        mv.addObject("cartCount",cartCount);
         mv.setViewName("index");
         return mv;
     }
 
+    /**
+     * 根据商品类型获取商品
+     * @param type
+     * @return
+     */
     @RequestMapping("/getGoodByType")
     @ResponseBody
     public List<Good> getGoodByType(TypeCondition type){

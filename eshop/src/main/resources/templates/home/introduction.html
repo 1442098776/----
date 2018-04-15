@@ -20,6 +20,7 @@
 		<script type="text/javascript" src="../js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.flexslider.js"></script>
 		<script type="text/javascript" src="../js/list.js"></script>
+		<script type="text/javascript" src="../js/introduction.js"></script>
 
 	</head>
 
@@ -117,6 +118,7 @@
 					<!--名称-->
 					<div class="tb-detail-hd">
 						<h1 th:text="${good.name}"></h1>
+						<input type="hidden" id="goodId" th:value="${good.id}"/>
 					</div>
 					<div class="tb-detail-list">
 						<!--活动	-->
@@ -143,7 +145,7 @@
 						<div class="tb-detail-price" th:if="${good.salePrice} ne null">
 							<li class="price iteminfo_price">
 								<dt>促销价</dt>
-								<dd><em>¥</em><b class="sys_item_price" th:text="${good.salePrice}">56.90</b>  </dd>
+								<dd><em>¥</em><b id="price" class="sys_item_price" th:text="${good.salePrice}">56.90</b>  </dd>
 							</li>
 							<li class="price iteminfo_mktprice">
 								<dt>原价</dt>
@@ -154,102 +156,12 @@
 						<div class="tb-detail-price" th:if="${good.salePrice} eq null">
 							<li class="price iteminfo_mktprice">
 								<dt>价格</dt>
-								<dd><em>¥</em><b class="sys_item_mktprice" th:text="${good.price}">98.00</b></dd>
+								<dd><em>¥</em><b id="price" class="sys_item_mktprice" th:text="${good.price}">98.00</b></dd>
 							</li>
 							<div class="clear"></div>
 						</div>
 
-						<script type="text/javascript">
-							<!--获取省-->
-                            function getProvince() {
-                                var province = window.document.getElementById("province");
-                                var str = '<option value="null">--请选择--</option>';
-                                $.ajax({
-                                    url:'/province',
-                                    type:'POST',
-                                    dateType:'json',
 
-                                    success:function(data) {
-                                        console.info(data);
-                                        for(var i=0; i < data.length; i++){
-                                            str += "<option id = "+data[i].provinceId+" value="+data[i].provinceName+">"+data[i].provinceName+"</option>"
-										}
-										console.info(str);
-                                        province.innerHTML = str;
-                                    }
-                                })
-
-                            }
-                            function getCity() {
-                                //得到select对象
-								var select = window.document.getElementById("province");
-								//得到被选的option的下标
-								var index = select.selectedIndex;
-								//得到option对象
-								var option = select.options[index];
-								//获取option的id
-								var id = option.id;
-								//获取option的value
-								var value = option.value;
-								// alert(id)
-								// alert(value);
-                                var city = window.document.getElementById("city");
-                                var area = window.document.getElementById("area");
-                                area.innerHTML = '<option value="null">--请选择--</option>';
-                                var str = '<option value="null">--请选择--</option>';
-								$.ajax({
-									url:'/city',
-									data:{
-									    province_id:id
-									},
-									type:'POST',
-									dataType:'json',
-									success:function (data) {
-                                        for(var i=0; i < data.length; i++){
-                                            str += "<option id = "+data[i].cityId+" value="+data[i].cityName+">"+data[i].cityName+"</option>"
-                                        }
-                                        console.info(str);
-                                        city.innerHTML = str;
-                                    }
-								})
-                            }
-
-                            function getArea() {
-                                //得到select对象
-                                var select = window.document.getElementById("city");
-                                //得到被选的option的下标
-                                var index = select.selectedIndex;
-                                //得到option对象
-                                var option = select.options[index];
-                                //获取option的id
-                                var id = option.id;
-                                //获取option的value
-                                var value = option.value;
-                                // alert(id)
-                                // alert(value);
-                                var area = window.document.getElementById("area");
-                                var str = '<option value="null">--请选择--</option>';
-                                $.ajax({
-                                    url:'/area',
-                                    data:{
-                                        city_id:id
-                                    },
-                                    type:'POST',
-                                    dataType:'json',
-                                    success:function (data) {
-                                        for(var i=0; i < data.length; i++){
-                                            str += "<option id = "+data[i].areaId+" value="+data[i].areaName+">"+data[i].areaName+"</option>"
-                                        }
-                                        console.info(str);
-                                        area.innerHTML = str;
-                                    }
-                                })
-                            }
-                            $(function () {
-								getProvince();
-                            })
-
-						</script>
 						<!--地址-->
 						<dl class="iteminfo_parameter freight">
 							<dt>配送至</dt>
@@ -265,7 +177,7 @@
 									</select>
 								</div>
 								<div class="pay-logis">
-									快递<b class="sys_item_freprice">10</b>元
+									快递<b id="freight" class="sys_item_freprice">10</b>元
 								</div>
 							</div>
 						</dl>
@@ -301,12 +213,12 @@
 						<div class="pay">
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="javascript:pay()">立即购买</a>
 								</div>
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车" href="javascript:addCart()"><i></i>加入购物车</a>
 								</div>
 							</li>
 							<div class="clear"></div>

@@ -11,7 +11,7 @@ public class GoodPic {
 
     private Boolean grade;
 
-    private Integer goodId;
+    private Long goodId;
 
     public Long getId() {
         return id;
@@ -45,11 +45,11 @@ public class GoodPic {
         this.grade = grade;
     }
 
-    public Integer getGoodId() {
+    public Long getGoodId() {
         return goodId;
     }
 
-    public void setGoodId(Integer goodId) {
+    public void setGoodId(Long goodId) {
         this.goodId = goodId;
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.eshop.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.shop.eshop.model.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <!--<result column="good_id" jdbcType="BIGINT" property="goodId" />-->
+    <result column="receive_address" jdbcType="BIGINT" property="receiveAddress" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    order_id, user_id, receive_address, create_time, send_time, receive_time, state
+  </sql>
+
+  <!--产生订单-->
+  <insert id="createOrder" parameterType="com.shop.eshop.model.Order">
+    INSERT INTO `order`(order_id, user_id, receive_address, create_time,message)
+    VALUES(#{orderId},#{userId},#{receiveAddress},#{createTime},#{message})
+  </insert>
+
+</mapper>

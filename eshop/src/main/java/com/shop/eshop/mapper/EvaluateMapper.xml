@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.eshop.mapper.EvaluateMapper">
+  <resultMap id="BaseResultMap" type="com.shop.eshop.model.Evaluate">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="good_id" jdbcType="BIGINT" property="goodId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, content, title, good_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from evaluate
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from evaluate
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.shop.eshop.model.Evaluate">
+    insert into evaluate (Id, content, title, 
+      good_id, create_time)
+    values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{goodId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shop.eshop.model.Evaluate">
+    update evaluate
+    set content = #{content,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      good_id = #{goodId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

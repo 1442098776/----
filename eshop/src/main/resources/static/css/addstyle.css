@@ -3,6 +3,7 @@
 [class*="am-u-"] {padding-left:0px; padding-right:0px;}
 .am-thumbnails > li {padding: 0 .5rem 0 .5rem;}
 .am-form textarea,.am-form select, .am-form textarea, .am-form input[type="text"], .am-form input[type="password"], .am-form input[type="datetime"], .am-form input[type="datetime-local"], .am-form input[type="date"], .am-form input[type="month"], .am-form input[type="time"], .am-form input[type="week"], .am-form input[type="tel"], .am-form input[type="email"], .am-form input[type="url"], .am-form input[type="search"], .am-form input[type="tel"], .am-form input[type="color"], .am-form-field,.am-btn{ font-size:14px;}
+.am-form select, .am-form textarea, .am-form input[type="text"], .am-form input[type="password"], .am-form input[type="datetime"], .am-form input[type="datetime-local"], .am-form input[type="date"], .am-form input[type="month"], .am-form input[type="time"], .am-form input[type="week"], .am-form input[type="number"], .am-form input[type="email"], .am-form input[type="url"], .am-form input[type="search"], .am-form input[type="tel"], .am-form input[type="color"], .am-form-field{width:85%;}
 .user-address {font-size:12px ;}
 .am-thumbnails {margin:0px 0px ;margin-bottom: 50px;}
 .user-address li.user-addresslist {float: none;min-height:80px ;position: relative;border-bottom:1px solid #eee ;padding:15px 10px;}
@@ -25,11 +26,16 @@ a.new-abtn-type{display: block;padding: 8px; overflow:hidden; border-radius: 2px
 
 /*地址增加*/
 .am-modal{background: #fff;width: 100%;margin: 0px 0px !important;left: 0;top:0 ;height: 100%;}
-.am-form-content.address select{ float: left;width:32% ;margin-left:1% ;}
-.am-selected {width: 32.3%;max-width: 200px;float: left;margin-left:1%;}
+.am-form-content.address select{ float: left;width:32% ;margin-right:1% ;}
+.am-selected {width: 32.3%;max-width: 200px;float: left;margin-right:1%;}
 .address li{font-size:12px ;}
 .am-close{width:auto ;line-height:1.2;opacity: .8;text-shadow:none;color:#fff !important ;}
 .footer{display: none;}
+
+span#reveice_address {
+    display: block;
+    padding: 0.5em;
+}
 @media only screen and (min-width:640px) 
 {		
 .new-tit {border:none;}
@@ -40,6 +46,7 @@ a.new-abtn-type{display: none;}
 .am-form-content {margin-left: 105px;}
 .new-option-r {position: absolute; top: 7px;right:10px;bottom: auto;}
 .footer{display:block;}
+.am-form-group {margin-bottom: 20px}
 
 /*地址增加*/
 
@@ -51,8 +58,8 @@ a.new-abtn-type{display: none;}
 .new-mu_l2cw {height:55px;}
 .new-addr-btn{padding-right:12px;padding-bottom:10px ;}
 .new-tit {padding:8px 12px 0px 0px;}
-.user-address li.user-addresslist{overflow:hidden;border:none;display:block;width:255px;height:150px;float: left;background: url(../images/peraddbg.png)no-repeat scroll 0% 0%;margin-right:10px ;}
-.user-address li.user-addresslist.defaultAddr{background: url(../images/peraddressbg.png)no-repeat scroll 0% 0%;}
+.user-address li.user-addresslist{overflow:hidden;border:none;display:block;width:252px;height:151px;float: left;background: url(../images/peraddbg.png)no-repeat scroll 0% 0%;margin-right:10px ;}
+.user-address li.user-addresslist.defaultAddr{background: url(../images/peraddressbg2.png)no-repeat scroll 0% 0%;}
 .user-address li{width:255px; margin-right:20px;}
 
 .new-option-r {position: absolute;top: 0px;right:3px;padding:0px 5px;border-radius: 0 0 5px 5px;color:#fff;}
@@ -64,6 +71,19 @@ a.new-abtn-type{display: none;}
 .user-addresslist.defaultAddr .new-addr-btn,.user-addresslist:hover .new-addr-btn,.user-addresslist.active .new-addr-btn{display: block;}
 .user-addresslist:hover .new-option-r,.user-addresslist.active .new-option-r  {position: absolute;top: 0px;}
 
+.theme-popover{display: none;}
+.theme-popover-mask{z-index:10000000;position:fixed;left:0;top:0;width:100%;height:100%;background:#000;opacity:0.5;filter:alpha(opacity=50);-moz-opacity:0.5;display:none;}
+.theme-popover{z-index:10000009;position:fixed;bottom:50%;left:50%;width:500px;height:450px;margin-bottom:-200px;margin-left:-250px;display:none;background:#fff;overflow: hidden;}
+.theme-popover .am-form-content.address select{width:32%;margin-right:1%;float: left;}
+.am-form-group .address{width:335px;position:absolute;padding-left:0;}
+.am-form-group .address1{width:460px;position:absolute;padding-left:0;}
+    .am-padding { padding: 10px 10px;}
+    hr {margin: 5px 0px;}
+    .am-form-group {margin-bottom: 20px}
+    span#reveice_address {
+        display: block;
+        padding: 0.5em;
+    }
 }
 
 

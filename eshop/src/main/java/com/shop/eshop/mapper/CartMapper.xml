@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.eshop.mapper.CartMapper">
+  <resultMap id="BaseResultMap" type="com.shop.eshop.model.Cart">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="good_id" jdbcType="BIGINT" property="goodId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="good_price" jdbcType="DECIMAL" property="goodPrice" />
+  </resultMap>
+
+  <resultMap id="VOResultMap" type="com.shop.eshop.model.CartVO">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="good_price" jdbcType="DECIMAL" property="goodPrice" />
+    <association property="user" javaType="com.shop.eshop.model.User" column="user_id" jdbcType="BIGINT" select="com.shop.eshop.mapper.UserMapper.getUserById" />
+    <association property="good" javaType="com.shop.eshop.model.Good" column="good_id" jdbcType="BIGINT" select="com.shop.eshop.mapper.GoodMapper.getGoodById" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, user_id, good_id, create_time, count, good_price
+  </sql>
+  <!--获取已选择的商品列表-->
+  <select id="getCartSelect" parameterType="java.util.List" resultMap="VOResultMap">
+    SELECT * FROM cart WHERE id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+  <!--根据购物车id更新已存在的购物车信息-->
+  <update id="updateGoodCart" parameterType="com.shop.eshop.model.Cart">
+    UPDATE cart set count = #{count},create_time = #{createTime},good_price = #{goodPrice}
+    WHERE id = #{id}
+  </update>
+
+  <!--检查购物车中是否已存在该商品-->
+  <select id="checkGood" parameterType="com.shop.eshop.model.Cart" resultMap="BaseResultMap">
+    SELECT * FROM cart where good_id = #{goodId} and user_id = #{userId}
+  </select>
+<!--根据用户id获取该用户购物车的商品数量-->
+  <select id="getCountByUserId" parameterType="com.shop.eshop.model.User" resultType="java.lang.Integer">
+    select count(*) from cart where 1=1
+    <if test="userId != null">
+      and user_id = #{userId}
+    </if>
+  </select>
+
+  <!--根据用户Id添加购物车-->
+  <insert id="addGoodToCart" parameterType="com.shop.eshop.model.Cart">
+    INSERT into cart(user_id,good_id,create_time,count,good_price)
+    values(#{userId},#{goodId},#{createTime},#{count},#{goodPrice})
+  </insert>
+
+  <!--根据用户id获取该用户的所以购物车条目-->
+  <select id="getAllCartByUserId" parameterType="com.shop.eshop.model.User" resultMap="VOResultMap">
+    SELECT * FROM cart WHERE user_id = #{userId}
+  </select>
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cart
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.shop.eshop.model.Cart">
+    insert into cart (Id, user_id, good_id, 
+      create_time, count, good_price
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{goodId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{count,jdbcType=INTEGER}, #{goodPrice,jdbcType=DECIMAL}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.shop.eshop.model.Cart">
+    update cart
+    set user_id = #{userId,jdbcType=BIGINT},
+      good_id = #{goodId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      count = #{count,jdbcType=INTEGER},
+      good_price = #{goodPrice,jdbcType=DECIMAL}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
