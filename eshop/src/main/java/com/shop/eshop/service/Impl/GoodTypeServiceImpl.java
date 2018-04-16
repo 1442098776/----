@@ -39,4 +39,19 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     public List<Good> getGoodByCondition(TypeCondition tp) {
         return goodMapper.getGoodByCondition(tp);
     }
+
+    @Override
+    public List<GoodType> getGoodTypeByParentId(Integer id) {
+        return goodTypeMapper.getGoodTypeByParentId(id);
+    }
+
+    /**
+     * 获取父类型下的所以商品
+     * @param typeCondition
+     * @return
+     */
+    @Override
+    public List<Good> getAllSonGood(TypeCondition typeCondition) {
+        return goodMapper.getAllSonGood(typeCondition);
+    }
 }

@@ -1,9 +1,18 @@
 package com.shop.eshop.dto;
 
+import java.util.List;
+
 public class TypeCondition {
-    private Integer menuId;
     private Integer typeId;
     private Integer count;
+    /**
+     * 类型集合
+     */
+    private List list;
+    /**
+     * 按什么排序0：按综合牌组1:按销量降序 2：按价格排序
+     */
+    private Integer type;
 
     public Integer getCount() {
         return count;
@@ -13,21 +22,6 @@ public class TypeCondition {
         this.count = count;
     }
 
-    @Override
-    public String toString() {
-        return "TypeCondition{" +
-                "menuId=" + menuId +
-                ", typeId=" + typeId +
-                '}';
-    }
-
-    public Integer getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
-    }
 
     public Integer getTypeId() {
         return typeId;
@@ -35,5 +29,21 @@ public class TypeCondition {
 
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
+    }
+
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

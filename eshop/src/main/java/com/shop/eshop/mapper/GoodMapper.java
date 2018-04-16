@@ -17,5 +17,12 @@ public interface GoodMapper {
 
     List<Good> getGoodBySaleNum();
 
+    /**
+     * 获取所有子类的商品
+     * @param list
+     * @return
+     */
+    List<Good> getAllSonGood(TypeCondition typeCondition);
+
     List<Good> getGoodByType(Integer id);
 }

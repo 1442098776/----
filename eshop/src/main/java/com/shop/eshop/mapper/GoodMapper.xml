@@ -42,6 +42,21 @@
         </if>
 
     </select>
+    <select id="getAllSonGood" parameterType="com.shop.eshop.dto.TypeCondition" resultMap="GoodMap">
+        SELECT * from good where type IN
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="type == 0">
+            order by sale_num desc,sale_price ASC
+        </if>
+        <if test="type == 1">
+            order by sale_num desc
+        </if>
+        <if test="type == 2">
+            order by sale_price asc
+        </if>
+    </select>
 
     <!-- 得到所有的商品 -->
     <select id="getAllGood" resultMap="GoodMap">
