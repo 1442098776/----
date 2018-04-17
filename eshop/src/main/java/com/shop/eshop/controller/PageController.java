@@ -32,6 +32,13 @@ public class PageController {
         mv.setViewName("home/cart");
         return mv;
     }
+    @RequestMapping("/searchKeyWord/{keyWord}")
+    public ModelAndView search(@PathVariable String keyWord){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("keyWord",keyWord);
+        mv.setViewName("home/search");
+        return mv;
+    }
     @RequestMapping("/success")
     public String paySuccess(){
         return "home/success";

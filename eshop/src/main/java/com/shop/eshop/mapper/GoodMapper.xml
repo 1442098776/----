@@ -28,7 +28,7 @@
     </resultMap>
 
 
-    <!--根据类型得到商品-->
+    <!--根据类型得到商品用于首页展示-->
     <select id="getGoodByCondition" resultMap="GoodMap" parameterType="com.shop.eshop.dto.TypeCondition">
         SELECT g.* FROM good AS g WHERE 1 = 1
         <if test = "menuId != null">
@@ -42,20 +42,27 @@
         </if>
 
     </select>
+    <!--得到所有的子类型商品-->
     <select id="getAllSonGood" parameterType="com.shop.eshop.dto.TypeCondition" resultMap="GoodMap">
-        SELECT * from good where type IN
-        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-        <if test="type == 0">
-            order by sale_num desc,sale_price ASC
-        </if>
-        <if test="type == 1">
-            order by sale_num desc
-        </if>
-        <if test="type == 2">
-            order by sale_price asc
-        </if>
+        SELECT * from good
+        <where>
+                name LIKE concat("%",#{keyWord},"%")
+            <if test="list != null">
+                or type IN
+                <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="type == 0">
+                order by sale_num desc,sale_price ASC
+            </if>
+            <if test="type == 1">
+                order by sale_num desc
+            </if>
+            <if test="type == 2">
+                order by sale_price asc
+            </if>
+        </where>
     </select>
 
     <!-- 得到所有的商品 -->
@@ -75,8 +82,14 @@
         SELECT * FROM good ORDER BY sale_num limit 1,10
     </select>
 
+    <!--根据类型得到商品-->
     <select id="getGoodByType" resultMap="GoodMap" parameterType="java.lang.Integer">
         SELECT * from good where type = #{id} limit 0,8
+    </select>
+
+    <!--搜索-->
+    <select id="getGoodByKeyWord" parameterType="java.lang.String" resultMap="GoodMap">
+        SELECT * from good where name LIKE concat("%",#{keyWord},"%")
     </select>
 
 

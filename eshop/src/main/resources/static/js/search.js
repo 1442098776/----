@@ -27,7 +27,11 @@ var type = null;
 $(function () {
     getGood();
     initGood();
+    if(window.document.getElementById("keyWordContent") != null){
+        search();
+    }
     goodContent(flag,1);
+    console.info(List);
 })
 function initGood() {
     var typeId = window.document.getElementById("typeId").value;
@@ -51,16 +55,21 @@ function initGood() {
 function sort(inputType) {
     if(type != inputType){
         flag = true;
-        alert(inputType);
+        // alert(inputType);
     }
-    alert(flag);
+    // alert(flag);
     type =inputType;
-    var typeId = window.document.getElementById("typeId").value;
+    if(window.document.getElementById("keyWordContent") != null){
+        var keyWord = window.document.getElementById("keyWordContent").value;
+    }else{
+        var typeId = window.document.getElementById("typeId").value;
+    }
     $.ajax({
         url:'/sort',
         data:{
             type:type,
-            typeId:typeId
+            typeId:typeId,
+            keyWord:keyWord
         },
         type:'POST',
         success:function (data) {
@@ -73,10 +82,15 @@ function sort(inputType) {
                     str +='<li>' +
                         '<div class="i-pic limit">';
                     var goodPic = data[i].goodPics;
-                    for(var j = 0;j < goodPic.length;j++){
-                        if(!goodPic[j].grade){
-                            str += '<img style="width: 278px;height: 278px;" src="../img/'+data[i].id+'/'+goodPic[j].picName+' />';
+                    if(goodPic != null){
+                        for(var j = 0;j < goodPic.length;j++){
+                            if(!goodPic[j].grade){
+                                str += '<img style="width: 278px;height: 278px;" src="../img/'+data[i].id+'/'+goodPic[j].picName+'" />';
+                            }
                         }
+                    }else {
+                        // 没有图片是占位置
+                        str += '<img style="width: 278px;height: 278px;" src="../img/666.jpg"/>';
                     }
                     var name = data[i].name.substring(0,14);
                         str +='<p class="title fl">'+name+'</p>' +
@@ -106,11 +120,16 @@ function sort(inputType) {
                     str +='<li><a href=/introduction/'+List[i].id+'>' +
                         '<div class="i-pic limit">';
                     var goodPic2 = data[i].goodPics;
-                    for(var j = 0;j < goodPic2.length;j++){
-                        if(!goodPic2[j].grade){
-                            str += '<img style="width: 278px;height: 278px;" src="../img/'+data[i].id+'/'+goodPic2[j].picName+' />';
+                    if(goodPic2 != null){
+                        for(var j = 0;j < goodPic2.length;j++){
+                            if(!goodPic2[j].grade){
+                                str += '<img style="width: 278px;height: 278px;" src="../img/'+data[i].id+'/'+goodPic2[j].picName+'" />';
+                            }
                         }
+                    }else {
+                        str += '<img style="width: 278px;height: 278px;" src="../img/666.jpg"/>';
                     }
+
                     var name = data[i].name.substring(0,14);
                     str +='<p class="title fl">'+name+'</p>' +
                         '<p class="price fl">';
@@ -151,8 +170,8 @@ function goodContent(flag,pageNow) {
     var totalPage = Math.ceil(List.length/pageSize);
     var center = window.document.getElementById("center");
     var str = "";
-    if(flag){
-        if(List.length > 0){
+    if(List.length > 0){
+        if(flag){
             if(my_pageNum < totalPage){
                 var limit = ((my_pageNum-1)*pageSize+pageSize)
             }else {
@@ -163,12 +182,17 @@ function goodContent(flag,pageNow) {
                     '<a href=/introduction/'+List[i].id+'>' +
                     '<div class="i-pic limit">';
                 var goodPics = List[i].goodPics;
-                for(var j = 0;j<goodPics.length;j++){
-                    if(!goodPics[j].grade){
-                        str += '<img style="width: 278px;height: 278px;" src="../img/'+List[i].id+'/'+goodPics[j].picName+'"/>';
-                    }
+                if(goodPics != null){
+                    for(var j = 0;j<goodPics.length;j++){
+                        if(!goodPics[j].grade){
+                            str += '<img style="width: 278px;height: 278px;" src="../img/'+List[i].id+'/'+goodPics[j].picName+'"/>';
+                        }
 
+                    }
+                }else {
+                    str += '<img style="width: 278px;height: 278px;" src="../img/666.jpg"/>';
                 }
+
                 var name = List[i].name.substring(0,14);
                 str +='<p class="title fl">'+name+'</p>' +
                     '<p class="price fl">';
@@ -193,12 +217,6 @@ function goodContent(flag,pageNow) {
             str += '<div class="clear"></div>';
             center.innerHTML = str;
         }else{
-            str += '<div style="background-color:#e9e9e9;width: 100%;height: 100px;text-align: center;line-height: 100px;font-size: 24px;color: #9C9C9C">没有该商品</div>' +
-                '<div class="clear"></div>';
-            center.innerHTML = str;
-        }
-    }else{
-        if(List.length > 0){
             if(my_pageNum < totalPage){
                 var limit = List.length -((my_pageNum-1)*pageSize);
             }else {
@@ -209,12 +227,17 @@ function goodContent(flag,pageNow) {
                     '<a href=/introduction/'+List[i].id+'>' +
                     '<div class="i-pic limit">';
                 var goodPics = List[i].goodPics;
-                for(var j = 0;j<goodPics.length;j++){
-                    if(!goodPics[j].grade){
-                        str += '<img style="width: 278px;height: 278px;" src="../img/'+List[i].id+'/'+goodPics[j].picName+'"/>';
-                    }
+                if(goodPics != null){
+                    for(var j = 0;j<goodPics.length;j++){
+                        if(!goodPics[j].grade){
+                            str += '<img style="width: 278px;height: 278px;" src="../img/'+List[i].id+'/'+goodPics[j].picName+'"/>';
+                        }
 
+                    }
+                }else {
+                    str += '<img style="width: 278px;height: 278px;" src="../img/666.jpg"/>';
                 }
+
                 var name = List[i].name.substring(0,14);
                 str +='<p class="title fl">'+name+'</p>' +
                     '<p class="price fl">';
@@ -238,11 +261,12 @@ function goodContent(flag,pageNow) {
             }
             str += '<div class="clear"></div>';
             center.innerHTML = str;
-        }else{
-            str += '<div style="background-color:#e9e9e9;width: 100%;height: 100px;text-align: center;line-height: 100px;font-size: 24px;color: #9C9C9C">没有该商品</div>' +
-                '<div class="clear"></div>';
-            center.innerHTML = str;
+
         }
+    }else{
+        str += '<div style="background-color:#e9e9e9;width: 100%;height: 100px;text-align: center;line-height: 100px;font-size: 24px;color: #9C9C9C">没有该类型商品</div>' +
+            '<div class="clear"></div>';
+        center.innerHTML = str;
     }
 
     var li = "";
@@ -306,4 +330,21 @@ function goodContent(flag,pageNow) {
             "</li>";
     }
     ul.innerHTML=li;
+}
+
+function search() {
+    var keyWord = window.document.getElementById("keyWordContent").value;
+    $.ajax({
+        url:'/searchGood',
+        type:'POST',
+        data:{
+            keyWord:keyWord
+        },
+        dataType:'JSON',
+        async: false,
+        success:function (goodList) {
+            List = goodList;
+            window.document.getElementById("searchNum").innerText = List.length;
+        }
+    })
 }

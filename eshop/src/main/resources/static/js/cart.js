@@ -126,7 +126,7 @@ function getCartByPage(pageNow) {
     }
     //获取分页器ul
     var ul=window.document.getElementById("ul");
-    var pageSize = 1;
+    var pageSize = 5;
     var totalPage = Math.ceil(List.length/pageSize);
     var cartTable = window.document.getElementById("cartContent");
     var str = "";

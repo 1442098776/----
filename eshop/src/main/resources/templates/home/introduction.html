@@ -30,20 +30,20 @@
 			<div th:include="common/head::header"></div>
 			<!--悬浮搜索框-->
 
-			<div class="nav white">
-				<div class="logo"><img src="../images/logo.png" /></div>
-				<div class="logoBig">
-					<li><img src="../images/logobig.png" /></li>
-				</div>
+			<!--<div class="nav white">-->
+				<!--<div class="logo"><img src="../images/logo.png" /></div>-->
+				<!--<div class="logoBig">-->
+					<!--<li><img src="../images/logobig.png" /></li>-->
+				<!--</div>-->
 
-				<div class="search-bar pr">
-					<a name="index_none_header_sysc" href="#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-					</form>
-				</div>
-			</div>
+				<!--<div class="search-bar pr">-->
+					<!--<a name="index_none_header_sysc" href="#"></a>-->
+					<!--<form>-->
+						<!--<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">-->
+						<!--<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">-->
+					<!--</form>-->
+				<!--</div>-->
+			<!--</div>-->
 
 			<div class="clear"></div>
 				<b class="line"></b>
@@ -256,12 +256,12 @@
 									<a href="#"><span class="index-needs-dt-txt">宝贝详情</span></a>
 
 								</li>
-								<li>
-									<a href="#"><span class="index-needs-dt-txt">全部评价</span></a>
-								</li>
-								<li>
-									<a href="#"><span class="index-needs-dt-txt">猜你喜欢</span></a>
-								</li>
+								<!--<li>-->
+									<!--<a href="#"><span class="index-needs-dt-txt">全部评价</span></a>-->
+								<!--</li>-->
+								<!--<li>-->
+									<!--<a href="#"><span class="index-needs-dt-txt">猜你喜欢</span></a>-->
+								<!--</li>-->
 							</ul>
 							<div class="am-tabs-bd">
 
@@ -291,13 +291,13 @@
 											<h4>商品细节</h4>
 										</div>
 										<div class="twlistNews">
-											<img src="../images/tw1.jpg" />
-											<img src="../images/tw2.jpg" />
-											<img src="../images/tw3.jpg" />
-											<img src="../images/tw4.jpg" />
-											<img src="../images/tw5.jpg" />
-											<img src="../images/tw6.jpg" />
-											<img src="../images/tw7.jpg" />
+											<img width="100%" th:each="goodPic:${good.goodPics}" th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" />
+											<!--<img src="../images/tw2.jpg" />-->
+											<!--<img src="../images/tw3.jpg" />-->
+											<!--<img src="../images/tw4.jpg" />-->
+											<!--<img src="../images/tw5.jpg" />-->
+											<!--<img src="../images/tw6.jpg" />-->
+											<!--<img src="../images/tw7.jpg" />-->
 										</div>
 									</div>
 									<div class="clear"></div>

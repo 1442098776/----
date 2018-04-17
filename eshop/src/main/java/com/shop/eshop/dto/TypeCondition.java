@@ -14,6 +14,16 @@ public class TypeCondition {
      */
     private Integer type;
 
+    private String keyWord;
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
+
     public Integer getCount() {
         return count;
     }

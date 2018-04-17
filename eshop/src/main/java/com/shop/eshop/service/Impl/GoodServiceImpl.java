@@ -51,4 +51,9 @@ public class GoodServiceImpl implements GoodService {
     public List<Good> getGoodByCondition(TypeCondition tp) {
         return goodMapper.getGoodByCondition(tp);
     }
+
+    @Override
+    public List<Good> getGoodByKeyWord(String keyWOrd) {
+        return goodMapper.getGoodByKeyWord(keyWOrd);
+    }
 }
