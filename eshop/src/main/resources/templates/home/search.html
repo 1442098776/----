@@ -13,6 +13,7 @@
 		<link href="../basic/css/demo.css" rel="stylesheet" type="text/css" />
 
 		<link href="../css/seastyle.css" rel="stylesheet" type="text/css" />
+		<!--<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
 
 		<script type="text/javascript" src="../basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="../js/script.js"></script>
@@ -112,24 +113,26 @@
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes" id="center">
-									<li th:each="good:${goodList}">
-										<div class="i-pic limit">
-											<img th:each="goodPic:${good.goodPics}" th:if="!${goodPic.grade}" th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" />
-											<p class="title fl" th:text="${good.name}">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<div th:if="${good.salePrice} != null" style="padding: 5px">
-												<span class="price fl" th:text="'￥'+${good.salePrice}"></span>
-												<s><span class="good_price" th:text="'￥'+${good.price}"></span></s>
-												</div>
-												<div th:if="${good.salePrice} == null" style="padding: 5px">
-													<span class="price fl" th:text="'￥'+${good.price}"></span>
-												</div>
-											</p>
-											<p class="number fl">
-												销量<span th:text="${good.saleNum}">1110</span>
-											</p>
-										</div>
-									</li>
+									<!--<li th:each="good:${goodList}">-->
+										<!--<a th:href="@{'/introduction/'+${good.id}}">-->
+										<!--<div class="i-pic limit">-->
+											<!--<img th:each="goodPic:${good.goodPics}" th:if="!${goodPic.grade}" th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" />-->
+											<!--<p class="title fl" th:text="${good.name}">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>-->
+											<!--<p class="price fl">-->
+												<!--<div th:if="${good.salePrice} != null" style="padding: 5px">-->
+												<!--<span class="price fl" th:text="'￥'+${good.salePrice}"></span>-->
+												<!--<s><span class="good_price" th:text="'￥'+${good.price}"></span></s>-->
+												<!--</div>-->
+												<!--<div th:if="${good.salePrice} == null" style="padding: 5px">-->
+													<!--<span class="price fl" th:text="'￥'+${good.price}"></span>-->
+												<!--</div>-->
+											<!--</p>-->
+											<!--<p class="number fl">-->
+												<!--销量<span th:text="${good.saleNum}">1110</span>-->
+											<!--</p>-->
+										<!--</div>-->
+										<!--</a>-->
+									<!--</li>-->
 									<!--<li>-->
 										<!--<div class="i-pic limit">-->
 											<!---->
@@ -335,15 +338,24 @@
 							<!--</div>-->
 							<div class="clear"></div>
 							<!--分页 -->
-							<ul class="am-pagination am-pagination-right">
-								<li class="am-disabled"><a href="#">&laquo;</a></li>
-								<li class="am-active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
+							<ul class="am-pagination am-pagination-right" id="ul">
+								<!--<li class="am-disabled"><a href="#">&laquo;</a></li>-->
+								<!--<li class="am-active"><a href="#">1</a></li>-->
+								<!--<li><a href="#">2</a></li>-->
+								<!--<li><a href="#">3</a></li>-->
+								<!--<li><a href="#">4</a></li>-->
+								<!--<li><a href="#">5</a></li>-->
+								<!--<li><a href="#">&raquo;</a></li>-->
 							</ul>
+							<!--<div class="panel-footer">-->
+								<!--<nav class='clearfix' aria-label="Page navigation">-->
+									<!--<span id="nowpage" style="font-size: 16px"></span>-->
+									<!--&lt;!&ndash; 分页器 &ndash;&gt;-->
+									<!--<ul class="pagination pull-right" id="ul">-->
+
+									<!--</ul>-->
+								<!--</nav>-->
+							<!--</div>-->
 						</div>
 
 				</div>

@@ -3,6 +3,7 @@ package com.shop.eshop.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author zhanguo.huang
@@ -24,6 +25,12 @@ public class PageController {
     @RequestMapping("/register")
     public String register(){
         return "register";
+    }
+    @RequestMapping("/shopcart")
+    public ModelAndView showCart(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("home/cart");
+        return mv;
     }
     @RequestMapping("/success")
     public String paySuccess(){

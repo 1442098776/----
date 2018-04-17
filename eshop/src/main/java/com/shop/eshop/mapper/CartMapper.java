@@ -45,13 +45,10 @@ public interface CartMapper {
      */
     Integer addGoodToCart(Cart cart);
 
-    int deleteByPrimaryKey(Long id);
-
-
-    int insert(Cart record);
-
-    Cart selectByPrimaryKey(Long id);
-
-
-    int updateByPrimaryKey(Cart record);
+    /**
+     * 根据id删除购物车
+     * @param list
+     * @return
+     */
+    Integer deleteCartGoodById(List<Long> list);
 }

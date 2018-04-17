@@ -34,6 +34,13 @@ public class PayController {
     @Autowired
     private CartService cartService;
 
+    /**
+     * 立即购买
+     * @param buy
+     * @param request
+     * @param response
+     * @return
+     */
     @PostMapping("/buy")
     public String buy(Buy buy, HttpServletRequest request, HttpServletResponse response){
         //获取用户
@@ -48,6 +55,12 @@ public class PayController {
         }
     }
 
+    /**
+     * 立即购买的计算
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/pay")
     public ModelAndView pay(HttpServletRequest request,HttpServletResponse response){
         ModelAndView mv = new ModelAndView();
@@ -64,6 +77,13 @@ public class PayController {
         return mv;
     }
 
+    /**
+     * 购物车结算
+     * @param request
+     * @param response
+     * @param id
+     * @return
+     */
     @RequestMapping("/cartpay")
     public ModelAndView cartpay(HttpServletRequest request,HttpServletResponse response,String id){
         ModelAndView mv = new ModelAndView();

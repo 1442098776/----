@@ -57,33 +57,11 @@
     SELECT * FROM cart WHERE user_id = #{userId}
   </select>
 
-
-
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from cart
-    where Id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from cart
-    where Id = #{id,jdbcType=BIGINT}
+  <!--根据id删除删除购物车-->
+  <delete id="deleteCartGoodById" parameterType="java.util.List">
+    DELETE FROM cart where id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </delete>
-  <insert id="insert" parameterType="com.shop.eshop.model.Cart">
-    insert into cart (Id, user_id, good_id, 
-      create_time, count, good_price
-      )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{goodId,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{count,jdbcType=INTEGER}, #{goodPrice,jdbcType=DECIMAL}
-      )
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.shop.eshop.model.Cart">
-    update cart
-    set user_id = #{userId,jdbcType=BIGINT},
-      good_id = #{goodId,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      count = #{count,jdbcType=INTEGER},
-      good_price = #{goodPrice,jdbcType=DECIMAL}
-    where Id = #{id,jdbcType=BIGINT}
-  </update>
 </mapper>

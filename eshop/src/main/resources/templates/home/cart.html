@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,9 +10,11 @@
 		<link th:href="@{../basic/css/demo.css}" rel="stylesheet" type="text/css" />
 		<link th:href="@{../css/cartstyle.css}" rel="stylesheet" type="text/css" />
 		<link th:href="@{../css/optstyle.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
 		<script type="text/javascript" src="../js/cart.js"></script>
+		<script type="text/javascript" th:src="@{../js/layer.js}"></script>
 
 
 	</head>
@@ -70,69 +71,89 @@
 						</div>
 					</div>
 					<div class="clear"></div>
+					<div id="cartContent"></div>
 
-					<tr class="item-list" th:each="cart:${cartList}">
-						<div class="bundle  bundle-last ">
-							<div class="clear"></div>
-							<div class="bundle-main">
-								<ul class="item-content clearfix">
-									<li class="td td-chk">
-										<div class="cart-checkbox ">
-											<input class="check" th:id="${cart.id}" onclick="getCartGood()" name="items" th:value="${cart.id}" type="checkbox">
-											<label th:for="${cart.id}"></label>
-										</div>
-									</li>
-									<li class="td td-item">
-										<div class="item-pic" th:each="goodPic:${cart.good.goodPics}" th:if="!${goodPic.grade}">
-											<a href="#" target="_blank" class="J_MakePoint">
-												<img width="80px" height="80px" th:src="@{'../img/'+${cart.good.id}+'/'+${goodPic.picName}}" class="itempic J_ItemImg"></a>
-										</div>
-										<div class="item-info">
-											<div class="item-basic-info">
-												<a href="#" target="_blank" th:title="${cart.good.name}" th:text="${cart.good.name}" class="item-title J_MakePoint" ></a>
-											</div>
-										</div>
-									</li>
+					<!--<tr class="item-list" th:each="cart:${cartList}">-->
+						<!--<div class="bundle  bundle-last ">-->
+							<!--<div class="clear"></div>-->
+							<!--<div class="bundle-main">-->
+								<!--<ul class="item-content clearfix">-->
+									<!--<li class="td td-chk">-->
+										<!--<div class="cart-checkbox ">-->
+											<!--<input class="check" th:id="${cart.id}" onclick="getCartGood()" name="items" th:value="${cart.id}" type="checkbox">-->
+											<!--<label th:for="${cart.id}"></label>-->
+										<!--</div>-->
+									<!--</li>-->
+									<!--<li class="td td-item">-->
+										<!--<div class="item-pic" th:each="goodPic:${cart.good.goodPics}" th:if="!${goodPic.grade}">-->
+											<!--<a href="#" target="_blank" class="J_MakePoint">-->
+												<!--<img width="80px" height="80px" th:src="@{'../img/'+${cart.good.id}+'/'+${goodPic.picName}}" class="itempic J_ItemImg"></a>-->
+										<!--</div>-->
+										<!--<div class="item-info">-->
+											<!--<div class="item-basic-info">-->
+												<!--<a href="#" target="_blank" th:title="${cart.good.name}" th:text="${cart.good.name}" class="item-title J_MakePoint" ></a>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</li>-->
 
-									<li class="td td-price">
-										<div class="item-price price-promo-promo">
-											<div class="price-content">
-												<div class="price-line">
-													<em class="price-original" th:text="${cart.good.price}"></em>
-												</div>
-												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0" th:text="${cart.goodPrice}"></em>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li class="td td-amount">
-										<div class="amount-wrapper ">
-											<div class="item-amount ">
-												<div class="sl">
-													<input class="min am-btn" name="" type="button" value="-" />
-													<input class="text_box" name="" type="text" th:value="${cart.count}" style="width:30px;" />
-													<input class="add am-btn" name="" type="button" value="+" />
-												</div>
-											</div>
-										</div>
-									</li>
-									<li class="td td-sum">
-										<div class="td-inner">
-											<em tabindex="0" class="J_ItemSum number" th:text="${cart.count}*${cart.goodPrice}"></em>
-										</div>
-									</li>
-									<li class="td td-op">
-										<div class="td-inner">
-											<a title="移入收藏夹" class="btn-fav" href="#">移入收藏夹</a>
-											<a href="javascript:;" data-point-url="#" class="delete">删除</a>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</tr>
+									<!--<li class="td td-price">-->
+										<!--<div class="item-price price-promo-promo">-->
+											<!--<div class="price-content">-->
+												<!--<div class="price-line">-->
+													<!--<em class="price-original" th:text="${cart.good.price}"></em>-->
+												<!--</div>-->
+												<!--<div class="price-line">-->
+													<!--<em class="J_Price price-now" tabindex="0" th:text="${cart.goodPrice}"></em>-->
+												<!--</div>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</li>-->
+									<!--<li class="td td-amount">-->
+										<!--<div class="amount-wrapper ">-->
+											<!--<div class="item-amount ">-->
+												<!--<div class="sl">-->
+													<!--<input class="min am-btn" name="" type="button" value="-" />-->
+													<!--<input class="text_box" name="" type="text" th:value="${cart.count}" style="width:30px;" />-->
+													<!--<input class="add am-btn" name="" type="button" value="+" />-->
+												<!--</div>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</li>-->
+									<!--<li class="td td-sum">-->
+										<!--<div class="td-inner">-->
+											<!--<em tabindex="0" class="J_ItemSum number" th:text="${cart.count}*${cart.goodPrice}"></em>-->
+										<!--</div>-->
+									<!--</li>-->
+									<!--<li class="td td-op">-->
+										<!--<div class="td-inner">-->
+											<!--&lt;!&ndash;<a title="移入收藏夹" class="btn-fav" href="#">移入收藏夹</a>&ndash;&gt;-->
+											<!--<span style="cursor: pointer;" onclick="toDelete(this)" th:id="${cart.id}" th:value="${cart.id}" data-point-url="#" class="delete">删除</span>-->
+										<!--</div>-->
+									<!--</li>-->
+								<!--</ul>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</tr>-->
 					<div class="clear"></div>
+					<!--分页器-->
+					<ul class="am-pagination am-pagination-right" id="ul">
+						<!--<li class="am-disabled"><a href="#">&laquo;</a></li>-->
+						<!--<li class="am-active"><a href="#">1</a></li>-->
+						<!--<li><a href="#">2</a></li>-->
+						<!--<li><a href="#">3</a></li>-->
+						<!--<li><a href="#">4</a></li>-->
+						<!--<li><a href="#">5</a></li>-->
+						<!--<li><a href="#">&raquo;</a></li>-->
+					</ul>
+					<!--<div class="panel-footer">-->
+						<!--<nav class='clearfix' aria-label="Page navigation">-->
+							<!--<span id="nowpage" style="font-size: 16px"></span>-->
+							<!--&lt;!&ndash; 分页器 &ndash;&gt;-->
+							<!--<ul class="pagination pull-right" id="ul">-->
+
+							<!--</ul>-->
+						<!--</nav>-->
+					<!--</div>-->
 				</div>
 				<div class="clear"></div>
 
@@ -145,8 +166,8 @@
 						<span>全选</span>
 					</div>
 					<div class="operations">
-						<a href="#" hidefocus="true" class="deleteAll">删除</a>
-						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
+						<a href="javaScript:toDelete(null)" hidefocus="true" class="deleteAll">删除</a>
+						<!--<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>-->
 					</div>
 					<div class="float-bar-right">
 						<div class="amount-sum">

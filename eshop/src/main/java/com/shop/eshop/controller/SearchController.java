@@ -24,8 +24,14 @@ public class SearchController {
 
     @Autowired
     private GoodTypeService goodTypeService;
+
+    /**
+     * 根据类型id获取商品集合
+     * @param typeId
+     * @return
+     */
     @GetMapping("/search/{typeId}")
-    public ModelAndView searchByMenu(@PathVariable Integer typeId,Integer type){
+    public ModelAndView searchByMenu(@PathVariable Integer typeId){
         ModelAndView mv = new ModelAndView();
         TypeCondition tp = new TypeCondition();
         List list = new ArrayList();
@@ -37,7 +43,6 @@ public class SearchController {
             }
         }
         tp.setList(list);
-        tp.setType(type);
         List<Good> goodList = goodTypeService.getAllSonGood(tp);
         mv.addObject("goodTypeList",goodTypeList);
         mv.addObject("goodList",goodList);
@@ -46,6 +51,26 @@ public class SearchController {
         return mv;
     }
 
+    /**
+     * 初始化商品
+     * @param typeCondition
+     * @return
+     */
+    @PostMapping("/initGoodList")
+    @ResponseBody
+    public List<Good> initGoodList(TypeCondition typeCondition){
+        List list = new ArrayList();
+        list.add(typeCondition.getTypeId());
+        List<GoodType> goodTypeList = goodTypeService.getGoodTypeByParentId(typeCondition.getTypeId());
+        if(goodTypeList != null){
+            for(GoodType goodType:goodTypeList){
+                list.add(goodType.getId());
+            }
+        }
+        typeCondition.setList(list);
+        List<Good> goodList = goodTypeService.getAllSonGood(typeCondition);
+        return goodList;
+    }
     /**
      * 排序：综合、销量、价格
      * @param typeId

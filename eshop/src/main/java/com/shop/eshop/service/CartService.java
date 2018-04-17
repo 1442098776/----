@@ -48,4 +48,11 @@ public interface CartService {
      * @return
      */
     Integer addGoodToCart(Cart cart);
+
+    /**
+     * 根据id删除购物车
+     * @param list
+     * @return
+     */
+    Integer deleteCartGoodById(List<Long> list);
 }

@@ -75,4 +75,9 @@ public class CartServiceImpl implements CartService {
     public Integer addGoodToCart(Cart cart) {
         return cartMapper.addGoodToCart(cart);
     }
+
+    @Override
+    public Integer deleteCartGoodById(List<Long> list) {
+        return cartMapper.deleteCartGoodById(list);
+    }
 }
