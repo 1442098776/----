@@ -17,7 +17,9 @@ public class User {
 
     private Date regTime;
 
-    private Boolean statu;
+    private Date modifyTIme;
+
+    private Boolean status;
 
     public Long getUserId() {
         return userId;
@@ -75,11 +77,19 @@ public class User {
         this.regTime = regTime;
     }
 
-    public Boolean getStatu() {
-        return statu;
+    public Date getModifyTIme() {
+        return modifyTIme;
     }
 
-    public void setStatu(Boolean statu) {
-        this.statu = statu;
+    public void setModifyTIme(Date modifyTIme) {
+        this.modifyTIme = modifyTIme;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

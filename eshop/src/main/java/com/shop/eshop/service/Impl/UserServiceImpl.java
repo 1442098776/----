@@ -43,4 +43,14 @@ public class UserServiceImpl implements UserService {
     public List<User> checkUser(User user) {
         return userMapper.checkUser(user);
     }
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    @Override
+    public Integer updateUserById(User user) {
+        return userMapper.updateUserById(user);
+    }
 }

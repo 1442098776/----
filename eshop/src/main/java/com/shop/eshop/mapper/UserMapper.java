@@ -31,4 +31,11 @@ public interface UserMapper {
      */
     List<User> checkUser(User user);
 
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    Integer updateUserById(User user);
+
 }
