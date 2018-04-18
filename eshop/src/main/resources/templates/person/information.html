@@ -118,13 +118,13 @@
 								<div class="am-form-group">
 									<label for="user-phone" class="am-form-label" >电话</label>
 									<div class="am-form-content">
-										<input id="user-phone" th:value="${session.user.phone}" placeholder="telephonenumber" type="tel">
+										<input id="user-phone" disabled th:value="${session.user.phone}" placeholder="telephonenumber" type="tel">
 									</div>
 								</div>
 								<div class="am-form-group">
 									<label for="user-email" class="am-form-label" >电子邮件</label>
 									<div class="am-form-content">
-										<input id="user-email" th:value="${session.user.email}" placeholder="Email" type="email">
+										<input id="user-email" th:value="${session.user.email}" placeholder="Email" type="email"><span></span>
 									</div>
 								</div>
 								<!--<div class="am-form-group address">-->

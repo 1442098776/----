@@ -17,7 +17,7 @@ public class User {
 
     private Date regTime;
 
-    private Date modifyTIme;
+    private Date modifyTime;
 
     private Boolean status;
 
@@ -77,12 +77,12 @@ public class User {
         this.regTime = regTime;
     }
 
-    public Date getModifyTIme() {
-        return modifyTIme;
+    public Date getModifyTime() {
+        return modifyTime;
     }
 
-    public void setModifyTIme(Date modifyTIme) {
-        this.modifyTIme = modifyTIme;
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     public Boolean getStatus() {

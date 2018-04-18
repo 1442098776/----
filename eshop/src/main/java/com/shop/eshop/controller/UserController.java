@@ -66,6 +66,8 @@ public class UserController {
         }else if (user.getPassword() == user1.getPassword() || user.getPassword().equals(user1.getPassword())) {
             //登录成功，并保存到session中
             request.getSession().setAttribute("user", user1);
+            //设置保存一天
+            request.getSession().setMaxInactiveInterval(1000*60*60*24);
             return "2";//登录成功
         } else {
             return "0";//密码错误
@@ -105,7 +107,7 @@ public class UserController {
             }else if(user.getPassword() != null){
                 loginUser.setPassword(newPassword);
             }
-            loginUser.setModifyTIme(new Date());
+            loginUser.setModifyTime(new Date());
             Integer is_update = userService.updateUserById(loginUser);
             if(is_update != null && is_update > 0){
                 return "1";
