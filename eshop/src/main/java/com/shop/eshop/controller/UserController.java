@@ -95,7 +95,7 @@ public class UserController {
     @PostMapping("/updateUser")
     public String updateUserBuId(User user,String newPassword,HttpServletRequest request){
         User loginUser = (User) request.getSession().getAttribute("user");
-        if(user.getPassword() != loginUser.getPassword()){
+        if(!loginUser.getPassword().equals(user.getPassword())){
             return "2";
         }else{
             if(user.getEmail()!= null){
@@ -105,6 +105,7 @@ public class UserController {
             }else if(user.getPassword() != null){
                 loginUser.setPassword(newPassword);
             }
+            loginUser.setModifyTIme(new Date());
             Integer is_update = userService.updateUserById(loginUser);
             if(is_update != null && is_update > 0){
                 return "1";
