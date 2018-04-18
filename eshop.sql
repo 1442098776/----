@@ -1,5 +1,5 @@
-﻿# Host: localhost  (Version 5.7.17-log)
-# Date: 2018-04-17 00:03:12
+﻿# Host: localhost  (Version 5.7.21-log)
+# Date: 2018-04-18 17:57:16
 # Generator: MySQL-Front 6.0  (Build 2.20)
 
 
@@ -51,15 +51,15 @@ CREATE TABLE `cart` (
   `good_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `count` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '数量',
-  `good_price` decimal(6,2) unsigned NOT NULL DEFAULT '0.00',
+  `good_price` float(6,2) unsigned NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='购物车';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='购物车';
 
 #
 # Data for table "cart"
 #
 
-INSERT INTO `cart` VALUES (1,7,1,'2018-04-01 17:13:20',22,22.00),(7,7,3,'2018-04-01 18:58:53',4,1.20),(8,7,6,'2018-04-01 18:59:05',4,15.00);
+INSERT INTO `cart` VALUES (14,7,2,'2018-04-17 15:42:06',3,38.50),(15,7,7,'2018-04-17 15:42:30',9,33.00),(16,7,18,'2018-04-17 15:42:45',3,38.50),(17,7,20,'2018-04-17 16:21:36',5,16.80),(18,7,19,'2018-04-17 15:42:59',3,1.20),(19,7,17,'2018-04-17 16:21:29',5,22.00),(20,7,16,'2018-04-17 15:43:16',3,24.00),(21,7,10,'2018-04-17 15:43:22',3,38.50),(22,7,3,'2018-04-17 15:43:30',3,1.20);
 
 #
 # Structure for table "city"
@@ -105,8 +105,8 @@ CREATE TABLE `good` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '商品名',
   `type` smallint(5) NOT NULL DEFAULT '0' COMMENT '商品类型',
-  `price` decimal(6,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品价格',
-  `sale_price` decimal(6,2) unsigned DEFAULT '0.00' COMMENT '销售价格',
+  `price` float(6,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品价格',
+  `sale_price` float(6,2) unsigned DEFAULT '0.00' COMMENT '销售价格',
   `stock` int(11) NOT NULL DEFAULT '0' COMMENT '库存',
   `sale_num` int(11) DEFAULT NULL COMMENT '销量',
   `advise` int(2) unsigned NOT NULL DEFAULT '0' COMMENT '推荐热度',
@@ -240,7 +240,7 @@ CREATE TABLE `order` (
   `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '订单创建时间',
   `send_time` datetime DEFAULT NULL COMMENT '发货日期',
   `receive_time` datetime DEFAULT NULL COMMENT '收货时间',
-  `state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '0：新建订单 1：已发货 2：已收货订单完成',
+  `state` int(2) unsigned NOT NULL DEFAULT '0' COMMENT '0：新建订单 1：已发货 2：已收货订单完成 3：取消',
   `message` varchar(255) DEFAULT NULL COMMENT '留言',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
@@ -256,7 +256,7 @@ INSERT INTO `order` VALUES (7201841417212184,7,1,'2018-04-14 17:21:03',NULL,NULL
 #
 
 CREATE TABLE `order_detail` (
-  `id` bigint(1) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单号',
   `good_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '商品id',
   `good_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品数量',
@@ -299,7 +299,8 @@ CREATE TABLE `user` (
   `phone` varchar(30) NOT NULL DEFAULT '',
   `email` varchar(30) DEFAULT NULL,
   `reg_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `statu` bit(1) NOT NULL DEFAULT b'1' COMMENT '状态：1：可用 0：禁用',
+  `modify_time` datetime DEFAULT NULL COMMENT '修改信息时间',
+  `status` bit(1) NOT NULL DEFAULT b'1' COMMENT '状态：1：可用 0：禁用',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
@@ -307,4 +308,4 @@ CREATE TABLE `user` (
 # Data for table "user"
 #
 
-INSERT INTO `user` VALUES (1,'hzg',NULL,'123','18814383255',NULL,'2018-03-23 00:00:00',b'1'),(2,'hzg',NULL,'123','18814383255',NULL,'2018-03-23 00:00:00',b'1'),(3,'hhh',NULL,'123','18814383455',NULL,'2018-03-23 00:00:00',b'1'),(4,'hhh',NULL,'123','18814383255',NULL,'2018-03-23 00:00:00',b'1'),(5,'hhh',NULL,'123','18814383233',NULL,'2018-03-23 00:00:00',b'1'),(6,'hzg',NULL,'123','18814383255',NULL,'2018-03-23 17:22:07',b'1'),(7,'周星驰',NULL,'123','18814383245',NULL,'2018-03-24 21:45:26',b'1');
+INSERT INTO `user` VALUES (1,'hzg',NULL,'123','18814383255',NULL,'2018-03-23 00:00:00',NULL,b'1'),(2,'hzg',NULL,'123','18814383255',NULL,'2018-03-23 00:00:00',NULL,b'1'),(3,'hhh',NULL,'123','18814383455',NULL,'2018-03-23 00:00:00',NULL,b'1'),(4,'hhh',NULL,'123','18814383255',NULL,'2018-03-23 00:00:00',NULL,b'1'),(5,'hhh',NULL,'123','18814383233',NULL,'2018-03-23 00:00:00',NULL,b'1'),(6,'hzg',NULL,'123','18814383255',NULL,'2018-03-23 17:22:07',NULL,b'1'),(7,'周星驰',NULL,'123','18814383245',NULL,'2018-03-24 21:45:26',NULL,b'1');
