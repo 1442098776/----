@@ -197,7 +197,7 @@ function allPay() {
 function saveAddress(){
 
     $.ajax({
-        url: '/getAddressCount',
+        url: '/address/getAddressCount',
         type: 'POST',
         dataType: 'JSON',
         success: function (data) {
@@ -215,7 +215,7 @@ function saveAddress(){
                 alert(username+","+phone+","+address);
 
                 $.ajax({
-                    url:'/saveAddress',
+                    url:'/address/saveAddress',
                     type:'POST',
                     data:{
                         phone:phone,
@@ -316,7 +316,7 @@ function sureBuy() {
     alert(address);
     var message = window.document.getElementById("message").value;
     $.ajax({
-        url:'/createOrder',
+        url:'/order/createOrder',
         type:'POST',
         data:{
             goodIds:goodId,

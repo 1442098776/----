@@ -32,7 +32,7 @@ $(document).ready(function (){
  */
 function getAllAddress() {
     $.ajax({
-        url:'/getAllAddress',
+        url:'/address/getAllAddress',
         type:'POST',
         dataType:'JSON',
         success:function (data) {
@@ -78,7 +78,7 @@ function getAllAddress() {
  */
 function modifyDefaultAddress(id) {
     $.ajax({
-        url:'/updateAddress',
+        url:'/address/updateAddress',
         type:'POSt',
         data:{
             addressId:id,
@@ -208,7 +208,7 @@ function modifyAddress() {
     }
     alert(consignee_name+","+consignee_phone+","+address);
     $.ajax({
-        url:'/updateAddress',
+        url:'/address/updateAddress',
         type:'POSt',
         data:{
             addressId:id,
@@ -238,7 +238,7 @@ function modifyAddress() {
 function showEdit(id) {
     alert(id)
     $.ajax({
-        url:'/getAddressById',
+        url:'/address/getAddressById',
         type:'POST',
         data:{
             addressId:id
@@ -285,7 +285,7 @@ $(document).ready(function($) {
 function saveAddress(){
 
     $.ajax({
-        url:'/getAddressCount',
+        url:'/address/getAddressCount',
         type:'POST',
         dataType:'JSON',
         success:function (data) {
@@ -302,7 +302,7 @@ function saveAddress(){
                 alert(username+","+phone+","+address);
 
                 $.ajax({
-                    url:'/saveAddress',
+                    url:'/address/saveAddress',
                     type:'POST',
                     data:{
                         phone:phone,
@@ -343,7 +343,7 @@ function getAddress(id) {
 
 function deleteAddress(id) {
     $.ajax({
-        url:'/deleteAddress',
+        url:'/address/deleteAddress',
         type:'POST',
         data:{
             addressId:id

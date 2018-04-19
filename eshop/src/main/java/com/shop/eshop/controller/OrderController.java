@@ -1,11 +1,13 @@
 package com.shop.eshop.controller;
 
+import com.shop.eshop.dto.OrderVo;
 import com.shop.eshop.dto.SureBuy;
 import com.shop.eshop.model.Address;
 import com.shop.eshop.model.Order;
 import com.shop.eshop.model.OrderDetail;
 import com.shop.eshop.model.User;
 import com.shop.eshop.service.AddressService;
+import com.shop.eshop.service.OrderManageService;
 import com.shop.eshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单controller
@@ -27,11 +30,13 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private OrderManageService orderManageService;
     /**
      * 产生订单
      * @return
      */
-    @PostMapping("/createOrder")
+    @PostMapping("/order/createOrder")
     public String createOrder(SureBuy sureBuy, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
 
@@ -86,5 +91,12 @@ public class OrderController {
             return "0";
         }
 
+    }
+
+    @PostMapping("/order/getAllOrderBuUserId")
+    public List<OrderVo> getAllOrderBuUserId(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        List<OrderVo> orderVoList = orderManageService.getAllOrderByUserId(user.getUserId());
+        return orderVoList;
     }
 }

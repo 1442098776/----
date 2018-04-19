@@ -32,6 +32,7 @@ function blurForVerityCode() {
 
 // 用于表单提交前返回该函数
 function checkVerityCode() {
+    blurForVerityCode();
     changeVerityImg();
     if(is_verity_success){
         //获取该网址，以便重新跳回

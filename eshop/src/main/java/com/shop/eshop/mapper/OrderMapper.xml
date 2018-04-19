@@ -10,12 +10,13 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
     <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="message" jdbcType="VARCHAR" property="message" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    order_id, user_id, receive_address, create_time, send_time, receive_time, state
+    order_id, user_id, receive_address, create_time, send_time, receive_time,cancel_time, state
   </sql>
 
   <!--产生订单-->

@@ -1,8 +1,13 @@
-package com.shop.eshop.model;
+package com.shop.eshop.dto;
 
 import java.util.Date;
+import java.util.List;
 
-public class Order {
+/**
+ * @author zhanguo.huang
+ * @date 2018-04-19
+ */
+public class OrderVo {
     /**
      * 订单号
      */
@@ -37,7 +42,6 @@ public class Order {
      * 收货时间
      */
     private Date receiveTime;
-
     /**
      * 取消时间
      */
@@ -51,6 +55,16 @@ public class Order {
      * 留言
      */
     private String message;
+
+    private List<OrderDetailVo> orderDetailVoList;
+
+    public List<OrderDetailVo> getOrderDetailVoList() {
+        return orderDetailVoList;
+    }
+
+    public void setOrderDetailVoList(List<OrderDetailVo> orderDetailVoList) {
+        this.orderDetailVoList = orderDetailVoList;
+    }
 
     public Long getId() {
         return id;

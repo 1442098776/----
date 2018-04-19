@@ -24,7 +24,7 @@ public class AddressController {
      * 添加保存地址
      * @return
      */
-    @PostMapping("/saveAddress")
+    @PostMapping("/address/saveAddress")
     public String saveAddress(Address address, HttpServletRequest request, HttpServletResponse response){
         User user = (User) request.getSession().getAttribute("user");
         address.setUserId(user.getUserId());
@@ -64,7 +64,7 @@ public class AddressController {
      * @param address
      * @return 1:成功 0：失败
      */
-    @PostMapping("/deleteAddress")
+    @PostMapping("/address/deleteAddress")
     public String deleteAddress(Address address){
         Integer is_delete = addressService.deleteAddressById(address.getAddressId());
         if(is_delete != null && is_delete > 0){
@@ -78,7 +78,7 @@ public class AddressController {
      * 获取地址
      * @return
      */
-    @PostMapping("/getAllAddress")
+    @PostMapping("/address/getAllAddress")
     public List<Address> getAllAddress(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         List<Address> addressList = addressService.getAllAddressByUserId(user.getUserId());
@@ -90,7 +90,7 @@ public class AddressController {
      * @param request
      * @return
      */
-    @PostMapping("/getAddressCount")
+    @PostMapping("/address/getAddressCount")
     public String getAddressCount(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         Integer count = addressService.getAddressCount(user.getUserId());
@@ -108,7 +108,7 @@ public class AddressController {
      * @param type
      * @return 1:成功 0:失败
      */
-    @PostMapping("/updateAddress")
+    @PostMapping("/address/updateAddress")
     public String updateAddress(Address address,Integer type,HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         if(type == 0){
@@ -149,7 +149,7 @@ public class AddressController {
      * @param address
      * @return
      */
-    @PostMapping("/getAddressById")
+    @PostMapping("/address/getAddressById")
     public Address getAddressById(Address address){
         address = addressService.getAddressById(address);
         return address;

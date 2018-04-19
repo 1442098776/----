@@ -132,9 +132,9 @@ function getCartByPage(pageNow) {
     var str = "";
     if(List.length > 0){
         if(my_pageNum < totalPage){
-            var limit = List.length -((my_pageNum-1)*pageSize);
+            var limit = (my_pageNum-1)*pageSize+pageSize;
         }else {
-            limit = 0;
+            limit = List.length;
         }
         for(var i = (my_pageNum-1)*pageSize;i < limit;i++){
             str += '<tr class="item-list">' +
@@ -153,7 +153,7 @@ function getCartByPage(pageNow) {
             for(var j = 0;j<good.goodPics.length;j++){
                 if(!good.goodPics[j].grade){
                     str += '<div class="item-pic">' +
-                        '<a href="#" target="_blank" class="J_MakePoint">' +
+                        '<a href="/introduction/'+good.id+'" target="_blank" class="J_MakePoint">' +
                         '<img width="80px" height="80px" src="../img/'+good.id+'/'+good.goodPics[j].picName+'" class="itempic J_ItemImg"></a>' +
                         '</div>';
                 }

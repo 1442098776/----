@@ -47,13 +47,13 @@
   <!--更新用户信息-->
   <update id="updateUserById" parameterType="com.shop.eshop.model.User" >
     UPDATE user set phone = #{phone},modify_time = #{modifyTime}
-    <if test="realName != null and realName != ''">
+    <if test="realName != ''">
       ,real_name = #{realName}
     </if>
-    <if test="password != null and password != ''">
+    <if test="password != ''">
       ,password = #{password}
     </if>
-    <if test="email != null and email != ''">
+    <if test="email != ''">
       ,email = #{email}
     </if>
     where user_id = #{userId,jdbcType=BIGINT}
