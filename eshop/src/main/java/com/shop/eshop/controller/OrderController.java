@@ -1,5 +1,7 @@
 package com.shop.eshop.controller;
 
+import com.shop.eshop.dto.MessageCheck;
+import com.shop.eshop.dto.OrderStatus;
 import com.shop.eshop.dto.OrderVo;
 import com.shop.eshop.dto.SureBuy;
 import com.shop.eshop.model.Address;
@@ -55,10 +57,10 @@ public class OrderController {
 
 //        }
 //        return stuNumber;
-        Long orderId = Long.parseLong(orderIdstr);
+        Long OrderId = Long.parseLong(orderIdstr);
         Order order = new Order();
         order.setCreateTime(new Date());
-        order.setOrderId(orderId);
+        order.setOrderId(OrderId);
         order.setUserId(user.getUserId());
         order.setMessage(sureBuy.getMessage());
         order.setReceiveAddress(sureBuy.getReceiveAddress());
@@ -76,7 +78,7 @@ public class OrderController {
             String goodPrices[] = sureBuy.getGoodPrices().split(",");
             Integer addOrderDetail = null;
             for(int i = 0;i<goodIds.length;i++){
-                orderDetail.setOrderId(orderId);
+                orderDetail.setOrderId(OrderId);
                 orderDetail.setGoodId(Long.parseLong(goodIds[i]));
                 orderDetail.setGoodCount(Integer.parseInt(goodCounts[i]));
                 orderDetail.setGoodPrice(Float.parseFloat(goodPrices[i]));
@@ -93,10 +95,62 @@ public class OrderController {
 
     }
 
-    @PostMapping("/order/getAllOrderBuUserId")
-    public List<OrderVo> getAllOrderBuUserId(HttpServletRequest request){
+    /**
+     * 获取所有的订单
+     * @param request
+     * @return
+     */
+    @PostMapping("/order/getAllOrderByUserId")
+    public List<OrderVo> getAllOrderByUserId(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         List<OrderVo> orderVoList = orderManageService.getAllOrderByUserId(user.getUserId());
         return orderVoList;
+    }
+
+    /**
+     * 根据状态获取订单
+     * @param orderStatus
+     * @param request
+     * @return
+     */
+    @PostMapping("/order/getOrderByStatus")
+    public List<OrderVo> getOrderByStatus(OrderStatus orderStatus,HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        orderStatus.setUserId(user.getUserId());
+        List<OrderVo> orderVoList = orderManageService.getOrderByStatus(orderStatus);
+        return orderVoList;
+    }
+
+    /**
+     * 更新订单信息
+     * @param orderVo
+     * @return
+     */
+    @PostMapping("/order/updateOrder")
+    public String updateOrderStatus(OrderVo orderVo){
+        Integer is_update = orderManageService.updateOrderStatus(orderVo);
+        if(is_update != null && is_update > 0){
+            return "1";
+        }else {
+            return "0";
+        }
+    }
+
+
+    /**
+     * 更新订单信息
+     * @param orderVo
+     * @return
+     */
+    @PostMapping("/order/getOrderDetail")
+    public MessageCheck getOrderDetail(OrderVo orderVo){
+        OrderVo orderVo1 = orderManageService.getOrderByOrderId(orderVo);
+        Address address = new Address();
+        address.setAddressId(orderVo1.getReceiveAddress());
+        address = addressService.getAddressById(address);
+        MessageCheck messageCheck = new MessageCheck();
+        messageCheck.setAddress(address);
+        messageCheck.setMessage(orderVo1.getMessage());
+        return messageCheck;
     }
 }

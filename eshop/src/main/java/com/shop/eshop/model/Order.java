@@ -45,7 +45,7 @@ public class Order {
     /**
      * 订单状态
      */
-    private Integer state;
+    private Integer status;
 
     /**
      * 留言
@@ -124,12 +124,12 @@ public class Order {
         this.cancelTime = cancelTime;
     }
 
-    public Integer getState() {
-        return state;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getMessage() {

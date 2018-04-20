@@ -1,6 +1,8 @@
 package com.shop.eshop.mapper;
 
+import com.shop.eshop.dto.OrderStatus;
 import com.shop.eshop.dto.OrderVo;
+import com.shop.eshop.model.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,4 +20,25 @@ public interface OrderManageMapper {
      * @return
      */
     List<OrderVo> getAllOrder(Long userId);
+
+    /**
+     * 根据不同状态获取订单
+     * @param orderStatus
+     * @return
+     */
+    List<OrderVo> getOrderByStatus(OrderStatus orderStatus);
+
+    /**
+     * 修改订单状态
+     * @param orderVo
+     * @return
+     */
+    Integer updateOrderStatus(OrderVo orderVo);
+
+    /**
+     * 根据id获取信息
+     * @param orderVo
+     * @return
+     */
+    OrderVo getOrderByOrderId(OrderVo orderVo);
 }

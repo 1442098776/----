@@ -219,66 +219,71 @@ function getCartByPage(pageNow) {
         cartTable.innerHTML = str;
     }
     var li = "";
-    // 如果不是第一页
-    if(my_pageNum > 1){
-        li+="<li onclick=getCartByPage("+1+")>" +
-            "<a href=\"#\" aria-label=\"Previous\" >" +
-            "<span aria-hidden=\"true\">首页</span>\n" +
-            "</a>\n" +
-            "</li>"+
-            "<li onclick=getCartByPage("+my_pageNum+'-'+1+")>" +
-            "<a href=\"#\" aria-label=\"Previous\" >" +
-            "<span aria-hidden=\"true\">上一页</span>\n" +
-            "</a>\n" +
-            "</li>";
-
-    }
-    if(totalPage<=10){//当页码不超过10的时候，全部显示
-        for(var i=1;i<=totalPage;i++){
-            li+="<li onclick=getCartByPage("+i+")><a href='#' >"+i+"</a></li>";
+    if(totalPage > 1){
+        // 如果不是第一页
+        if(my_pageNum > 1){
+            li+="<li onclick=getCartByPage("+1+")>" +
+                "<a href=\"#\" aria-label=\"Previous\" >" +
+                "<span aria-hidden=\"true\">首页</span>\n" +
+                "</a>\n" +
+                "</li>"+
+                "<li onclick=getCartByPage("+my_pageNum+'-'+1+")>" +
+                "<a href=\"#\" aria-label=\"Previous\" >" +
+                "<span aria-hidden=\"true\">上一页</span>\n" +
+                "</a>\n" +
+                "</li>";
 
         }
-    }else{//当大于10页时，根据当前页做处理。
-        if(my_pageNum < 5) {//如果当前页小于5， 则显示 前面五个页码+省略号+最后一页。总页数大于10且当前页远离总页数(小于5)
-            for(var i = 1; i <=5; i++) {
-                li+="<li onclick='getCartByPage("+i+")'><a href='#' >"+i+"</a></li>";
-            }
-            // li+="<li><a href='#' >..</a></li>"+
-            //     "<li onclick='getCartByPage("+totalPage+")'><a href='#' >"+totalPage+"</a></li>";
-        }else if(my_pageNum >=totalPage-3){//如果当前页是接近最后几页的，输出 首页码+省略号+后面几页（包括当前页）。总页数大于10且当前页接近总页数(小于总页数-3)
-            // pages.push('<a class="page-link" href="javascript:void(0);">' + 1 + '</a> …');
-            // li+="<li onclick=getCartByPage(1)><a href='#' >"+1+"</a></li>"+
-            //     "<li><a href='#' >..</a></li>";
-            for(var i=totalPage-4;i<=totalPage;i++){
+        if(totalPage<=10){//当页码不超过10的时候，全部显示
+            for(var i=1;i<=totalPage;i++){
                 li+="<li onclick=getCartByPage("+i+")><a href='#' >"+i+"</a></li>";
+
             }
-        }else{ //剩下的情况，输出首页+省略号+中间几页（包含当前页）+省略号+最后一页。除开上面两个情况
-            // pages.push('<a class="page-link" href="javascript:void(0);">' + 1 + '</a> … ');
-            // li+="<li onclick=getCartByPage(1)><a href='#' >"+1+"</a></li>"+
-            //     "<li><a href='#' >..</a></li>";
-            for(var i=my_pageNum-2;i<=my_pageNum+2;i++){
-                li+="<li onclick=getCartByPage("+i+")><a href='#' >"+i+"</a></li>";
+        }else{//当大于10页时，根据当前页做处理。
+            if(my_pageNum < 5) {//如果当前页小于5， 则显示 前面五个页码+省略号+最后一页。总页数大于10且当前页远离总页数(小于5)
+                for(var i = 1; i <=5; i++) {
+                    li+="<li onclick='getCartByPage("+i+")'><a href='#' >"+i+"</a></li>";
+                }
+                // li+="<li><a href='#' >..</a></li>"+
+                //     "<li onclick='getCartByPage("+totalPage+")'><a href='#' >"+totalPage+"</a></li>";
+            }else if(my_pageNum >=totalPage-3){//如果当前页是接近最后几页的，输出 首页码+省略号+后面几页（包括当前页）。总页数大于10且当前页接近总页数(小于总页数-3)
+                // pages.push('<a class="page-link" href="javascript:void(0);">' + 1 + '</a> …');
+                // li+="<li onclick=getCartByPage(1)><a href='#' >"+1+"</a></li>"+
+                //     "<li><a href='#' >..</a></li>";
+                for(var i=totalPage-4;i<=totalPage;i++){
+                    li+="<li onclick=getCartByPage("+i+")><a href='#' >"+i+"</a></li>";
+                }
+            }else{ //剩下的情况，输出首页+省略号+中间几页（包含当前页）+省略号+最后一页。除开上面两个情况
+                // pages.push('<a class="page-link" href="javascript:void(0);">' + 1 + '</a> … ');
+                // li+="<li onclick=getCartByPage(1)><a href='#' >"+1+"</a></li>"+
+                //     "<li><a href='#' >..</a></li>";
+                for(var i=my_pageNum-2;i<=my_pageNum+2;i++){
+                    li+="<li onclick=getCartByPage("+i+")><a href='#' >"+i+"</a></li>";
+                }
+                // pages.push(' … <a class="page-link" href="javascript:void(0);">' + total + '</a>');
+                // li+="<li><a href='#' >..</a></li>"+
+                //     "<li onclick=getCartByPage("+totalPage+")><a href='#' >"+totalPage+"</a></li>";
             }
-            // pages.push(' … <a class="page-link" href="javascript:void(0);">' + total + '</a>');
-            // li+="<li><a href='#' >..</a></li>"+
-            //     "<li onclick=getCartByPage("+totalPage+")><a href='#' >"+totalPage+"</a></li>";
         }
+
+        // 如果不是最后一页
+        if (my_pageNum < totalPage) {
+            li+="<li onclick=getCartByPage("+my_pageNum+'+'+1+")>" +
+                "<a href=\"#\" aria-label=\"Next\" >" +
+                "<span aria-hidden=\"true\">下一页</span>\n" +
+                "</a>" +
+                "</li>"+
+                "<li onclick=getCartByPage("+totalPage+")>" +
+                "<a href=\"#\" aria-label=\"Next\" >" +
+                "<span aria-hidden=\"true\">末页</span>\n" +
+                "</a>" +
+                "</li>";
+        }
+        ul.innerHTML=li;
+    }else {
+        ul.innerHTML="";
     }
 
-    // 如果不是最后一页
-    if (my_pageNum < totalPage) {
-        li+="<li onclick=getCartByPage("+my_pageNum+'+'+1+")>" +
-            "<a href=\"#\" aria-label=\"Next\" >" +
-            "<span aria-hidden=\"true\">下一页</span>\n" +
-            "</a>" +
-            "</li>"+
-            "<li onclick=getCartByPage("+totalPage+")>" +
-            "<a href=\"#\" aria-label=\"Next\" >" +
-            "<span aria-hidden=\"true\">末页</span>\n" +
-            "</a>" +
-            "</li>";
-    }
-    ul.innerHTML=li;
 }
 
  function add(type) {

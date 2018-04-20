@@ -1,6 +1,5 @@
 package com.shop.eshop.model;
 
-import java.math.BigDecimal;
 
 public class OrderDetail {
     /**

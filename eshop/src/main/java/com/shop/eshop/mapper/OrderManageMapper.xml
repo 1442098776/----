@@ -10,24 +10,48 @@
         <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
         <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
         <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
-        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="status" jdbcType="INTEGER" property="status" />
         <result column="message" jdbcType="VARCHAR" property="message" />
         <collection property="orderDetailVoList" ofType="com.shop.eshop.dto.OrderDetailVo" column="order_id" select="getOrderDetailByOrderId"/>
     </resultMap>
 
     <resultMap id="OrderDetailManage" type="com.shop.eshop.dto.OrderDetailVo">
-        <id column="order_id" jdbcType="BIGINT" property="orderId" />
+        <id column="order_id" jdbcType="VARCHAR" property="orderId" />
         <!--<result column="good_id" jdbcType="BIGINT" property="goodId" />-->
         <result column="good_count" jdbcType="INTEGER" property="goodCount" />
         <result column="good_price" jdbcType="FLOAT" property="goodPrice" />
         <association property="good" javaType="com.shop.eshop.model.Good" column="good_id" select="com.shop.eshop.mapper.GoodMapper.getGoodById"/>
     </resultMap>
-    
+
+    <!--获取所有订单-->
     <select id="getAllOrder" parameterType="java.lang.Long" resultMap="orderManageMap">
-        SELECT * from `order` where user_id = #{userId}
+        SELECT * from `order` where user_id = #{userId} and status != 4 ORDER BY create_time desc
     </select>
-    
-    <select id="getOrderDetailByOrderId" parameterType="java.lang.Long" resultMap="OrderDetailManage">
+    <!--获取订单的详细集合-->
+    <select id="getOrderDetailByOrderId" parameterType="java.lang.String" resultMap="OrderDetailManage">
         select * from `order_detail` where order_id = #{orderId}
     </select>
+
+    <!--获取待发货、待收货、已完成订单-->
+    <select id="getOrderByStatus" parameterType="com.shop.eshop.dto.OrderStatus" resultMap="orderManageMap">
+        SELECT * from `order` where user_id = #{userId}
+         <if test="status != null">
+             and status = #{status}
+         </if>
+        and status != 4 ORDER BY create_time desc
+    </select>
+
+    <!--修改订单状态-->
+    <update id="updateOrderStatus" parameterType="com.shop.eshop.dto.OrderVo">
+        UPDATE `order` SET status = #{status}
+         <if test="cancelTime != null">
+             ,cancel_time =#{cancelTime}
+         </if>
+         where order_id = #{orderId}
+    </update>
+
+    <select id="getOrderByOrderId" parameterType="com.shop.eshop.dto.OrderVo" resultMap="orderManageMap">
+        SELECT * FROM `order` where order_id = #{orderId}
+    </select>
+
 </mapper>

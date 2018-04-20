@@ -1,6 +1,8 @@
 package com.shop.eshop.service;
 
+import com.shop.eshop.dto.OrderStatus;
 import com.shop.eshop.dto.OrderVo;
+import com.shop.eshop.model.Order;
 
 import java.util.List;
 
@@ -16,4 +18,25 @@ public interface OrderManageService {
      * @return
      */
     List<OrderVo> getAllOrderByUserId(Long userId);
+
+    /**
+     * 根据状态获取订单
+     * @param orderStatus
+     * @return
+     */
+    List<OrderVo> getOrderByStatus(OrderStatus orderStatus);
+
+    /**
+     * 修改订单状态
+     * @param orderVo
+     * @return
+     */
+    Integer updateOrderStatus(OrderVo orderVo);
+
+    /**
+     * 根据id获取order
+     * @param orderVo
+     * @return
+     */
+    OrderVo getOrderByOrderId(OrderVo orderVo);
 }
