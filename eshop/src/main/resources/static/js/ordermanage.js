@@ -328,8 +328,6 @@ function showEdit(id) {
 
 function close() {
     $(document.body).css("overflow","visible");
-    $('.theme-login').removeClass("selected");
-    $('.item-props-can').removeClass("selected");
     $('.theme-popover-mask').hide();
     $('.theme-popover').slideUp(200);
 }
