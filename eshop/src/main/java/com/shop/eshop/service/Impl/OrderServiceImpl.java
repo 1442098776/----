@@ -20,13 +20,34 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
     @Autowired
     private OrderDetailMapper orderDetailMapper;
+
+    /**
+     * 创建订单
+     * @param order
+     * @return
+     */
     @Override
     public Integer createOrder(Order order) {
         return orderMapper.createOrder(order);
     }
 
+    /**
+     * 添加订单明细
+     * @param orderDetail
+     * @return
+     */
     @Override
     public Integer addOrderDetail(OrderDetail orderDetail) {
         return orderDetailMapper.addOrderDetail(orderDetail);
+    }
+
+    /**
+     * 检查订单号是否已存在
+     * @param orderId
+     * @return
+     */
+    @Override
+    public Integer checkOrderId(Long orderId) {
+        return orderMapper.checkOrderId(orderId);
     }
 }

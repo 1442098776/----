@@ -16,5 +16,17 @@ public interface OrderService {
      */
     Integer createOrder(Order order);
 
+    /**
+     * 添加订单明细
+     * @param orderDetail
+     * @return
+     */
     Integer addOrderDetail(OrderDetail orderDetail);
+
+    /**
+     * 检查订单号是否已存在
+     * @param orderId
+     * @return
+     */
+    Integer checkOrderId(Long orderId);
 }

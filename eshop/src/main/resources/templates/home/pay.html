@@ -158,9 +158,11 @@
 												<div class="item-amount ">
 													<span class="phone-title" >购买数量</span>
 													<div class="sl">
-														<input class="min am-btn" name="" type="button" value="-" />
-														<input class="text_box" name="" type="text" th:value="${buy.num}" style="width:30px;" />
-														<input class="add am-btn" name="" type="button" value="+" />
+														<div class="stock" style="padding-left: 50px">
+														<input class="min" onclick="reduce(this)" type="text" value="-" readonly="readonly" style="width:26px;" />
+														<input class="text_box" onchange="change()" name="" type="text" th:value="${buy.num}" style="width:48px;" />
+														<input class="add" onclick="add(this)" type="text" value="+" readonly="readonly" style="width:26px;" />
+														</div>
 													</div>
 												</div>
 											</div>
@@ -174,7 +176,7 @@
 											<div class="td-inner">
 												<span class="phone-title">配送方式</span>
 												<div class="pay-logis">
-
+													快递
 												</div>
 											</div>
 										</li>
@@ -209,9 +211,11 @@
 													<div class="item-amount ">
 														<span class="phone-title" >购买数量</span>
 														<div class="sl">
-															<input class="min am-btn" name="" type="button" value="-" />
-															<input class="text_box" name="" type="text" th:value="${cart.count}" style="width:30px;" />
-															<input class="add am-btn" name="" type="button" value="+" />
+															<div class="stock" style="padding-left: 50px">
+															<input class="min" onclick="reduce(this)" type="text" value="-" readonly="readonly" style="width:26px;"  />
+															<input class="text_box" onchange="change()" name="" type="text" th:value="${cart.count}" style="width:48px;" />
+															<input class="add" onclick="add(this)" type="text" value="+" readonly="readonly" style="width:26px;" />
+															</div>
 														</div>
 													</div>
 												</div>
@@ -225,7 +229,7 @@
 												<div class="td-inner">
 													<span class="phone-title">配送方式</span>
 													<div class="pay-logis">
-
+														快递
 													</div>
 												</div>
 											</li>
@@ -296,7 +300,7 @@
 
 									<div id="holyshit269" class="submitOrder">
 										<div class="go-btn-wrap">
-											<a id="J_Go" href="success.html" class="btn-go" onclick="sureBuy()" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+											<a id="J_Go" href="javaScript:sureBuy()" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
 										</div>
 									</div>
 									<div class="clear"></div>

@@ -183,7 +183,7 @@ function getCartByPage(pageNow) {
                 '<div class="item-amount ">' +
                 '<div class="sl">' +
                 '<div class="stock">' +
-                '<input class="min" onclick="min(this)" type="text" value="-" readonly="readonly" style="width:26px;">' +
+                '<input class="min" onclick="reduce(this)" type="text" value="-" readonly="readonly" style="width:26px;">' +
                 '<input class="text_box" onchange="change()" name="" type="text" value='+List[i].count+' />' +
                 // '<input class="add am-btn" name="" type="button" value="+" />' ++'"/>' +
                 '<input class="add" onclick="add(this)" type="text" value="+" readonly="readonly" style="width:26px;">' +
@@ -291,7 +291,7 @@ function getCartByPage(pageNow) {
      t.val(parseInt(t.val()) + 1)
      goodTotal();
  }
- function min(type) {
+ function reduce(type) {
      var t = $(type).parent().find('input.text_box');
      t.val(parseInt(t.val()) - 1)
      if (parseInt(t.val()) < 1) {

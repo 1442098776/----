@@ -7,25 +7,25 @@ $(document).ready(function(){
     /**
      * 添加、减少、修改数量
      */
-    $(function(){
-        $(".add").click(function(){
-            var t=$(this).parent().find('input[class*=text_box]');
-            t.val(parseInt(t.val())+1)
-            goodTotal();
-
-        })
-        $(".min").click(function(){
-            var t=$(this).parent().find('input[class*=text_box]');
-            t.val(parseInt(t.val())-1)
-            if(parseInt(t.val())<1){
-                t.val(1);
-            }
-            goodTotal();
-        })
-        $(".text_box").change(function () {
-            goodTotal();
-        })
-    })
+    // $(function(){
+    //     $(".add").click(function(){
+    //         var t=$(this).parent().find('input[class*=text_box]');
+    //         t.val(parseInt(t.val())+1)
+    //         goodTotal();
+    //
+    //     })
+    //     $(".min").click(function(){
+    //         var t=$(this).parent().find('input[class*=text_box]');
+    //         t.val(parseInt(t.val())-1)
+    //         if(parseInt(t.val())<1){
+    //             t.val(1);
+    //         }
+    //         goodTotal();
+    //     })
+    //     $(".text_box").change(function () {
+    //         goodTotal();
+    //     })
+    // })
 
 
     // <!--兼容IE浏览器 -->
@@ -336,6 +336,25 @@ function sureBuy() {
             }
         }
     })
+}
+
+function add(type) {
+    var t = $(type).parent().find('input.text_box');
+    t.val(parseInt(t.val()) + 1)
+    goodTotal();
+}
+
+function reduce(type) {
+    var t = $(type).parent().find('input.text_box');
+    t.val(parseInt(t.val()) - 1)
+    if (parseInt(t.val()) < 1) {
+        t.val(1);
+    }
+    goodTotal();
+}
+
+function change() {
+    goodTotal();
 }
 
  

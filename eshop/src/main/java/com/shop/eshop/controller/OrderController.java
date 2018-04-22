@@ -45,22 +45,35 @@ public class OrderController {
         Calendar calendar = Calendar.getInstance();
         //生成订单号** 用户id+年月日时分+6位数
         String orderIdstr = "";
-//        boolean done = true;
-//        while (done) {
+        Long orderId = null;
+        boolean flag = true;
+        while (flag) {
 //            orderId = "";
-            orderIdstr += ""+user.getUserId() + calendar.get(Calendar.YEAR)+(calendar.get(Calendar.MONTH)+1)+
-                    calendar.get(Calendar.DAY_OF_MONTH)+calendar.get(Calendar.HOUR_OF_DAY)+calendar.get(Calendar.MINUTE)+
-                    calendar.get(Calendar.SECOND)+calendar.get(Calendar.MILLISECOND);
+        //时间一直到毫秒
+//            orderIdstr += ""+ calendar.get(Calendar.YEAR)+(calendar.get(Calendar.MONTH)+1)+
+//                    calendar.get(Calendar.DAY_OF_MONTH)+calendar.get(Calendar.HOUR_OF_DAY)+calendar.get(Calendar.MINUTE)+
+//                    calendar.get(Calendar.SECOND)+calendar.get(Calendar.MILLISECOND);
 //            double rand =  * 900000;
 //            long orderId2 = (long) (Math.random()*1000);
 //            orderIdstr += orderId2;
+            //时间一直到日
+            orderIdstr += ""+ calendar.get(Calendar.YEAR)+(calendar.get(Calendar.MONTH)+1)+
+                    calendar.get(Calendar.DAY_OF_MONTH);
+            //产生9位的随机数
+            long orderIdstr2 = (long) (Math.random()*1000000000);
+            orderIdstr += orderIdstr2;
+            orderId = Long.parseLong(orderIdstr);
+            Integer checkCount = orderService.checkOrderId(orderId);
+            if(checkCount == 0){
+                flag = false;
+            }
 
-//        }
+        }
 //        return stuNumber;
-        Long OrderId = Long.parseLong(orderIdstr);
+//        Long OrderId = Long.parseLong(orderIdstr);
         Order order = new Order();
         order.setCreateTime(new Date());
-        order.setOrderId(OrderId);
+        order.setOrderId(orderId);
         order.setUserId(user.getUserId());
         order.setMessage(sureBuy.getMessage());
         order.setReceiveAddress(sureBuy.getReceiveAddress());
@@ -72,13 +85,14 @@ public class OrderController {
             sureBuy.setAddress(address);
             //保存到session
             request.getSession().setAttribute("messageCheck",sureBuy);
+            request.getSession().setAttribute("orderId",orderId);
             OrderDetail orderDetail = new OrderDetail();
             String goodIds[] = sureBuy.getGoodIds().split(",");
             String goodCounts[] = sureBuy.getGoodCounts().split(",");
             String goodPrices[] = sureBuy.getGoodPrices().split(",");
             Integer addOrderDetail = null;
             for(int i = 0;i<goodIds.length;i++){
-                orderDetail.setOrderId(OrderId);
+                orderDetail.setOrderId(orderId);
                 orderDetail.setGoodId(Long.parseLong(goodIds[i]));
                 orderDetail.setGoodCount(Integer.parseInt(goodCounts[i]));
                 orderDetail.setGoodPrice(Float.parseFloat(goodPrices[i]));

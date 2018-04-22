@@ -2,6 +2,11 @@ var List = null;
 $(document).ready(function () {
     getOrderByStatus();
     getOrderByPage(null);
+    $('#close').click(function () {
+        $(document.body).css("overflow","visible");
+        $('.theme-popover-mask').hide();
+        $('.theme-popover').attr("style","display:none");
+    })
 });
 
 function initOrderManage() {
@@ -126,7 +131,7 @@ function getOrderByPage(pageNow) {
                 '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n' +
                 '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>\n' +
                 '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li class="td td-status">\n' +
-                '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div onclick="showEdit('+List[i].orderId+')" style="position: absolute;transform: translateY(-50%);top: 50%;padding-left: 20px;"><p class="order-info"><a>订单详情</a></p>\n';
+                '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div onclick="showEdit('+List[i].orderId+')" style="position: absolute;transform: translateY(-50%);top: 50%;padding-left: 20px;"><p class="order-info" style="cursor: pointer">订单详情</p>\n';
                 if(List[i].status == 2 || List[i].status == 3 ){
                     str += '<p class="order-info" onclick="updateOrder('+List[i].orderId+','+2+')" style="cursor: pointer">删除订单</p>';
                 }
@@ -298,7 +303,7 @@ function showEdit(id) {
             var addressList = window.document.getElementById("addressList");
             var message = window.document.getElementById("message");
             var str = "";
-            str += '<li class=\"user-addresslist defaultAddr\" style="width: 100%;">'+
+            str += '<li class=\"user-addresslist defaultAddr\" style="width: 100%;height: 0px;">'+
                     '<span class=\"new-option-r\"><i class=\"am-icon-check-circle\"></i>收货地址</span>';
             str +='<p class=\"new-tit new-p-re\" style="padding: 0px;">' +
                 '<span class="new-txt">'+messageCheck.address.consignee+'</span>';
@@ -319,15 +324,8 @@ function showEdit(id) {
     })
 //					禁止遮罩层下面的内容滚动
     $(document.body).css("overflow","hidden");
-    $('.theme-login').addClass("selected");
-    $('.theme-login').parent().addClass("selected");
     $('.theme-popover-mask').show();
     $('.theme-popover-mask').height($(window).height());
-    $('.theme-popover').slideDown(200);
+    $('.theme-popover').attr("style","display:block");
 }
 
-function close() {
-    $(document.body).css("overflow","visible");
-    $('.theme-popover-mask').hide();
-    $('.theme-popover').slideUp(200);
-}

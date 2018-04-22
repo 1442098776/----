@@ -22,6 +22,12 @@ public interface OrderMapper {
     Integer createOrder(Order order);
 
 
+    /**
+     * 检查订单号是否已存在
+     * @param orderId
+     * @return
+     */
+    Integer checkOrderId(Long orderId);
 
 
 

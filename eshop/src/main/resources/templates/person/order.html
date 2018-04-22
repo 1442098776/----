@@ -17,6 +17,7 @@
 
 		<script src="../AmazeUI-2-4-2/assets/js/jquery.min.js"></script>
 		<script src="../AmazeUI-2-4-2/assets/js/amazeui.js"></script>
+		<script src="../js/jquery-3.1.1.js"></script>
 		<script src="../js/ordermanage.js"></script>
 		<script src="../js/layer.js"></script>
 		<style type="text/css">
@@ -25,7 +26,7 @@
 			}
 			.theme-popover{display: none;}
 			.theme-popover-mask{z-index:10000000;position:fixed;left:0;top:0;width:100%;height:100%;background:#000;opacity:0.5;filter:alpha(opacity=50);-moz-opacity:0.5;display:none;}
-			.theme-popover{z-index:10000009;position:fixed;bottom:50%;left:50%;width:300px;height:250px;margin-bottom:-200px;margin-left:-250px;display:none;background:#fff;overflow: hidden;}
+			.theme-popover{z-index:10000009;position:fixed;bottom:50%;left:50%;width:500px;height:250px;margin-bottom:-100px;margin-left:-250px;display:none;background:#fff;overflow: hidden;}
 		</style>
 
 	</head>
@@ -118,11 +119,11 @@
 			<div class="am-u-md-12">
 				<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails" id="addressList">
 				</ul>
-				<span id="message">
+				<span id="message" style="display: block;padding: 10px;color:gray;">
 				</span>
-				<div class="am-form-group theme-poptit">
-					<div class="am-u-sm-9 am-u-sm-push-3">
-							<div class="am-btn am-btn-danger close" onclick="close()">确定</div>
+				<div class="am-form-group theme-poptit" style="text-align: center;">
+					<div style="text-align: center;padding: 20px;">
+							<div class="am-btn am-btn-danger close" id="close">确定</div>
 							<!--<div class="am-btn am-btn-danger close">取消</div>-->
 					</div>
 				</div>

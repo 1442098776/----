@@ -206,7 +206,7 @@ function modifyAddress() {
     }else {
         address = window.document.getElementById("reveice_address").innerText;
     }
-    alert(consignee_name+","+consignee_phone+","+address);
+    // alert(consignee_name+","+consignee_phone+","+address);
     $.ajax({
         url:'/address/updateAddress',
         type:'POSt',
