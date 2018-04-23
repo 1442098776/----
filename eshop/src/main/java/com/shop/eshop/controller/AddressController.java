@@ -25,7 +25,7 @@ public class AddressController {
      * @return
      */
     @PostMapping("/address/saveAddress")
-    public String saveAddress(Address address, HttpServletRequest request, HttpServletResponse response){
+    public String saveAddress(Address address, HttpServletRequest request, HttpServletResponse response) throws Exception{
         User user = (User) request.getSession().getAttribute("user");
         address.setUserId(user.getUserId());
         List<Address> addressList = addressService.getAllAddressByUserId(user.getUserId());

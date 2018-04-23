@@ -1,6 +1,7 @@
 package com.shop.eshop.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,5 +47,26 @@ public class PageController {
     @RequestMapping("/person/{pageName}")
     public String personPage(@PathVariable String pageName){
         return "person/"+pageName;
+    }
+
+    @GetMapping("/error")
+    public ModelAndView error(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("error");
+        return mv;
+    }
+
+    @RequestMapping("/admin")
+    public ModelAndView admin(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/adminLogin");
+        return  mv;
+    }
+
+    @RequestMapping("/admin/{pageName}")
+    public ModelAndView adminPage(@PathVariable String pageName){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/"+pageName);
+        return  mv;
     }
 }

@@ -76,6 +76,7 @@ public class OrderController {
         order.setOrderId(orderId);
         order.setUserId(user.getUserId());
         order.setMessage(sureBuy.getMessage());
+        order.setSum(sureBuy.getSum());
         order.setReceiveAddress(sureBuy.getReceiveAddress());
         Integer createOrder = orderService.createOrder(order);
         if(createOrder != null && createOrder > 0){

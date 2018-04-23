@@ -11,9 +11,10 @@
     <result column="reg_time" jdbcType="TIMESTAMP" property="regTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="status" jdbcType="BIT" property="status" />
+    <result column="role" jdbcType="INTEGER" property="role" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, user_name, real_name, password, phone, email, reg_time, modify_time, status
+    user_id, user_name, real_name, password, phone, email, reg_time, modify_time, status, role
   </sql>
 
   <!--注册用户-->

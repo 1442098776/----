@@ -52,6 +52,8 @@ public class Order {
      */
     private String message;
 
+    private Float sum;
+
     public Long getId() {
         return id;
     }
@@ -138,5 +140,13 @@ public class Order {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Float getSum() {
+        return sum;
+    }
+
+    public void setSum(Float sum) {
+        this.sum = sum;
     }
 }

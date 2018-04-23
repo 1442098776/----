@@ -21,6 +21,8 @@ public class User {
 
     private Boolean status;
 
+    private Integer role;
+
     public Long getUserId() {
         return userId;
     }
@@ -91,5 +93,13 @@ public class User {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

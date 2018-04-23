@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>商城后台管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="nofollow"/>
+<link href="../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
+<style>
+body{width:100%;height:100%;overflow:hidden;background:url(../adminImages/pc_loginBg.jpg) no-repeat;background-size:cover;position:absolute;}
+</style>
+<script src="../js/jquery.js"></script>
+<script src="../adminJs/Particleground.js"></script>
+<script src="../adminJs/adminLogin.js"></script>
+<script>
+$(document).ready(function() {
+  $('body').particleground({
+    dotColor:'green',
+    lineColor:'#c9ec6e'
+  });
+  $('.intro').css({
+    'margin-top': -($('.intro').height() /2)
+  });
+});
+</script>
+
+</head>
+<body>
+  <section class="loginform">
+   <h1>商城后台管理系统</h1>
+   <form id="loginform">
+   <ul>
+    <li>
+     <span></span>
+     <label>账号：</label>
+     <input type="text" class="textBox" name="phone" id="user" placeholder="管理员账号"/>
+    </li>
+    <li>
+     <span></span>
+     <label>密码：</label>
+     <input type="password" class="textBox" name="password" id="password" placeholder="登陆密码"/>
+    </li>
+
+    <li>
+     <span></span>
+     <label>验证码：</label>
+     <input type="text" class="textBox" id="code" placeholder="验证码"/>
+     <a id="btn_changeVerityImg" href=" "><img style="position: absolute;bottom:95px;right: 28px" src="/verity/verityImg" class="verityImg" id="myVerityImg"/></a>
+    </li>
+    <li>
+     <input type="button" onclick="checkVerityCode()" value="立即登陆"/>
+    </li>
+   </ul>
+   </form>
+  </section>
+</body>
+</html>

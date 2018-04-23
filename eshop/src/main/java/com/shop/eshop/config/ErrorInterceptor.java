@@ -1,26 +1,26 @@
-package com.shop.eshop.interceptor;
+package com.shop.eshop.config;
 
-import com.shop.eshop.model.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
-public class MyInterceptor implements HandlerInterceptor {
+public class ErrorInterceptor implements HandlerInterceptor {
+    private List<Integer> errorCodeList = Arrays.asList(404, 403,405, 500, 501);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 
-        boolean flag = true;
-        User user = (User) request.getSession().getAttribute("user");
-        if(user == null){
-            response.sendRedirect("/login");
-            flag = false;
+        if (errorCodeList.contains(response.getStatus())) {
+//            response.sendRedirect("/error/" + response.getStatus());
+            response.sendRedirect("/error");
+            return false;
         }else {
-            flag = true;
+            return true;
         }
-        return flag;
     }
 
     @Override

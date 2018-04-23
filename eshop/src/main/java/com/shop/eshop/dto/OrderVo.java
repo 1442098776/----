@@ -56,6 +56,8 @@ public class OrderVo {
      */
     private String message;
 
+    private Float sum;
+
     private List<OrderDetailVo> orderDetailVoList;
 
     public List<OrderDetailVo> getOrderDetailVoList() {
@@ -152,5 +154,13 @@ public class OrderVo {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Float getSum() {
+        return sum;
+    }
+
+    public void setSum(Float sum) {
+        this.sum = sum;
     }
 }

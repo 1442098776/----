@@ -12,6 +12,7 @@
         <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
         <result column="status" jdbcType="INTEGER" property="status" />
         <result column="message" jdbcType="VARCHAR" property="message" />
+        <result column="sum" jdbcType="FLOAT" property="sum" />
         <collection property="orderDetailVoList" ofType="com.shop.eshop.dto.OrderDetailVo" column="order_id" select="getOrderDetailByOrderId"/>
     </resultMap>
 

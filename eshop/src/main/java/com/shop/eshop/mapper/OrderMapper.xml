@@ -13,16 +13,17 @@
     <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="sum" jdbcType="FLOAT" property="sum" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    order_id, user_id, receive_address, create_time, send_time, receive_time,cancel_time, status
+    order_id, user_id, receive_address, create_time, send_time, receive_time,cancel_time, status ,message, sum
   </sql>
 
   <!--产生订单-->
   <insert id="createOrder" parameterType="com.shop.eshop.model.Order">
-    INSERT INTO `order`(order_id, user_id, receive_address, create_time,message)
-    VALUES(#{orderId},#{userId},#{receiveAddress},#{createTime},#{message})
+    INSERT INTO `order`(order_id, user_id, receive_address, create_time,message,`sum`)
+    VALUES(#{orderId},#{userId},#{receiveAddress},#{createTime},#{message},#{sum})
   </insert>
 
   <!--检查订单好是否存在-->

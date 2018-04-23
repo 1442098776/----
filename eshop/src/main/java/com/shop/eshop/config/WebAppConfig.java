@@ -1,10 +1,10 @@
-package com.shop.eshop.interceptor;
+package com.shop.eshop.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+        import org.springframework.context.annotation.Configuration;
+        import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+        import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-//@Configuration
+@Configuration
 public class WebAppConfig implements WebMvcConfigurer {
 
     @Override
@@ -18,6 +18,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 //                "/register2","/check","/login2","/exit","img/**","js/**","css/**",
 //                "images/**","/assets/**","AmazeUI-2-4-2/**","basic/**","../img/**","../js/**","../css/**",
 //                "../images/**","../assets/**","../AmazeUI-2-4-2/**","../basic/**");
-        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/person/index").excludePathPatterns("/**");
+//        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/person/index").excludePathPatterns("/**");
+        registry.addInterceptor(new ErrorInterceptor());//.addPathPatterns("/action/**", "/mine/**");默认所有
     }
 }
