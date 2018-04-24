@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // 是否为空
     $(".password").blur(function () {
-        if($("#oldPassword").val() != null | $("#oldPassword").val() != "") {
+        if($("#oldPassword").val() != "") {
             if ($(this).val() == null | $(this).val() == "") {
                 $(this).parent().next().children().text("不能为空！").attr("style", "color:red;padding: 0.5em;float: left;");
             } else {

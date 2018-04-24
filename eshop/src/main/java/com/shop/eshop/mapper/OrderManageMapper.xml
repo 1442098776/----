@@ -24,6 +24,20 @@
         <association property="good" javaType="com.shop.eshop.model.Good" column="good_id" select="com.shop.eshop.mapper.GoodMapper.getGoodById"/>
     </resultMap>
 
+    <resultMap id="orderManageMap2" type="com.shop.eshop.dto.OrderVo">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_id" jdbcType="BIGINT" property="orderId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="receive_address" jdbcType="BIGINT" property="receiveAddress" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+        <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+        <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="message" jdbcType="VARCHAR" property="message" />
+        <result column="sum" jdbcType="FLOAT" property="sum" />
+    </resultMap>
+
     <!--获取所有订单-->
     <select id="getAllOrder" parameterType="java.lang.Long" resultMap="orderManageMap">
         SELECT * from `order` where user_id = #{userId} and status != 4 ORDER BY create_time desc
@@ -48,11 +62,67 @@
          <if test="cancelTime != null">
              ,cancel_time =#{cancelTime}
          </if>
+        <if test="sendTime != null">
+            ,send_time =#{sendTime}
+        </if>
+        <if test="receiveTime != null">
+            ,receive_time =#{receiveTime}
+        </if>
          where order_id = #{orderId}
     </update>
 
+    <!--根据订单id获取订单-->
     <select id="getOrderByOrderId" parameterType="com.shop.eshop.dto.OrderVo" resultMap="orderManageMap">
         SELECT * FROM `order` where order_id = #{orderId}
+    </select>
+
+    <!--管理员获取所有的订单-->
+    <select id="getAllOrderByAdmin" parameterType="com.shop.eshop.model.Order" resultMap="orderManageMap2">
+        SELECT * FROM `order`
+        <where>
+            <if test=" orderId != null and orderId != ''">
+                and order_id = #{orderId}
+            </if>
+            <if test="status == 0">
+                and status = 0
+            </if>
+            <if test="status == 1">
+                and status = 1
+            </if>
+            <if test="status == 2">
+                and status = 2
+            </if>
+            <if test="status == 3">
+                and status = 3
+            </if>
+            and status != 4 ORDER BY create_time DESC
+        </where>
+    </select>
+
+
+    <!--管理员查询订单-->
+    <select id="searchOrderByAdmin" parameterType="com.shop.eshop.model.Order" resultMap="orderManageMap2">
+        SELECT * FROM `order`
+        <where>
+            <if test="orderId != ''">
+                and order_id = #{orderId}
+            </if>
+            <if test="receiveAddress != ''">
+                and receive_address = #{receiveAddress}
+            </if>
+            <if test="status != 0">
+                and status = 0
+            </if>
+            <if test="status != 1">
+                and status = 1
+            </if>
+            <if test="status != 2">
+                and status = 2
+            </if>
+            <if test="status != 3">
+                and status = 3
+            </if>
+        </where>
     </select>
 
 </mapper>

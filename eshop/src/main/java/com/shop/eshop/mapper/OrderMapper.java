@@ -1,10 +1,7 @@
 package com.shop.eshop.mapper;
 
 import com.shop.eshop.model.Order;
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 订单Mapper
@@ -29,7 +26,12 @@ public interface OrderMapper {
      */
     Integer checkOrderId(Long orderId);
 
-
+    /**
+     * 根据id获取订单
+     * @param orderId
+     * @return
+     */
+    Order getOrderById(Long orderId);
 
 
     int deleteByPrimaryKey(Long orderId);

@@ -50,5 +50,10 @@ public class OrderManageServiceImpl implements OrderManageService {
         return orderManageMapper.getOrderByOrderId(orderVo);
     }
 
+    @Override
+    public List<OrderVo> getAllOrderByAdmin(Order order) {
+        return orderManageMapper.getAllOrderByAdmin(order);
+    }
+
 
 }

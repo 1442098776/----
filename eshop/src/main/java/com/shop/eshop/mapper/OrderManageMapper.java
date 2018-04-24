@@ -41,4 +41,10 @@ public interface OrderManageMapper {
      * @return
      */
     OrderVo getOrderByOrderId(OrderVo orderVo);
+
+    /**
+     * 管理员获取所有的订单
+     * @return
+     */
+    List<OrderVo> getAllOrderByAdmin(Order order);
 }

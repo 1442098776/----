@@ -11,6 +11,7 @@ import com.shop.eshop.model.User;
 import com.shop.eshop.service.AddressService;
 import com.shop.eshop.service.OrderManageService;
 import com.shop.eshop.service.OrderService;
+import com.shop.eshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * 订单controller
@@ -34,6 +36,8 @@ public class OrderController {
     private AddressService addressService;
     @Autowired
     private OrderManageService orderManageService;
+    @Autowired
+    private UserService userService;
     /**
      * 产生订单
      * @return
@@ -43,7 +47,7 @@ public class OrderController {
         User user = (User) request.getSession().getAttribute("user");
 
         Calendar calendar = Calendar.getInstance();
-        //生成订单号** 用户id+年月日时分+6位数
+        //生成订单号**年月日+8位数
         String orderIdstr = "";
         Long orderId = null;
         boolean flag = true;
@@ -59,8 +63,8 @@ public class OrderController {
             //时间一直到日
             orderIdstr += ""+ calendar.get(Calendar.YEAR)+(calendar.get(Calendar.MONTH)+1)+
                     calendar.get(Calendar.DAY_OF_MONTH);
-            //产生9位的随机数
-            long orderIdstr2 = (long) (Math.random()*1000000000);
+            //产生8位的随机数
+            long orderIdstr2 = (long) (Math.random()*100000000);
             orderIdstr += orderIdstr2;
             orderId = Long.parseLong(orderIdstr);
             Integer checkCount = orderService.checkOrderId(orderId);
@@ -153,7 +157,7 @@ public class OrderController {
 
 
     /**
-     * 更新订单信息
+     * 订单详细信息
      * @param orderVo
      * @return
      */
@@ -168,4 +172,105 @@ public class OrderController {
         messageCheck.setMessage(orderVo1.getMessage());
         return messageCheck;
     }
+
+    /**
+     * 管理员获取所有的订单
+     * @return
+     */
+    @PostMapping("/order/getAllOrderByAdmin")
+    public List<OrderVo> getAllOrderByAdmin(Order order){
+        List<OrderVo> orderVoList = orderManageService.getAllOrderByAdmin(order);
+        List<OrderVo> orderVoList1 = new Vector<>();
+        for(OrderVo orderVo:orderVoList){
+            Address address = new Address();
+            address.setAddressId(orderVo.getReceiveAddress());
+            address = addressService.getAddressById(address);
+            User user = userService.getUserById(orderVo.getUserId());
+            orderVo.setAddress(address);
+            orderVo.setUser(user);
+            orderVoList1.add(orderVo);
+        }
+        return orderVoList1;
+    }
+
+    /**
+     * 将订单状态改为删除
+     * @param orderId
+     * @return
+     */
+    @PostMapping("/order/deleteOrder")
+    public String deleteOrder(String orderId){
+        String[] orderIdStrs = orderId.split(",");
+        OrderVo orderVo = new OrderVo();
+        Integer is_update = null;
+        for(String orderIdStr :orderIdStrs){
+            Long orderIdLong = Long.parseLong(orderIdStr);
+            orderVo.setOrderId(orderIdLong);
+            orderVo.setStatus(4);
+            is_update = orderManageService.updateOrderStatus(orderVo);
+
+        }
+        if(is_update != null && is_update > 0){
+            return "1";
+        }else{
+            return "0";
+        }
+    }
+
+    /**
+     * 更新订单信息
+     * @param orderVo
+     * @return
+     */
+    @PostMapping("/order/adminUpdateOrder")
+    public String adminUpdateOrderStatus(OrderVo orderVo){
+        Order order = orderService.getOrderById(orderVo.getOrderId());
+        Integer is_update = null;
+        if(orderVo.getStatus() == 2){
+            Long oneDay = Long.valueOf(24*60*60*1000);
+            System.out.println(new Date().getTime());
+            System.out.println(order.getSendTime().getTime());
+            System.out.println("========================");
+            Long day = (new Date().getTime() - order.getSendTime().getTime())/oneDay;
+            if(day >= 14){
+                is_update = orderManageService.updateOrderStatus(orderVo);
+                if(is_update != null && is_update >0 ){
+                    return "1";//成功
+                }else {
+                    return "0";//失败
+                }
+            }else {
+                return "2";//权限确认收货
+            }
+        }else if(orderVo.getStatus() == 1){
+            if(order.getStatus() == 0){
+                orderVo.setSendTime(new Date());
+                is_update = orderManageService.updateOrderStatus(orderVo);
+                if(is_update != null && is_update >0 ){
+                    return "1";//成功
+                }else {
+                    return "0";//失败
+                }
+            }else{
+                return "0";
+            }
+
+        }else if(orderVo.getStatus() == 3){
+            if(order.getStatus() == 0){
+                orderVo.setCancelTime(new Date());
+                is_update = orderManageService.updateOrderStatus(orderVo);
+                if(is_update != null && is_update >0 ){
+                    return "1";//成功
+                }else {
+                    return "0";//失败
+                }
+            }else{
+                return "0";
+            }
+        }else{
+            return "0";
+        }
+    }
+
 }
+

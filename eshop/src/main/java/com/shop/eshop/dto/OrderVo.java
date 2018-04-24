@@ -1,5 +1,9 @@
 package com.shop.eshop.dto;
 
+import com.shop.eshop.model.Address;
+import com.shop.eshop.model.User;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +11,7 @@ import java.util.List;
  * @author zhanguo.huang
  * @date 2018-04-19
  */
-public class OrderVo {
+public class OrderVo implements Serializable {
     /**
      * 订单号
      */
@@ -21,6 +25,8 @@ public class OrderVo {
      * 用户id
      */
     private Long userId;
+
+    private User user;
 //    /**
 //     * 商品id
 //     */
@@ -29,6 +35,8 @@ public class OrderVo {
      * 收货地址
      */
     private Long receiveAddress;
+
+    private Address address;
     /**
      * 创建时间
      */
@@ -99,6 +107,23 @@ public class OrderVo {
 //    public void setGoodId(Long goodId) {
 //        this.goodId = goodId;
 //    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Long getReceiveAddress() {
         return receiveAddress;

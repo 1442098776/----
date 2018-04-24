@@ -1,11 +1,9 @@
 package com.shop.eshop.mapper;
 
-import com.shop.eshop.model.Address;
 import com.shop.eshop.model.User;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
@@ -37,5 +35,12 @@ public interface UserMapper {
      * @return
      */
     Integer updateUserById(User user);
+
+    /**
+     * 根据id获取user
+     * @param userId
+     * @return
+     */
+    User getUserById(Long userId);
 
 }

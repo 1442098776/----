@@ -29,4 +29,11 @@ public interface OrderService {
      * @return
      */
     Integer checkOrderId(Long orderId);
+
+    /**
+     * 根据id获取订单
+     * @param orderId
+     * @return
+     */
+    Order getOrderById(Long orderId);
 }

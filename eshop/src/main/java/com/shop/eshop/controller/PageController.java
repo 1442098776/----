@@ -1,5 +1,10 @@
 package com.shop.eshop.controller;
 
+import com.shop.eshop.dto.OrderVo;
+import com.shop.eshop.model.Address;
+import com.shop.eshop.service.AddressService;
+import com.shop.eshop.service.OrderManageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PageController {
 
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private OrderManageService orderManageService;
 //    @RequestMapping("/{page}")
 //    public String pageController(@PathVariable String page){
 //        return "home/"+page;
@@ -68,5 +77,25 @@ public class PageController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("admin/"+pageName);
         return  mv;
+    }
+
+
+    /**
+     * 查看订单详情
+     * @return
+     */
+    @RequestMapping("/order/orderDetail/{orderId}")
+    public ModelAndView getAllOrderByCondition(@PathVariable Long orderId){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/order_detail");
+        OrderVo orderVo = new OrderVo();
+        orderVo.setOrderId(orderId);
+        orderVo = orderManageService.getOrderByOrderId(orderVo);
+        Address address = new Address();
+        address.setAddressId(orderVo.getReceiveAddress());
+        address = addressService.getAddressById(address);
+        orderVo.setAddress(address);
+        mv.addObject("orderVo",orderVo);
+        return mv;
     }
 }

@@ -39,4 +39,10 @@ public interface OrderManageService {
      * @return
      */
     OrderVo getOrderByOrderId(OrderVo orderVo);
+
+    /**
+     * 管理员获取所有订单
+     * @return
+     */
+    List<OrderVo> getAllOrderByAdmin(Order order);
 }

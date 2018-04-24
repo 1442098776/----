@@ -26,9 +26,13 @@
     VALUES(#{orderId},#{userId},#{receiveAddress},#{createTime},#{message},#{sum})
   </insert>
 
-  <!--检查订单好是否存在-->
+  <!--检查订单号是否存在-->
   <select id="checkOrderId" parameterType="java.lang.Long" resultType="java.lang.Integer">
     select count(*) from `order` where order_id = #{orderId};
+  </select>
+
+  <select id="getOrderById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT * from `order` WHERE order_id = #{orderId}
   </select>
 
 </mapper>

@@ -1,14 +1,15 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>订单详情</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
+<link href="../../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<input type="hidden" th:value="${orderVo.orderId}" id="orderId"/>
  <div class="wrap">
   <div class="page-title">
-    <span class="modular fl"><i class="order"></i><em>订单编号：2015041803225</em></span>
+    <span class="modular fl"><i class="order"></i><em>订单编号：<span th:text="${orderVo.orderId}"></span></em></span>
   </div>
   <dl class="orderDetail">
    <dt class="order-h">订单详情</dt>
@@ -16,33 +17,36 @@
     <ul>
      <li>
       <span class="h-cont h-right">收件人姓名：</span>
-      <span class="h-cont h-left">张三</span>
+      <span class="h-cont h-left" th:text="${orderVo.address.consignee}">张三</span>
      </li>
      <li>
       <span class="h-cont h-right">联系电话：</span>
-      <span class="h-cont h-left">15825518194</span>
+      <span class="h-cont h-left" th:text="${orderVo.address.phone}">15825518194</span>
      </li>
      <li>
       <span class="h-cont h-right">联系地址：</span>
-      <span class="h-cont h-left">陕西省西安市未央区220号</span>
+      <span class="h-cont h-left" th:text="${orderVo.address.addressName}">陕西省西安市未央区220号</span>
      </li>
      <li>
-      <span class="h-cont h-right">付款状态：</span>
-      <span class="h-cont h-left">未付款</span>
+      <span class="h-cont h-right">订单状态：</span>
+      <span class="h-cont h-left" th:if="${orderVo.status} eq 0">未发货</span>
+      <span class="h-cont h-left" th:if="${orderVo.status} eq 1">已发货</span>
+      <span class="h-cont h-left" th:if="${orderVo.status} eq 2">订单已完成</span>
+      <span class="h-cont h-left" th:if="${orderVo.status} eq 3">订单已取消</span>
      </li>
      <li>
       <span class="h-cont h-right">下单时间：</span>
-      <span class="h-cont h-left">2015-04-18 13:25</span>
+      <span class="h-cont h-left" th:text="${orderVo.createTime}" id="createTime">2015-04-18 13:25</span>
      </li>
-     <li>
-      <span class="h-cont h-right">付款时间：</span>
-      <span class="h-cont h-left">2015-04-18 13:35</span>
-     </li>
+     <!--<li>-->
+      <!--<span class="h-cont h-right">付款时间：</span>-->
+      <!--<span class="h-cont h-left">2015-04-18 13:35</span>-->
+     <!--</li>-->
     </ul>
    </dd>
    <dd style="padding:1em 0;">
     <span><b>订单留言：</b></span>
-    <span>...这里是用户留言信息，务必***请到****谢谢~</span>
+    <span th:text="${orderVo.message}">...这里是用户留言信息，务必***请到****谢谢~</span>
    </dd>
    <dd>
     <table class="list-style">
@@ -53,20 +57,20 @@
       <th>数量</th>
       <th>小计</th>
      </tr>
-     <tr>
-      <td><img src="#" class="thumbnail"/></td>
-      <td>这里是产品名称哦</td>
+     <tr th:each="orderDetailList:${orderVo.orderDetailVoList}">
+      <td th:each="goodPic:${orderDetailList.good.goodPics}" th:if="!${goodPic.grade}"><img th:src="@{'../img/'+${orderDetailList.good.id}+'/'+${goodPic.picName}}" width="80px" height="80px" class="thumbnail"/></td>
+      <td th:text="${orderDetailList.good.name}">这里是产品名称哦</td>
       <td>
        <span>
         <i>￥</i>
-        <em>0.00</em>
+        <em th:text="${orderDetailList.goodPrice}">0.00</em>
        </span>
       </td>
-      <td>1</td>
+      <td th:text="${orderDetailList.goodCount}">1</td>
       <td>
        <span>
         <i>￥</i>
-        <em>0.00</em>
+        <em th:text="${orderDetailList.goodPrice}*${orderDetailList.goodCount}">0.00</em>
        </span>
       </td>
      </tr>
@@ -75,7 +79,7 @@
        <div class="fr">
         <span style="font-size:15px;font-weight:bold;">
          <i>订单共计金额：￥</i>
-         <b>0.00</b>
+         <b th:text="${orderVo.sum}">0.00</b>
         </span>
        </div>
       </td>

@@ -50,4 +50,14 @@ public class OrderServiceImpl implements OrderService {
     public Integer checkOrderId(Long orderId) {
         return orderMapper.checkOrderId(orderId);
     }
+
+    /**
+     * 根据id获取订单
+     * @param orderId
+     * @return
+     */
+    @Override
+    public Order getOrderById(Long orderId) {
+        return orderMapper.getOrderById(orderId);
+    }
 }
