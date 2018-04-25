@@ -1,5 +1,6 @@
 package com.shop.eshop.mapper;
 
+import com.shop.eshop.dto.UserQueryForm;
 import com.shop.eshop.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -43,4 +44,30 @@ public interface UserMapper {
      */
     User getUserById(Long userId);
 
+    /**
+     * 获取所有的用户信息
+     * @return
+     */
+    List<User> getAllUser(UserQueryForm userQueryForm);
+
+    /**
+     * 用户的启用禁用
+     * @param user
+     * @return
+     */
+//    Integer updateUserStatus(User user);
+
+    /**
+     * 删除用户
+     * @param userIdList
+     * @return
+     */
+    Integer deleteUser(List<Long> userIdList);
+
+    /**
+     * 添加管理员
+     * @param user
+     * @return
+     */
+    Integer insertAdmin(User user);
 }

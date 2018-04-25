@@ -4,33 +4,47 @@
 <title>添加管理员</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" src="../js/jquery.js"></script>
+ <script type="text/javascript" src="../js/layer.js"></script>
+ <script type="text/javascript" src="../adminJs/addAdmin.js"></script>
 </head>
 <body>
  <div class="wrap">
   <div class="page-title">
     <span class="modular fl"><i class="add_user"></i><em>添加管理员</em></span>
   </div>
-  <form action="user_list.html">
+  <form action="user_list.html" id="addAdmin">
   <table class="list-style">
    <tr>
     <td style="width:15%;text-align:right;">昵称：</td>
-    <td><input type="text" class="textBox length-middle"/></td>
+    <td width="300px">
+     <input id="username" name="userName" type="text" class="syncVerity textBox length-middle"/>
+     <span style="color: red;">**设置后不能修改</span>
+    </td>
+    <td><span></span></td>
    </tr>
    <tr>
     <td style="text-align:right;">邮箱：</td>
-    <td><input type="text" class="textBox length-middle"/></td>
+    <td><input id="email" name="email" type="text" class="textBox length-middle"/></td>
+    <td><span></span></td>
    </tr>
    <tr>
     <td style="text-align:right;">设置密码：***默认123456</td>
-    <td><input type="password" class="textBox length-middle"/></td>
+    <td><input type="password" name="password" id="password" class="textBox length-middle"/></td>
+    <td><span></span></td>
    </tr>
    <tr>
     <td style="text-align:right;">手机号码：</td>
-    <td><input type="text" class="textBox length-middle"/></td>
+    <td>
+     <input id="phone" name="phone" type="text" class="syncVerity textBox length-middle"/>
+     <span style="color: red;">**设置后不能修改</span>
+    </td>
+    <td><span></span></td>
    </tr>
    <tr>
     <td style="text-align:right;"></td>
-    <td><input type="submit" class="tdBtn" value="确定添加"/></td>
+    <td><input type="button" onclick="insertAdmin()" class="tdBtn" value="确定添加"/></td>
+    <td style="text-align:right;"></td>
    </tr>
   </table>
   </form>

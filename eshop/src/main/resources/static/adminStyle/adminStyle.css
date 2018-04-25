@@ -7,7 +7,7 @@ dd{margin:0;}
 table {border-collapse:collapse;border-spacing:0;}
 h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal}
 img{border:none;}
-input,button,select,form{margin:0;padding:0;font-size:12px;}
+input,button,select,form{margin:0;font-size:12px;padding: 5px 15px;}
 input,button,select,img{vertical-align:middle;}
 .fl{float:left;}
 .fr{float:right;}
@@ -46,11 +46,11 @@ input,button,select,img{vertical-align:middle;}
 .top-link a:hover{color:#d6d6d6;}
 .top-link a i{width:25px;height:25px;display:inline-block;position:relative;top:8px;}
 .top-link a span{text-shadow:2px 2px 2px #333;}
-.top-link a .shopLinkIcon{background:url('../images/admin_bg.png') -5px -9px;}
-.top-link a .adminIcon{background:url('../images/admin_bg.png') -37px -9px;}
-.top-link a .clearIcon{background:url('../images/admin_bg.png') -70px -9px;}
-.top-link a .revisepwdIcon{background:url('../images/admin_bg.png') -104px -9px;}
-.top-link a .quitIcon{background:url('../images/admin_bg.png') -135px -6px;}
+.top-link a .shopLinkIcon{background:url('../adminImages/admin_bg.png') -5px -9px;}
+.top-link a .adminIcon{background:url('../adminImages/admin_bg.png') -37px -9px;}
+.top-link a .clearIcon{background:url('../adminImages/admin_bg.png') -70px -9px;}
+.top-link a .revisepwdIcon{background:url('../adminImages/admin_bg.png') -104px -9px;}
+.top-link a .quitIcon{background:url('../adminImages/admin_bg.png') -135px -6px;}
 /*menu*/
 .menu-list{color:#cecece;}
 .menu-list-title{font-size:14px;font-weight:bold;height:45px;line-height:45px;padding-left:5px;background:#555555;border-bottom:1px #666666 solid;cursor:pointer;}
@@ -64,16 +64,16 @@ input,button,select,img{vertical-align:middle;}
 /*page title*/
 .page-title{border-bottom:1px #ddd solid;overflow:hidden;padding:5px 0;margin-bottom:8px;}
 .page-title .modular{display:block;}
-.page-title i{background:url('../images/admin_bg.png') -4px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title i{background:url('../adminImages/admin_bg.png') -4px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
 .page-title em{font-style:normal;color:#3d3d3d;font-size:15px;font-weight:bold;}
-.page-title .add{background:url('../images/admin_bg.png') -37px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
-.page-title .user{background:url('../images/admin_bg.png') -95px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
-.page-title .add_user{background:url('../images/admin_bg.png') -126px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
-.page-title .edit_user{background:url('../images/admin_bg.png') -156px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
-.page-title .account_user{background:url('../images/admin_bg.png') -184px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
-.page-title .settings{background:url('../images/admin_bg.png') -218px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
-.page-title .order{background:url('../images/admin_bg.png') -251px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
-.home-icon{background:url('../images/admin_bg.png') -287px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title .add{background:url('../adminImages/admin_bg.png') -37px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title .user{background:url('../adminImages/admin_bg.png') -95px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title .add_user{background:url('../adminImages/admin_bg.png') -126px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title .edit_user{background:url('../adminImages/admin_bg.png') -156px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title .account_user{background:url('../adminImages/admin_bg.png') -184px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title .settings{background:url('../adminImages/admin_bg.png') -218px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.page-title .order{background:url('../adminImages/admin_bg.png') -251px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
+.home-icon{background:url('../adminImages/admin_bg.png') -287px -44px;display:inline-block;width:23px;height:19px;position:relative;top:3px;margin-right:5px;}
 /*top operate*/
 .operate{margin-bottom:8px;}
 /*start page*/
@@ -143,7 +143,7 @@ input,button,select,img{vertical-align:middle;}
 .ds_dialog_title{ background:#476db9; border-bottom:1px solid #476db9; height:34px;}
 .ds_dialog_title h3{ cursor:default; color:#999; font-size:12px; font-weight:normal; line-height:34px; padding:0 30px 0 16px; height:29px; white-space:nowrap;}
 .ds_dialog_active .ds_dialog_title h3{ color:#FFF;}
-.ds_dialog_active .ds_dialog_title h3 span.sadIcon{ display:inline-block; background:url(../images/sadIcon_23.png) no-repeat 0 3px; padding-left:30px; height:29px; width:23px;}
+.ds_dialog_active .ds_dialog_title h3 span.sadIcon{ display:inline-block; background:url(../adminImages/sadIcon_23.png) no-repeat 0 3px; padding-left:30px; height:29px; width:23px;}
 .ds_dialog_close{ height:24px; width:24px; position:absolute; right:10px; top:6px;}
 .ds_dialog_close a{ display:block; color:#FFF; font:26px/24px Arial,Helvetica; height:24px; overflow:hidden; text-align:center; text-decoration:none; text-shadow:0 -1px 0 #395ba1;}
 .ds_dialog_close a:hover{ color:#fff; text-decoration:none;}

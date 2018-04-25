@@ -1,65 +1,61 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>编辑会员资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
+<link href="../../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" src="../../js/jquery.js"></script>
+ <script type="text/javascript" src="../../adminJs/editAdmin.js"></script>
+ <script type="text/javascript" src="../../js/layer.js"></script>
 </head>
 <body>
  <div class="wrap">
   <div class="page-title">
-    <span class="modular fl"><i class="edit_user"></i><em>编辑会员资料</em></span>
+    <span class="modular fl"><i class="edit_user"></i><em>编辑管理员资料</em></span>
   </div>
+  <form id="editAdmin">
   <table class="list-style">
+   <input type="hidden" name="userId" th:value="${user.userId}" id="userId"/>
    <tr>
-    <td style="width:15%;text-align:right;">会员昵称：</td>
-    <td><input type="text" class="textBox length-middle" value="DeathGhost"/></td>
+    <td style="width:15%;text-align:right;">管理员昵称：</td>
+    <td style="width: 300px;"><input style="width:96%;" disabled type="text" id="username" name="userName" class="textBox length-middle" th:value="${user.userName}"/></td>
+    <td><span></span></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">真实名字：</td>
+    <td><input style="width:96%;" type="text" name="realName" class="textBox length-middle" th:value="${user.realName}"/></td>
+    <td><span></span></td>
    </tr>
    <tr>
     <td style="text-align:right;">电子邮件：</td>
-    <td><input type="text" class="textBox length-middle" value="DeathGhost@sina.cn"/></td>
+    <td><input style="width:96%;" type="text" id="email" name="email" class="textBox length-middle" th:value="${user.email}"/></td>
+    <td><span></span></td>
    </tr>
    <tr>
     <td style="text-align:right;">手机号码：</td>
-    <td><input type="text" class="textBox length-middle" value="18309275673"/></td>
+    <td><input style="width:96%;" type="text" id="phone" disabled name="phone" class="textBox length-middle" th:value="${user.phone}"/></td>
+    <td><span></span></td>
    </tr>
-   <tr>
-    <td style="text-align:right;">可用资金：</td>
-    <td>
-     <input type="text" class="textBox length-short" value="5000000" disabled="disabled"/>
-     <span>元</span>
-    </td>
-   </tr>
-   <tr>
-    <td style="text-align:right;">冻结资金：</td>
-    <td>
-     <input type="text" class="textBox length-short" value="300" disabled="disabled"/>
-     <span>元</span>
-    </td>
-   </tr>
-   <tr>
-    <td style="text-align:right;">会员等级：</td>
-    <td>
-     <select class="textBox">
-      <option>请选择会员等级</option>
-      <option>白金会员</option>
-      <option>黄金会员</option>
-     </select>
-    </td>
-   </tr>
-   <tr>
-    <td style="text-align:right;">重置密码：</td>
-    <td><input type="password" class="textBox length-middle" value="123456"/></td>
-   </tr>
-   <tr>
-    <td style="text-align:right;">确认密码：</td>
-    <td><input type="password" class="textBox length-middle" value="123456"/></td>
-   </tr>
-   <tr>
+   <!--<tr>-->
+    <!--<td style="text-align:right;">重置密码：</td>-->
+    <!--<td><input type="password" name="password" id="password" class="textBox length-middle" value=""/></td>-->
+    <!--<td><span></span></td>-->
+   <!--</tr>-->
+   <!--<tr>-->
+    <!--<td style="text-align:right;">确认密码：</td>-->
+    <!--<td><input type="password" name="password" id="confirmPassword" class="textBox length-middle" value=""/></td>-->
+    <!--<td><span></span></td>-->
+   <!--</tr>-->
+   <!--<tr>-->
     <td style="text-align:right;"></td>
-    <td><input type="submit" class="tdBtn" value="更新保存"/></td>
+    <td>
+     <input type="button" class="tdBtn" onclick="editAdmin()" value="更新保存"/>
+     <input type="button" class="tdBtn" onclick="resetPassword()" value="重置密码"/>
+    </td>
+    <td><span></span></td>
    </tr>
   </table>
+  </form>
  </div>
 </body>
 </html>

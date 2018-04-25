@@ -31,13 +31,7 @@
 
   <!-- 检查用户名或昵称使用唯一-->
   <select id="checkUser" parameterType="com.shop.eshop.model.User" resultMap="BaseResultMap">
-    SELECT * FROM USER where 1=1
-    <if test="userName != null and userName != ''">
-      and user_name = #{userName} or phone = #{userName}
-    </if>
-    <if test="phone != null and phone != ''">
-      and phone =#{phone}
-    </if>
+    SELECT * FROM `user` where user_name = #{userName} or phone =#{phone}
   </select>
 
   <!--根据id获取user-->
@@ -47,18 +41,57 @@
 
   <!--更新用户信息-->
   <update id="updateUserById" parameterType="com.shop.eshop.model.User" >
-    UPDATE user set phone = #{phone},modify_time = #{modifyTime}
-    <if test="realName != ''">
+    UPDATE user set modify_time = #{modifyTime}
+    <if test="phone != '' and phone != null">
+      ,phone = #{phone}
+    </if>
+    <if test="realName != '' and realName != null">
       ,real_name = #{realName}
     </if>
-    <if test="password != ''">
+    <if test="password != '' and password != null">
       ,password = #{password}
     </if>
-    <if test="email != ''">
+    <if test="email != '' and email != null">
       ,email = #{email}
+    </if>
+    <if test="status != null">
+      ,status = #{status}
+    </if>
+    <if test="role != null">
+      ,role = #{role}
     </if>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 
 
+  <!--获取所有的用户信息-->
+  <select id="getAllUser" parameterType="com.shop.eshop.dto.UserQueryForm" resultMap="BaseResultMap">
+    select * from `user`
+    <where>
+      <if test="role != null">
+        and role = #{role}
+      </if>
+      <if test="searchKey != null and searchKey != ''">
+        and (phone LIKE concat('%',#{searchKey},'%') or email LIKE concat('%',#{searchKey},'%') OR user_name LIKE concat('%',#{searchKey},'%'))
+      </if>
+    </where>
+    ORDER BY reg_time DESC ;
+  </select>
+
+  <!--<update id="updateUserStatus" parameterType="com.shop.eshop.model.User">-->
+    <!--UPDATE `user` set status = #{status} where user_id = #{userId}-->
+  <!--</update>-->
+
+  <!--删除用户-->
+  <delete id="deleteUser" parameterType="java.util.List">
+    DELETE FROM `user` where user_id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <!--添加管理员-->
+  <insert id="insertAdmin" parameterType="com.shop.eshop.model.User">
+    INSERT INTO `user`(user_name,email,password,phone,reg_time,role)
+    VALUES (#{userName},#{email},#{password},#{phone},#{regTime},#{role})
+  </insert>
 </mapper>

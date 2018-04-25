@@ -4,6 +4,10 @@
 <title>订单详情</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
+ <script src="../../js/jquery.js" type="text/javascript"></script>
+ <script type="text/javascript" src="../../adminJs/orderDetail.js" ></script>
+ <script src="../../js/layer.js" type="text/javascript"></script>
+ <script src="../../adminJs/DateFormat.js" type="text/javascript"></script>
 </head>
 <body>
 <input type="hidden" th:value="${orderVo.orderId}" id="orderId"/>
@@ -36,7 +40,19 @@
      </li>
      <li>
       <span class="h-cont h-right">下单时间：</span>
-      <span class="h-cont h-left" th:text="${orderVo.createTime}" id="createTime">2015-04-18 13:25</span>
+      <span class="h-cont h-left time" th:text="${orderVo.createTime}" id="createTime">2015-04-18 13:25</span>
+     </li>
+     <li th:if="${orderVo.status} eq 1 or ${orderVo.status} eq 2">
+      <span class="h-cont h-right" >发货时间：</span>
+      <span class="h-cont h-left time" th:text="${orderVo.sendTime}" id="sendTime">2015-04-18 13:25</span>
+     </li>
+     <li th:if="${orderVo.status} eq 2">
+      <span class="h-cont h-right" >收货时间：</span>
+      <span class="h-cont h-left time" th:text="${orderVo.receiveTime}" id="receiveTime">2015-04-18 13:25</span>
+     </li>
+     <li th:if="${orderVo.status} eq 3">
+      <span class="h-cont h-right" >订单取消时间：</span>
+      <span class="h-cont h-left time" th:text="${orderVo.cancelTime}" id="cancelTime">2015-04-18 13:25</span>
      </li>
      <!--<li>-->
       <!--<span class="h-cont h-right">付款时间：</span>-->
@@ -99,10 +115,11 @@
    <dd>
       <!-- Operation -->
 	  <div class="BatchOperation">
-	   <input type="button" value="打印订单" class="btnStyle"/>
-	   <input type="button" value="配送" class="btnStyle"/>
-	   <input type="button" value="发货" class="btnStyle"/>
-	   <input type="button" value="取消订单" class="btnStyle"/>
+	   <input type="button" onclick="toPrint()" value="打印订单" class="btnStyle"/>
+	   <!--<input type="button" value="配送" class="btnStyle"/>-->
+	   <input type="button" th:if="${orderVo.status} eq 0" onclick="updateOrderStatus(1)" value="确认发货" class="btnStyle"/>
+	   <input type="button" th:if="${orderVo.status} eq 1" onclick="updateOrderStatus(2)" value="完成订单" class="btnStyle"/>
+	   <input type="button" th:if="${orderVo.status} eq 0" onclick="updateOrderStatus(3)" value="取消订单" class="btnStyle"/>
 	  </div>
    </dd>
   </dl>

@@ -13,8 +13,11 @@ import com.shop.eshop.service.OrderManageService;
 import com.shop.eshop.service.OrderService;
 import com.shop.eshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
@@ -270,6 +273,26 @@ public class OrderController {
         }else{
             return "0";
         }
+    }
+
+
+    /**
+     * 查看订单详情
+     * @return
+     */
+    @RequestMapping("/order/orderDetail/{orderId}")
+    public ModelAndView getAllOrderByCondition(@PathVariable Long orderId){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/order_detail");
+        OrderVo orderVo = new OrderVo();
+        orderVo.setOrderId(orderId);
+        orderVo = orderManageService.getOrderByOrderId(orderVo);
+        Address address = new Address();
+        address.setAddressId(orderVo.getReceiveAddress());
+        address = addressService.getAddressById(address);
+        orderVo.setAddress(address);
+        mv.addObject("orderVo",orderVo);
+        return mv;
     }
 
 }

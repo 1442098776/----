@@ -72,7 +72,7 @@ function getOrderByPage(pageNow) {
                 '     <span class="block">'+List[i].user.userName+'</span>\n' +
                 '     <span class="block">'+new Date(List[i].createTime).Format("yyyy-MM-dd hh:mm")+'</span>\n' +
                 '    </td>\n' +
-                '    <td width="350">\n' +
+                '    <td width="300">\n' +
                 '     <span class="block">'+List[i].address.consignee+'['+List[i].address.phone+']</span>\n' +
                 '     <address>'+List[i].address.addressName+'</address>\n' +
                 '    </td>\n' +

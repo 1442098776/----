@@ -1,5 +1,6 @@
 package com.shop.eshop.service.Impl;
 
+import com.shop.eshop.dto.UserQueryForm;
 import com.shop.eshop.mapper.UserMapper;
 import com.shop.eshop.model.User;
 import com.shop.eshop.service.UserService;
@@ -63,4 +64,43 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Long userId) {
         return userMapper.getUserById(userId);
     }
+
+    /**
+     * 获取所有的用户信息
+     * @return
+     */
+    @Override
+    public List<User> getAllUser(UserQueryForm userQueryForm) {
+        return userMapper.getAllUser(userQueryForm);
+    }
+
+    /**
+     * 删除用户
+     * @param userIdList
+     * @return
+     */
+    @Override
+    public Integer deleteUser(List<Long> userIdList) {
+        return userMapper.deleteUser(userIdList);
+    }
+
+    /**
+     * 添加管理员
+     * @param user
+     * @return
+     */
+    @Override
+    public Integer insertAdmin(User user) {
+        return userMapper.insertAdmin(user);
+    }
+
+    /**
+     * 用户的启用禁用
+     * @param user
+     * @return
+     */
+//    @Override
+//    public Integer updateUserStatus(User user) {
+//        return userMapper.updateUserStatus(user);
+//    }
 }
