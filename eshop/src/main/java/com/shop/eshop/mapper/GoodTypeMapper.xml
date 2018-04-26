@@ -35,28 +35,24 @@
     <include refid="Base_Column_List" />
     FROM good_type WHERE parent_id = #{id}
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
-    select 
+
+
+  <!--根据父级id获取商品类型-->
+  <select id="indexGoodTypeByParentId" resultMap="BaseResultMap2" parameterType="java.lang.Integer">
+    SELECT
     <include refid="Base_Column_List" />
-    from good_type
-    where id = #{id,jdbcType=SMALLINT}
+    FROM good_type WHERE parent_id = #{id}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
-    delete from good_type
-    where id = #{id,jdbcType=SMALLINT}
+
+  <!--删除分类-->
+  <delete id="deleteGoodType" parameterType="java.util.List">
+    DELETE FROM `good_type` where id in
+    <foreach collection="list" item="items" index="index" open="(" separator="," close=")">
+      #{items}
+    </foreach>
   </delete>
-  <insert id="insert" parameterType="com.shop.eshop.model.GoodType">
-    insert into good_type (id, name, parent_id, 
-      create_time, menu_id)
-    values (#{id,jdbcType=SMALLINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=SMALLINT}, 
-      #{createTime,jdbcType=DATE}, #{menuId,jdbcType=SMALLINT})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.shop.eshop.model.GoodType">
-    update good_type
-    set name = #{name,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=SMALLINT},
-      create_time = #{createTime,jdbcType=DATE},
-      menu_id = #{menuId,jdbcType=SMALLINT}
-    where id = #{id,jdbcType=SMALLINT}
-  </update>
+
+  <select id="getAllSonType" resultMap="BaseResultMap">
+    SELECT * FROM `good_type` where parent_id != 0
+  </select>
 </mapper>

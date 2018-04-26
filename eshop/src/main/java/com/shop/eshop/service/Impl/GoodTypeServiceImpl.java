@@ -40,10 +40,16 @@ public class GoodTypeServiceImpl implements GoodTypeService {
         return goodMapper.getGoodByCondition(tp);
     }
 
+    /**
+     * 根据父级id获取子集
+     * @param id
+     * @return
+     */
     @Override
     public List<GoodType> getGoodTypeByParentId(Integer id) {
         return goodTypeMapper.getGoodTypeByParentId(id);
     }
+
 
     /**
      * 获取父类型下的所以商品
@@ -53,5 +59,24 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     @Override
     public List<Good> getAllSonGood(TypeCondition typeCondition) {
         return goodMapper.getAllSonGood(typeCondition);
+    }
+
+    /**
+     * 删除分类
+     * @param list
+     * @return
+     */
+    @Override
+    public Integer deleteGoodType(List<Long> list) {
+        return goodTypeMapper.deleteGoodType(list);
+    }
+
+    /**
+     * 获取所有的非一级类型
+     * @return
+     */
+    @Override
+    public List<GoodType> getAllSonType() {
+        return goodTypeMapper.getAllSonType();
     }
 }

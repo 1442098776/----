@@ -34,4 +34,12 @@ public interface GoodService {
      * @return
      */
     List<Good> getGoodByKeyWord(String keyWOrd);
+
+
+    /**
+     * 更新商品信息
+     * @param good
+     * @return
+     */
+    Integer updateGood(Good good);
 }

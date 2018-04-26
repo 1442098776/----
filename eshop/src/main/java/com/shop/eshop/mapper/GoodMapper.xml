@@ -5,8 +5,8 @@
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="type" jdbcType="SMALLINT" property="type" />
-        <result column="price" jdbcType="DECIMAL" property="price" />
-        <result column="sale_price" jdbcType="DECIMAL" property="salePrice" />
+        <result column="price" jdbcType="FLOAT" property="price" />
+        <result column="sale_price" jdbcType="FLOAT" property="salePrice" />
         <result column="stock" jdbcType="INTEGER" property="stock" />
         <result column="sale_num" jdbcType="INTEGER" property="saleNum" />
         <result column="advise" jdbcType="INTEGER" property="advise" />
@@ -46,6 +46,7 @@
     <select id="getAllSonGood" parameterType="com.shop.eshop.dto.TypeCondition" resultMap="GoodMap">
         SELECT * from good
         <where>
+            status = 1 and
                 name LIKE concat("%",#{keyWord},"%")
             <if test="list != null">
                 or type IN
@@ -67,8 +68,9 @@
 
     <!-- 得到所有的商品 -->
     <select id="getAllGood" resultMap="GoodMap">
-        SELECT * from good
+        SELECT * from good WHERE status = 1
     </select>
+
     <!-- 根据商品id获取商品-->
     <select id="getGoodById" parameterType="java.lang.Long" resultMap="GoodMap">
         SELECT * from good where id = #{id}
@@ -84,7 +86,7 @@
 
     <!--根据类型得到商品-->
     <select id="getGoodByType" resultMap="GoodMap" parameterType="java.lang.Integer">
-        SELECT * from good where type = #{id} limit 0,8
+        SELECT * from good where type = #{id}
     </select>
 
     <!--搜索-->
@@ -92,5 +94,32 @@
         SELECT * from good where name LIKE concat("%",#{keyWord},"%")
     </select>
 
+    <!--更新商品信息-->
+    <update id="updateGood" parameterType="com.shop.eshop.model.Good">
+      UPDATE good
+        <set>
+            <if test="name != null and name != ''">
+              `name` = #{name},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="salePrice != null">
+                salePrice = #{salePrice},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--根据类型删除商品-->
 
 </mapper>

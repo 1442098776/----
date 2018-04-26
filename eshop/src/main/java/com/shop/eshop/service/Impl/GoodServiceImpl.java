@@ -52,8 +52,23 @@ public class GoodServiceImpl implements GoodService {
         return goodMapper.getGoodByCondition(tp);
     }
 
+    /**
+     * 商品搜索
+     * @param keyWOrd
+     * @return
+     */
     @Override
     public List<Good> getGoodByKeyWord(String keyWOrd) {
         return goodMapper.getGoodByKeyWord(keyWOrd);
+    }
+
+    /**
+     * 更新商品信息
+     * @param good
+     * @return
+     */
+    @Override
+    public Integer updateGood(Good good) {
+        return goodMapper.updateGood(good);
     }
 }

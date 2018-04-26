@@ -1,6 +1,5 @@
 package com.shop.eshop.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,12 +19,12 @@ public class Good {
     /**
      * 原价格
      */
-    private BigDecimal price;
+    private Float price;
 
     /**
      * 销售价格
      */
-    private BigDecimal salePrice;
+    private Float salePrice;
 
     /**
      * 库存
@@ -101,19 +100,19 @@ public class Good {
         this.type = type;
     }
 
-    public BigDecimal getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public BigDecimal getSalePrice() {
+    public Float getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(BigDecimal salePrice) {
+    public void setSalePrice(Float salePrice) {
         this.salePrice = salePrice;
     }
 

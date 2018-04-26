@@ -17,11 +17,23 @@ public interface GoodTypeMapper {
      */
     List<GoodType> getGoodTypeByParentId(Integer id );
 
-    int deleteByPrimaryKey(Short id);
+    /**
+     * 首页
+     * @param id
+     * @return
+     */
+    List<GoodType> indexGoodTypeByParentId(Integer id );
 
-    int insert(GoodType record);
+    /**
+     * 删除分类
+     * @param list
+     * @return
+     */
+    Integer deleteGoodType(List<Long> list);
 
-    GoodType selectByPrimaryKey(Short id);
-
-    int updateByPrimaryKey(GoodType record);
+    /**
+     * 获取所有的非一级类型
+     * @return
+     */
+    List<GoodType> getAllSonType();
 }

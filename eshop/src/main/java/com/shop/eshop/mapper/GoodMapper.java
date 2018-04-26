@@ -55,4 +55,11 @@ public interface GoodMapper {
      * @return
      */
     List<Good> getGoodByKeyWord(String keyWord);
+
+    /**
+     * 更新商品信息
+     * @param good
+     * @return
+     */
+    Integer updateGood(Good good);
 }

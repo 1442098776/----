@@ -18,10 +18,24 @@ public interface GoodTypeService {
      */
     List<GoodType> getGoodTypeByParentId(Integer id);
 
+
     /**
      * 获取自己及子类所有商品
      * @param typeCondition
      * @return
      */
     List<Good> getAllSonGood(TypeCondition typeCondition);
+
+    /**
+     * 删除分类
+     * @param list
+     * @return
+     */
+    Integer deleteGoodType(List<Long> list);
+
+    /**
+     * 获取所有的非一级类型
+     * @return
+     */
+    List<GoodType> getAllSonType();
 }

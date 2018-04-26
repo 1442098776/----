@@ -54,9 +54,9 @@
 					<div class="category">
 						<ul class="category-list" id="js_climit_li" style="background-color:#D2364C">
 							<!--<c:forEach items="${ MenuList}" var="menu">-->
-								<li class="appliance js_toggle relative first" th:each="goodType:${goodTypeList}" th:value="${goodType.id}">
+								<li class="appliance js_toggle relative first" th:each="menu:${menuList}" th:value="${menu.id}">
 									<div class="category-info">
-										<h3 class="category-name b-category-name"><a th:href="@{'/search/'+${goodType.id}}" class="ml-22" th:title="${goodType.name }" th:text = "${goodType.name }"></a></h3>
+										<h3 class="category-name b-category-name"><i><img th:src="@{'img/'+${menu.img}}" src=></i><a th:href="@{'/search/'+${menu.id}}" class="ml-22" th:title="${menu.name }" th:text = "${menu.name }"></a></h3>
 										<em>&gt;</em></div>
 									<div class="menu-item menu-in top">
 										<div class="area-in">
@@ -64,9 +64,9 @@
 												<div class="menu-srot">
 													<div class="sort-side">
 														<dl class="dl-sort">
-															<dt><span th:title="${goodType.name}" th:text="${goodType.name}"></span></dt>
+															<dt><span th:title="${menu.name}" th:text="${menu.name}"></span></dt>
 															<!--<c:forEach items="${menu.list }" var="sonmenu">-->
-																<dd th:each="sonGoodType:${goodType.goodTypes}"><a th:title="${sonGoodType.name}" th:href="@{'/search/'+${sonGoodType.id}}"><span th:text="${sonGoodType.name }"></span></a></dd>
+																<dd th:each="sonMenu:${menu.child}"><a th:title="${sonMenu.name}" th:href="@{'/search/'+${sonMenu.id}}"><span th:text="${sonMenu.name }"></span></a></dd>
 															<!--</c:forEach>-->
 														</dl>
 													</div>
@@ -123,18 +123,18 @@
 </div>
 <div class="shopMainbg">
 
-	<div id="f1" th:each="goodType:${goodTypeList}">
+	<div id="f1" th:each="menu:${menuList}">
 		<!--甜点-->
 
 		<div class="am-container ">
 			<div class="shopTitle ">
-				<h4 th:text="${goodType.name}"></h4>
+				<h4 th:text="${menu.name}"></h4>
 				<!--<h3>每一道甜品都有一个故事</h3>-->
 				<div class="today-brands ">
-					<a th:each="sonType , sonstat:${goodType.goodTypes}" th:href="@{'/search/'+${sonType.id}}" th:text="${sonType.name}" th:if="${sonstat.index} lt '3'">桂花糕</a>
+					<a th:each="sonmenu , sonstat:${menu.child}" th:href="@{'/search/'+${sonmenu.id}}" th:text="${sonmenu.name}" th:if="${sonstat.index} lt '3'">桂花糕</a>
 				</div>
 				<span class="more ">
-                    <a th:href="@{'/search/'+${goodType.id}}">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                    <a th:href="@{'/search/'+${menu.id}}">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                         </span>
 			</div>
 		</div>
@@ -178,8 +178,8 @@
 					getGood();
                 })
 			</script>
-			<div class="good_content" th:each="goodType,status:${goodTypeList}" th:if="${status.index} lt 1">
-					<div class="good" th:each="good,status:${goodType.good} " th:if="${status.index} lt 8">
+			<div class="good_content" th:each="goodType,status:${menu.goodTypes}" th:if="${status.index} lt 1">
+					<div class="good" th:each="good:${goodType.good} " >
 						<a th:href="@{'/introduction/'+${good.id}}"><img th:each="goodpic : ${good.goodPics}" th:if="!${goodpic.grade}" th:src="@{'img/'+${good.id}+'/'+${goodpic.picName}}"/>
 							<div>
 								<div class="good_name"  th:text="${good.name}"></div>
