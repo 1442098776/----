@@ -103,18 +103,18 @@ public class GoodController {
     @PostMapping("/admin/addGood")
     public String addGood(Good good, @RequestParam(value = "file") MultipartFile[] files, HttpServletRequest request){
         //这里能直接得到文件数组，怎么保存到服务器相信不用我多说了
-        List<String> list = new ArrayList<String>();
-        if (files != null && files.length > 0) {
-            for (int i = 0; i < files.length; i++) {
-                MultipartFile file = files[i];
-                // 保存文件
-                list = saveFile(request, file, list);
-            }
-        }
-        //写着测试，删了就可以
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("集合里面的数据" + list.get(i));
-        }
+//        List<String> list = new ArrayList<String>();
+//        if (files != null && files.length > 0) {
+//            for (int i = 0; i < files.length; i++) {
+//                MultipartFile file = files[i];
+//                // 保存文件
+//                list = saveFile(request, file, list);
+//            }
+//        }
+//        //写着测试，删了就可以
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println("集合里面的数据" + list.get(i));
+//        }
         return "home/index";//跳转的页面
     }
 
