@@ -23,8 +23,8 @@
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="pic_name" jdbcType="VARCHAR" property="picName" />
         <result column="create_time" jdbcType="DATE" property="createTime" />
-        <result column="grade" jdbcType="BIT" property="grade" />
-        <result column="good_id" jdbcType="INTEGER" property="goodId" />
+        <result column="grade" jdbcType="INTEGER" property="grade" />
+        <result column="good_id" jdbcType="BIGINT" property="goodId" />
     </resultMap>
 
 
@@ -120,6 +120,21 @@
         where id = #{id}
     </update>
 
+
+    <!--添加商品-->
+    <insert id="insertGood" parameterType="com.shop.eshop.model.Good" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO good(`name`,type,price,sale_price,stock,create_time)
+        VALUES (#{name},#{type},#{price},#{salePrice},#{stock},#{createTime})
+    </insert>
+
+    <!--根据id删除商品-->
+    <delete id="deleteGoodById" parameterType="java.lang.Long">
+        DELETE FROM good where id = #{id}
+    </delete>
+
     <!--根据类型删除商品-->
+    <delete id="deleteGoodByType" parameterType="java.lang.Short">
+        DELETE FROM good where type = #{type}
+    </delete>
 
 </mapper>

@@ -7,7 +7,6 @@ import com.shop.eshop.model.GoodType;
 import java.util.List;
 
 public interface GoodTypeService {
-    List<GoodType> getGoodTypeByMenuId(Integer id);
 
     List<Good> getGoodByCondition(TypeCondition tp);
 
@@ -34,8 +33,9 @@ public interface GoodTypeService {
     Integer deleteGoodType(List<Long> list);
 
     /**
-     * 获取所有的非一级类型
+     * 添加商品分类
+     * @param goodType
      * @return
      */
-    List<GoodType> getAllSonType();
+    Integer insertGoodType(GoodType goodType);
 }

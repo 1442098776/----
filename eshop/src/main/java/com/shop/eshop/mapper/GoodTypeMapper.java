@@ -8,8 +8,6 @@ import java.util.List;
 @Mapper
 public interface GoodTypeMapper {
 
-    List<GoodType> getGoodTypeByMenuId(Integer id);
-
     /**
      * 根据父级id获取类型列表
      * @param id
@@ -32,8 +30,9 @@ public interface GoodTypeMapper {
     Integer deleteGoodType(List<Long> list);
 
     /**
-     * 获取所有的非一级类型
+     * 添加分类
+     * @param goodType
      * @return
      */
-    List<GoodType> getAllSonType();
+    Integer insertGoodType(GoodType goodType);
 }

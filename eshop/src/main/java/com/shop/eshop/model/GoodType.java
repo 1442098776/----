@@ -12,7 +12,8 @@ public class GoodType {
 
     private Date createTime;
 
-    private Short menuId;
+    private Date modifyTime;
+
 
     private List<GoodType> goodTypes;
 
@@ -66,11 +67,11 @@ public class GoodType {
         this.createTime = createTime;
     }
 
-    public Short getMenuId() {
-        return menuId;
+    public Date getModifyTime() {
+        return modifyTime;
     }
 
-    public void setMenuId(Short menuId) {
-        this.menuId = menuId;
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

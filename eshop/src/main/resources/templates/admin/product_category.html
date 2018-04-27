@@ -22,7 +22,7 @@
  <div class="wrap">
   <div class="page-title">
     <span class="modular fl"><i></i><em>产品分类</em></span>
-    <span class="modular fr"><a href="add_category.html" class="pt-link-btn">+添加新分类</a></span>
+    <span class="modular fr"><a href="javaScript:showAddTypeModel()" class="pt-link-btn">+添加新类型</a></span>
   </div>
   
   <table class="list-style">
@@ -102,7 +102,7 @@
    <div class="modal-content">
     <div class="modal-header">
      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-     <h4 class="modal-title" id="myModalLabel">删除类型</h4>
+     <h4 class="modal-title" id="delete">删除类型</h4>
     </div>
     <div class="modal-body">
      <input type="hidden" id="typeId"/>
@@ -112,6 +112,36 @@
     <div class="modal-footer">
      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
      <button type="button" class="btn btn-primary" onclick="deleteGoodType(1)">确定</button>
+    </div>
+   </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+ </div>
+
+ <!-- 模态框（Modal） -->
+ <div class="modal fade" id="addGoodType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     <h4 class="modal-title" id="add">添加类型</h4>
+    </div>
+    <div class="modal-body">
+     <!--<input type="hidden" id="typeId"/>-->
+     <form id="addApplyForm">
+      <div class="form-group">
+       <label class="control-label">父级类型:</label>
+       <!--<input type="text" class="form_datetime form-control" id="add_startTime" name="startTime" readonly="readonly"/>-->
+       <select id="parentType" class="form-control" name="parentId">
+
+       </select>
+       <label class="control-label">新建类型名:</label>
+       <input type="text" class="form-control" name="name"/>
+      </div>
+     </form>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+     <button type="button" class="btn btn-primary" onclick="">确定</button>
     </div>
    </div><!-- /.modal-content -->
   </div><!-- /.modal -->

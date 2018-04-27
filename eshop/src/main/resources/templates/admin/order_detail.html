@@ -74,7 +74,7 @@
       <th>小计</th>
      </tr>
      <tr th:each="orderDetailList:${orderVo.orderDetailVoList}">
-      <td th:each="goodPic:${orderDetailList.good.goodPics}" th:if="!${goodPic.grade}"><img th:src="@{'../img/'+${orderDetailList.good.id}+'/'+${goodPic.picName}}" width="80px" height="80px" class="thumbnail"/></td>
+      <td th:each="goodPicMapper:${orderDetailList.good.goodPics}" th:if="!${goodPicMapper.grade}"><img th:src="@{'../img/'+${orderDetailList.good.id}+'/'+${goodPicMapper.picName}}" width="80px" height="80px" class="thumbnail"/></td>
       <td th:text="${orderDetailList.good.name}">这里是产品名称哦</td>
       <td>
        <span>

@@ -71,4 +71,34 @@ public class GoodServiceImpl implements GoodService {
     public Integer updateGood(Good good) {
         return goodMapper.updateGood(good);
     }
+
+    /**
+     * 添加商品
+     * @param good
+     * @return
+     */
+    @Override
+    public Integer insertGood(Good good) {
+        return goodMapper.insertGood(good);
+    }
+
+    /**
+     * 根据id删除商品
+     * @param id
+     * @return
+     */
+    @Override
+    public Integer deleteGoodById(Long id) {
+        return goodMapper.deleteGoodById(id);
+    }
+
+    /**
+     * 根据类型删除商品
+     * @param type
+     * @return
+     */
+    @Override
+    public Integer deleteGoodByType(Short type) {
+        return goodMapper.deleteGoodByType(type);
+    }
 }

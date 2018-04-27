@@ -180,7 +180,7 @@
 			</script>
 			<div class="good_content" th:each="goodType,status:${goodTypeList}" th:if="${status.index} lt 1">
 					<div class="good" th:each="good,status:${goodType.good} " th:if="${status.index} lt 8">
-						<a th:href="@{'/introduction/'+${good.id}}"><img th:each="goodpic : ${good.goodPics}" th:if="!${goodpic.grade}" th:src="@{'img/'+${good.id}+'/'+${goodpic.picName}}"/>
+						<a th:href="@{'/introduction/'+${good.id}}"><img th:each="goodpic : ${good.goodPics}" th:if="${goodpic.grade} eq 0" th:src="@{'img/'+${good.id}+'/'+${goodpic.picName}}"/>
 							<div>
 								<div class="good_name"  th:text="${good.name}"></div>
 								<div th:if="${good.salePrice} != null">

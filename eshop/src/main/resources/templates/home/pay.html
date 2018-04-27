@@ -135,8 +135,8 @@
 										<div class="pay-phone">
 											<li class="td td-item">
 												<div class="item-pic">
-													<a href="#" class="J_MakePoint" th:each="goodPic:${good.goodPics}" th:if="!${goodPic.grade}">
-														<img width="80px" height="80px" th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" class="itempic J_ItemImg"></a>
+													<a href="#" class="J_MakePoint" th:each="goodPicMapper:${good.goodPics}" th:if="!${goodPicMapper.grade}">
+														<img width="80px" height="80px" th:src="@{'../img/'+${good.id}+'/'+${goodPicMapper.picName}}" class="itempic J_ItemImg"></a>
 												</div>
 												<div class="item-info">
 													<div class="item-basic-info">
@@ -188,8 +188,8 @@
 											<div class="pay-phone">
 												<li class="td td-item">
 													<div class="item-pic">
-														<a href="#" class="J_MakePoint" th:each="goodPic:${cart.good.goodPics}" th:if="!${goodPic.grade}">
-															<img width="80px" height="80px" th:src="@{'../img/'+${cart.good.id}+'/'+${goodPic.picName}}" class="itempic J_ItemImg"></a>
+														<a href="#" class="J_MakePoint" th:each="goodPicMapper:${cart.good.goodPics}" th:if="!${goodPicMapper.grade}">
+															<img width="80px" height="80px" th:src="@{'../img/'+${cart.good.id}+'/'+${goodPicMapper.picName}}" class="itempic J_ItemImg"></a>
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info">

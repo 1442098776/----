@@ -42,4 +42,25 @@ public interface GoodService {
      * @return
      */
     Integer updateGood(Good good);
+
+    /**
+     * 添加商品
+     * @param good
+     * @return
+     */
+    Integer insertGood(Good good);
+
+    /**
+     * 根据id删除商品
+     * @param id
+     * @return
+     */
+    Integer deleteGoodById(Long id);
+
+    /**
+     * 根据类型删除商品
+     * @param type
+     * @return
+     */
+    Integer deleteGoodByType(Short type);
 }

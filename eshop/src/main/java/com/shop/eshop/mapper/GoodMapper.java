@@ -62,4 +62,26 @@ public interface GoodMapper {
      * @return
      */
     Integer updateGood(Good good);
+
+
+    /**
+     * 添加商品
+     * @param good
+     * @return
+     */
+    Integer insertGood(Good good);
+
+    /**
+     * 根据商品id删除商品
+     * @param id
+     * @return
+     */
+    Integer deleteGoodById(Long id);
+
+    /**
+     * 根据类型删除商品
+     * @param type
+     * @return
+     */
+    Integer deleteGoodByType(Short type);
 }

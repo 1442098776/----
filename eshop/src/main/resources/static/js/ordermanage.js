@@ -72,7 +72,7 @@ function getOrderByPage(pageNow) {
                     '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class="item-pic">\n' +
                     '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a href="#" class="J_MakePoint">\n';
                     for(var k = 0;k<goodPics.length;k++){
-                        if(!goodPics[k].grade){
+                        if(goodPics[k].grade == 0){
                             str += '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src="../img/'+good.id+'/'+goodPics[k].picName+'" class="itempic J_ItemImg">\n';
                         }
 

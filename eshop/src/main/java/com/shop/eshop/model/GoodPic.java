@@ -9,7 +9,9 @@ public class GoodPic {
 
     private Date createTime;
 
-    private Boolean grade;
+    private Date modifyTime;
+
+    private Integer grade;
 
     private Long goodId;
 
@@ -37,11 +39,19 @@ public class GoodPic {
         this.createTime = createTime;
     }
 
-    public Boolean getGrade() {
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(Boolean grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 

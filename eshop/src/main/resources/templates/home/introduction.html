@@ -73,8 +73,8 @@
 					<section class="slider">
 						<div class="flexslider">
 							<ul class="slides">
-								<li th:each="goodPic:${good.goodPics}">
-									<img th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" title="pic" />
+								<li th:each="goodPicMapper:${good.goodPics}">
+									<img th:src="@{'../img/'+${good.id}+'/'+${goodPicMapper.picName}}" title="pic" />
 								</li>
 							</ul>
 						</div>
@@ -99,12 +99,12 @@
 						</script>
 
 						<div class="tb-booth tb-pic tb-s310">
-							<a href="../images/01.jpg"><img th:each="goodPic,status:${good.goodPics}" th:if="${status.index} eq 0" th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" alt="细节展示放大镜特效" th:rel="'../img/'+${good.id}+'/'+${goodPic.picName}" class="jqzoom" /></a>
+							<a href="../images/01.jpg"><img th:each="goodPicMapper,status:${good.goodPics}" th:if="${status.index} eq 0" th:src="@{'../img/'+${good.id}+'/'+${goodPicMapper.picName}}" alt="细节展示放大镜特效" th:rel="'../img/'+${good.id}+'/'+${goodPicMapper.picName}" class="jqzoom" /></a>
 						</div>
 						<ul class="tb-thumb" id="thumblist">
-							<li class="tb-selected" th:each="goodPic:${good.goodPics}">
+							<li class="tb-selected" th:each="goodPicMapper:${good.goodPics}">
 								<div class="tb-pic tb-s40">
-									<a href="#"><img th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" th:mid="'../img/'+${good.id}+'/'+${goodPic.picName}" th:big="'../img/'+${good.id}+'/'+${goodPic.picName}"></a>
+									<a href="#"><img th:src="@{'../img/'+${good.id}+'/'+${goodPicMapper.picName}}" th:mid="'../img/'+${good.id}+'/'+${goodPicMapper.picName}" th:big="'../img/'+${good.id}+'/'+${goodPicMapper.picName}"></a>
 								</div>
 							</li>
 						</ul>
@@ -238,8 +238,8 @@
 									<h2>看了又看</h2>
 								</div>
 								  <li class="first" th:each="good : ${goodList}">
-									<div class="p-img" th:each="goodPic : ${good.goodPics}" th:if="!${goodPic.grade}">
-										<a  th:href="@{'/introduction/'+${good.id}}"> <img class="" th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}"> </a>
+									<div class="p-img" th:each="goodPicMapper : ${good.goodPics}" th:if="!${goodPicMapper.grade}">
+										<a  th:href="@{'/introduction/'+${good.id}}"> <img class="" th:src="@{'../img/'+${good.id}+'/'+${goodPicMapper.picName}}"> </a>
 									</div>
 									<div class="p-name"><a th:href="@{'/introduction/'+${good.id}}" th:text="${good.name}">
 									</a>
@@ -291,7 +291,7 @@
 											<h4>商品细节</h4>
 										</div>
 										<div class="twlistNews">
-											<img width="100%" th:each="goodPic:${good.goodPics}" th:src="@{'../img/'+${good.id}+'/'+${goodPic.picName}}" />
+											<img width="100%" th:each="goodPicMapper:${good.goodPics}" th:src="@{'../img/'+${good.id}+'/'+${goodPicMapper.picName}}" />
 											<!--<img src="../images/tw2.jpg" />-->
 											<!--<img src="../images/tw3.jpg" />-->
 											<!--<img src="../images/tw4.jpg" />-->

@@ -55,7 +55,7 @@ function getByPage(pageNow) {
                 '    <td class="center pic-area">' ;
                 var goodPic = List[i].goodPics;
                 for(var j = 0;j<goodPic.length;j++){
-                    if(!goodPic[j].grade){
+                    if(goodPic[j].grade == 0){
                         str += '<img src="../img/'+List[i].id+'/'+goodPic[j].picName+'" class="thumbnail"/>';
                     }
                 }

@@ -20,15 +20,6 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     @Autowired
     private GoodMapper goodMapper;
 
-    /**
-     * 根据菜单id获取商品类型
-     * @param id
-     * @return
-     */
-    @Override
-    public List<GoodType> getGoodTypeByMenuId(Integer id) {
-        return goodTypeMapper.getGoodTypeByMenuId(id);
-    }
 
     /**
      * 根据类型获取商品
@@ -72,11 +63,14 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     }
 
     /**
-     * 获取所有的非一级类型
+     * 添加商品分类
+     * @param goodType
      * @return
      */
     @Override
-    public List<GoodType> getAllSonType() {
-        return goodTypeMapper.getAllSonType();
+    public Integer insertGoodType(GoodType goodType) {
+        return goodTypeMapper.insertGoodType(goodType);
     }
+
+
 }

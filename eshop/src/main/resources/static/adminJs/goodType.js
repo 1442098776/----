@@ -130,3 +130,26 @@ function showModel(typeId) {
     $("#typeId").val(typeId);
     $("#tip").modal('show');
 }
+
+
+function showAddTypeModel() {
+    $("#addGoodType").modal('show');
+    $.ajax({
+        url:'/admin/getAllType',
+        type:'POST',
+        dataType:'JSON',
+        async:false,
+        success:function (typeList) {
+            var parentType = window.document.getElementById("parentType");
+            var str = '<option value="">--请选择--</option>';
+            if(typeList.length > 0){
+                for(var i = 0;i < typeList.length; i++){
+                    str += '      <option value="'+typeList[i].id+'">'+typeList[i].name+'</option>\n';
+                }
+                parentType.innerHTML = str;
+            }else{
+                parentType.innerHTML = str;
+            }
+        }
+    })
+}

@@ -84,7 +84,7 @@ function sort(inputType) {
                     var goodPic = data[i].goodPics;
                     if(goodPic != null){
                         for(var j = 0;j < goodPic.length;j++){
-                            if(!goodPic[j].grade){
+                            if(goodPic[j].grade == 0){
                                 str += '<img style="width: 278px;height: 278px;" src="../img/'+data[i].id+'/'+goodPic[j].picName+'" />';
                             }
                         }
@@ -122,7 +122,7 @@ function sort(inputType) {
                     var goodPic2 = data[i].goodPics;
                     if(goodPic2 != null){
                         for(var j = 0;j < goodPic2.length;j++){
-                            if(!goodPic2[j].grade){
+                            if(goodPic2[j].grade == 0){
                                 str += '<img style="width: 278px;height: 278px;" src="../img/'+data[i].id+'/'+goodPic2[j].picName+'" />';
                             }
                         }
@@ -184,7 +184,7 @@ function goodContent(flag,pageNow) {
                 var goodPics = List[i].goodPics;
                 if(goodPics != null){
                     for(var j = 0;j<goodPics.length;j++){
-                        if(!goodPics[j].grade){
+                        if(goodPics[j].grade == 0){
                             str += '<img style="width: 278px;height: 278px;" src="../img/'+List[i].id+'/'+goodPics[j].picName+'"/>';
                         }
 
@@ -229,7 +229,7 @@ function goodContent(flag,pageNow) {
                 var goodPics = List[i].goodPics;
                 if(goodPics != null){
                     for(var j = 0;j<goodPics.length;j++){
-                        if(!goodPics[j].grade){
+                        if(goodPics[j].grade == 0){
                             str += '<img style="width: 278px;height: 278px;" src="../img/'+List[i].id+'/'+goodPics[j].picName+'"/>';
                         }
 

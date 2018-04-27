@@ -6,7 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="parent_id" jdbcType="SMALLINT" property="parentId" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
-    <result column="menu_id" jdbcType="SMALLINT" property="menuId" />
+    <result column="modify_time" jdbcType="DATE" property="modifyTime" />
     <collection property="goodTypes" ofType="com.shop.eshop.model.GoodType" column="id" select="getGoodTypeByParentId" />
   </resultMap>
 
@@ -15,19 +15,13 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="parent_id" jdbcType="SMALLINT" property="parentId" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
-    <result column="menu_id" jdbcType="SMALLINT" property="menuId" />
+    <result column="modify_time" jdbcType="DATE" property="modifyTime" />
     <collection property="goodTypes" ofType="com.shop.eshop.model.GoodType" column="id" select="getGoodTypeByParentId" />
-    <collection property="good" ofType="com.shop.eshop.model.Good" column="id" select="com.shop.eshop.mapper.GoodMapper.getGoodByType" />  </resultMap>
+    <collection property="good" ofType="com.shop.eshop.model.Good" column="id" select="com.shop.eshop.mapper.GoodMapper.getGoodByType" />
+  </resultMap>
   <sql id="Base_Column_List">
-    id, name, parent_id, create_time, menu_id
+    id, name, parent_id, create_time, modify_time
   </sql>
-
-  <!--根据菜单id获取商品类型-->
-  <select id="getGoodTypeByMenuId" resultMap="BaseResultMap2" parameterType="java.lang.Integer">
-    SELECT
-    <include refid="Base_Column_List" />
-    FROM good_type WHERE menu_id = #{menuId}
-  </select>
 
   <!--根据父级id获取商品类型-->
   <select id="getGoodTypeByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -52,7 +46,9 @@
     </foreach>
   </delete>
 
-  <select id="getAllSonType" resultMap="BaseResultMap">
-    SELECT * FROM `good_type` where parent_id != 0
-  </select>
+  <!--添加分类-->
+  <insert id="insertGoodType"  parameterType="com.shop.eshop.model.GoodType">
+    insert into good_type(`name`,parent_id,create_time)
+    VALUES (#{name},#{parentId},#{createTime})
+  </insert>
 </mapper>
