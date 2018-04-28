@@ -54,6 +54,11 @@ public class Good {
     private Date createTime;
 
     /**
+     * 修改时间
+     */
+    private Date modifyTime;
+
+    /**
      * 活动开始时间
      */
     private Date startTime;
@@ -162,6 +167,14 @@ public class Good {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     public Date getStartTime() {

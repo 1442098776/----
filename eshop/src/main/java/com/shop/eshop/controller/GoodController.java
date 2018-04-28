@@ -7,10 +7,9 @@ import com.shop.eshop.service.GoodPicService;
 import com.shop.eshop.service.GoodService;
 import com.shop.eshop.service.GoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -44,6 +43,49 @@ public class GoodController {
     }
 
     /**
+     * 添加商品类型
+     * @param goodType
+     * @return
+     */
+    @PostMapping("/admin/insertGoodType")
+    public String adminAddGoodType(GoodType goodType){
+        Integer checkTypeName = goodTypeService.checkTypeName(goodType);
+        if(checkTypeName != null && checkTypeName > 0){
+            return "2";//分类名已存在
+        }else {
+            goodType.setCreateTime(new Date());
+            Integer is_insert = goodTypeService.insertGoodType(goodType);
+            if(is_insert != null && is_insert > 0){
+                return "1";
+            }else {
+                return "0";
+            }
+        }
+
+    }
+
+    /**
+     * 更新商品分类信息
+     * @param goodType
+     * @return
+     */
+    @PostMapping("/admin/updateGoodType")
+    public String adminUpdateGoodType(GoodType goodType){
+        Integer checkTypeName = goodTypeService.checkTypeName(goodType);
+        if(checkTypeName != null && checkTypeName > 0){
+            return "2";//分类名已存在
+        }else {
+            goodType.setModifyTime(new Date());
+            Integer is_update = goodTypeService.updateGoodType(goodType);
+            if(is_update != null && is_update > 0){
+                return "1";
+            }else {
+                return "0";
+            }
+        }
+    }
+
+    /**
      * 删除类型
      * @param id
      * @return
@@ -51,13 +93,35 @@ public class GoodController {
     @PostMapping("/admin/deleteGoodType")
     public String deleteGoodType(String id){
         String[] idStrs = id.split(",");
-        List<Long> idList = new ArrayList<>();
+        List<Short> idList = new ArrayList<>();
         for(String idStr :idStrs){
-            idList.add(Long.parseLong(idStr));
+            idList.add(Short.parseShort(idStr));
         }
-        Integer is_delete = goodTypeService.deleteGoodType(new ArrayList<>());
+        //得到所有的要删除的商品id
+        List<Long> goodIdList = goodService.getGoodByType(idList);
+        //删除分类
+        Integer is_delete = goodTypeService.deleteGoodType(idList);
         if(is_delete != null && is_delete > 0){
-            return "1";
+            //删除商品
+            Integer is_delete_good = goodService.deleteGoodByType(idList);
+            //删除商品图片
+            for(int i = 0;i < goodIdList.size();i++){
+                System.out.println(goodIdList.get(i).toString());
+                File file = new File("D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+goodIdList.get(i).toString());
+                File[] files = file.listFiles();
+                for (int j = 0; j < files.length; j++) {
+                    //删除子文件
+                    if (files[j].isFile()) {
+                        files[j].delete();
+                    }
+                }
+                file.delete();
+            }
+            if(is_delete_good != null && is_delete_good > 0){
+                return "1";
+            }else {
+                return "0";
+            }
         }else{
             return "0";
         }
@@ -101,20 +165,6 @@ public class GoodController {
         return goodTypeService.getGoodTypeByParentId(0);
     }
 
-    /**
-     * 添加商品类型
-     * @param goodType
-     * @return
-     */
-    @PostMapping("/admin/insertGoodType")
-    public String adminAddGoodType(GoodType goodType){
-        Integer is_insert = goodTypeService.insertGoodType(goodType);
-        if(is_insert != null && is_insert > 0){
-            return "1";
-        }else {
-            return "0";
-        }
-    }
 
     /**
      * 添加商品
@@ -145,7 +195,8 @@ public class GoodController {
                     Integer  is_insert_pic = goodPicService.insertGoodPic(goodPic);
                     if(is_insert_pic != null && is_insert_pic > 0){
                         // 保存文件
-                        flag = saveFile(request, file,good.getId());
+                        flag = saveFile(request, file,good.getId());//上传到项目的绝对地址
+//                        flag = saveFile2(request, file,good.getId());//上传到temp上
                     }else {
                         flag = false;
                         break;
@@ -164,13 +215,18 @@ public class GoodController {
             //添加商品失败则吧添加到数据库的信息删除
             Integer is_delete = goodService.deleteGoodById(good.getId());
             if(is_delete != null && is_delete > 0){
+                File[] filesw = file2.listFiles();
+                for (int j = 0; j < filesw.length; j++) {
+                    //删除子文件
+                    if (filesw[j].isFile()) {
+                        filesw[j].delete();
+                    }
+                }
                 file2.delete();
             }
             return "0";
         }
     }
-
-
     /**
      *
      * @param request 用户获取request.getSession().getServletContext().getRealPath("/")
@@ -187,9 +243,6 @@ public class GoodController {
                 // )D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/
                 String filePath = "D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"
                         + id+"/" + file.getOriginalFilename();
-//                String filePath = request.getSession().getServletContext()
-//                        .getRealPath("/")
-//                        + "upload/" + file.getOriginalFilename();
                 System.out.println(filePath);
 //                list.add(file.getOriginalFilename());
                 File saveDir = new File(filePath);
@@ -204,5 +257,54 @@ public class GoodController {
             }
         }
         return false;
+    }
+
+
+
+
+    private boolean saveFile2(HttpServletRequest request,
+                             MultipartFile file,Long id) {
+        // 判断文件是否为空
+        if (!file.isEmpty()) {
+            try {
+                // 保存的文件路径(如果用的是Tomcat服务器，文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\upload\\文件夹中
+                // )D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/
+                String filePath2 = request.getSession().getServletContext()
+                        .getRealPath("img/")
+                        + id+"/" + file.getOriginalFilename();
+                File saveDir2 = new File(filePath2);
+                if (!saveDir2.getParentFile().exists())
+                    saveDir2.getParentFile().mkdirs();
+
+                file.transferTo(saveDir2);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+    /**
+     * 跳转到编辑页面
+     * @param id
+     * @return
+     */
+    @RequestMapping("/admin/editGood/{id}")
+    public ModelAndView toEditGood(@PathVariable Long id){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/edit_product");
+        mv.addObject("id",id);
+        return mv;
+    }
+
+    /**
+     * 管理员编辑商品信息
+     * @param id
+     * @return
+     */
+    @PostMapping("/admin/toEditGood")
+    public Good adminToEditGood(Long id){
+        Good good = goodService.getGoodById(id);
+        return good;
     }
 }

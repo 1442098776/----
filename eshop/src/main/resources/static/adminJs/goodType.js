@@ -2,7 +2,7 @@ var flag = true;
 $(function(){
     initGoodType();
 })
-
+var List = null;
 function initGoodType() {
     var typeList = window.document.getElementById("typeList");
     $.ajax({
@@ -10,6 +10,7 @@ function initGoodType() {
         type:'POST',
         dataType:'JSON',
         success:function (goodTypeList) {
+            List = goodTypeList;
             var str = "";
             for(var i = 0;i < goodTypeList.length;i++){
                 str += '<tr class="parent">\n' +
@@ -18,8 +19,13 @@ function initGoodType() {
                     // '     <input type="checkbox" name="items" value='+goodTypeList[i].id+'"/>\n' +
                     '     <span>'+goodTypeList[i].name+'</span>\n' +
                     '    </td>'+
-                    '    <td class="center">'+new Date(goodTypeList[i].createTime).Format("yyyy-MM-dd hh:mm")+'</td>\n' +
-                    '    <td class="center"></td>';
+                    '    <td class="center">'+new Date(goodTypeList[i].createTime).Format("yyyy-MM-dd hh:mm")+'</td>\n';
+                if(goodTypeList[i].modifyTime != null){
+                    str += '    <td class="center">'+new Date(goodTypeList[i].modifyTime).Format("yyyy-MM-dd hh:mm")+'</td>\n';
+                }else {
+                    str += '    <td class="center"></td>\n';
+                }
+                str += '    <td class="center"><button onclick="showEditModel('+goodTypeList[i].id+','+0+')" type="button">编辑</button></td>';
                 for( var j = 0;j<goodTypeList[i].goodTypes.length;j++){
                     str += '<tr class="child'+goodTypeList[i].id+'" hidden>\n' +
                         '    <td  class="center"></td>\n' +
@@ -27,8 +33,14 @@ function initGoodType() {
                         '     <input type="checkbox" name="items" value="'+goodTypeList[i].goodTypes[j].id+'"/>\n' +
                         '     <span>'+goodTypeList[i].goodTypes[j].name+'</span>\n' +
                         '    </td>\n' +
-                        '    <td class="center">'+new Date(goodTypeList[i].goodTypes[j].createTime).Format("yyyy-MM-dd hh:mm")+'</td>\n' +
-                        '    <td class="center"><button onclick="showModel('+goodTypeList[i].id+')" type="button">删除</button></td>\n' +
+                        '    <td class="center">'+new Date(goodTypeList[i].goodTypes[j].createTime).Format("yyyy-MM-dd hh:mm")+'</td>\n';
+                    if(goodTypeList[i].goodTypes[j].modifyTime != null){
+                        str += '    <td class="center">'+new Date(goodTypeList[i].goodTypes[j].modifyTime).Format("yyyy-MM-dd hh:mm")+'</td>\n';
+                    }else {
+                        str += '    <td class="center"></td>\n';
+                    }
+                    str += '    <td class="center"><button onclick="showEditModel('+goodTypeList[i].goodTypes[j].id+','+goodTypeList[i].id+')" type="button">编辑</button>\n' +
+                        '    <button onclick="showModel('+goodTypeList[i].goodTypes[j].id+')" type="button">删除</button></td>\n' +
                         '   </tr>'
                 }
             }
@@ -82,7 +94,19 @@ function selectAll() {
     }
 }
 
+/**
+ * 删除分类提示框
+ * @param typeId
+ */
+function showModel(typeId) {
+    $("#typeId").val(typeId);
+    $("#tip").modal('show');
+}
 
+/**
+ * 删除商品分类
+ * @param inputId
+ */
 function deleteGoodType(inputId) {
     //获取所有的复选框列表
     var checkboxTag = document.getElementsByName("items");
@@ -122,33 +146,114 @@ function deleteGoodType(inputId) {
             }
         })
     } else {
-        alert("没有选择任何用户");
+        alert("没有选择任何商品分类");
     }
 }
 
-function showModel(typeId) {
-    $("#typeId").val(typeId);
-    $("#tip").modal('show');
+
+
+/**
+ * 编辑分类显示模态框
+ * @param typeId
+ * @param parentId
+ */
+function showEditModel(typeId,parentId) {
+    $("#editGoodType").modal('show');
+    var parentType = window.document.getElementById("edit_parentType");
+    $("#id").val(typeId);
+    if(parentId != 0){
+        var str = '';
+        if(List.length > 0){
+            for(var i = 0;i < List.length; i++){
+                if(parentId == List[i].id){
+                    str += '      <option value="'+List[i].id+'" selected>'+List[i].name+'</option>\n';
+                    for(var j = 0;j<List[i].goodTypes.length;j++){
+                        if(typeId == List[i].goodTypes[j].id){
+                            $("#edit_typeName").val(List[i].goodTypes[j].name);
+                        }
+                    }
+                }else {
+                    str += '      <option value="'+List[i].id+'">'+List[i].name+'</option>\n';
+                }
+            }
+            parentType.innerHTML = str;
+
+        }else{
+            parentType.innerHTML = str;
+        }
+    }else {
+        $("#parentTitle").addClass("hide");
+        $("#edit_parentType").addClass("hide");
+        for(var i = 0;i < List.length; i++){
+            if(typeId == List[i].id){
+                $("#edit_typeName").val(List[i].name);
+            }
+        }
+    }
+
+}
+
+/**
+ * 修改分类
+ */
+function updateGoodType() {
+    $.ajax({
+        url:'/admin/updateGoodType',
+        type:'POST',
+        data:$('#editGoodTypeForm').serialize(),
+        dataType:'JSON',
+        success:function (msg) {
+            if(msg == 1){
+                $('#typeName').val("");
+                layer.msg("修改商品分类成功");
+                $("#editGoodType").modal('hide');
+                initGoodType();
+            }else if(msg == 2){
+                layer.msg("该分类已存在");
+            }else {
+                layer.msg("修改分类失败");
+            }
+        }
+    })
 }
 
 
+/**
+ * 添加分类显示模态框
+ */
 function showAddTypeModel() {
     $("#addGoodType").modal('show');
+    var parentType = window.document.getElementById("parentType");
+    var str = '<option value="">--请选择--</option>';
+    if(List.length > 0){
+        for(var i = 0;i < List.length; i++){
+            str += '      <option value="'+List[i].id+'">'+List[i].name+'</option>\n';
+        }
+        parentType.innerHTML = str;
+    }else{
+        parentType.innerHTML = str;
+    }
+}
+
+/**
+ * 添加分类
+ */
+function addType() {
     $.ajax({
-        url:'/admin/getAllType',
+        url:'/admin/insertGoodType',
         type:'POST',
+        data:$('#addGoodTypeForm').serialize(),
         dataType:'JSON',
-        async:false,
-        success:function (typeList) {
-            var parentType = window.document.getElementById("parentType");
-            var str = '<option value="">--请选择--</option>';
-            if(typeList.length > 0){
-                for(var i = 0;i < typeList.length; i++){
-                    str += '      <option value="'+typeList[i].id+'">'+typeList[i].name+'</option>\n';
-                }
-                parentType.innerHTML = str;
-            }else{
-                parentType.innerHTML = str;
+        success:function (msg) {
+            if(msg == 1){
+                $('#typeName').val("");
+                layer.msg("添加商品分类成功");
+                $("#addGoodType").modal('hide');
+                initGoodType();
+            }else if(msg == 2){
+                layer.msg("该分类已存在");
+            }else {
+                layer.msg("添加分类失败");
             }
         }
     })

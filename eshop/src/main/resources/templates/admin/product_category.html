@@ -16,13 +16,16 @@
   button{
    cursor: pointer;
   }
+  .hide{
+   display: none;
+  }
  </style>
 </head>
 <body>
  <div class="wrap">
   <div class="page-title">
     <span class="modular fl"><i></i><em>产品分类</em></span>
-    <span class="modular fr"><a href="javaScript:showAddTypeModel()" class="pt-link-btn">+添加新类型</a></span>
+    <span class="modular fr"><a href="javaScript:showAddTypeModel()" class="pt-link-btn">+添加新分类</a></span>
   </div>
   
   <table class="list-style">
@@ -31,6 +34,7 @@
      <th class="center" width="30px"></th>
      <th class="center">分类名称</th>
      <th class="center">创建时间</th>
+     <th class="center">修改时间</th>
      <th class="center">操作</th>
     </tr>
    </thead>
@@ -96,52 +100,83 @@
  </div>
 
 
- <!-- 模态框（Modal） -->
+ <!-- 删除分类提示模态框（Modal） -->
  <div class="modal fade" id="tip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
    <div class="modal-content">
     <div class="modal-header">
      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-     <h4 class="modal-title" id="delete">删除类型</h4>
+     <h4 class="modal-title" id="delete">删除分类</h4>
     </div>
     <div class="modal-body">
      <input type="hidden" id="typeId"/>
-     <div style="width: 100%;text-align: center;color: red;font-size: 16px;">删除该类型连同该类型的所有商品都删除!</div>
-     <div style="width: 100%;text-align: center;">你确定要删除该类型吗？</div>
+     <div style="width: 100%;text-align: center;color: red;font-size: 16px;">删除该分类连同该分类下的所有商品都删除!</div>
+     <div style="width: 100%;text-align: center;">你确定要删除该分类吗？</div>
     </div>
     <div class="modal-footer">
      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-     <button type="button" class="btn btn-primary" onclick="deleteGoodType(1)">确定</button>
+     <button type="button" class="btn btn-primary" onclick="deleteGoodType(this)">确定</button>
     </div>
    </div><!-- /.modal-content -->
   </div><!-- /.modal -->
  </div>
 
- <!-- 模态框（Modal） -->
+ <!-- 添加分类模态框（Modal） -->
  <div class="modal fade" id="addGoodType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
    <div class="modal-content">
     <div class="modal-header">
      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-     <h4 class="modal-title" id="add">添加类型</h4>
+     <h4 class="modal-title" id="add">添加分类</h4>
     </div>
     <div class="modal-body">
      <!--<input type="hidden" id="typeId"/>-->
-     <form id="addApplyForm">
+     <form id="addGoodTypeForm">
       <div class="form-group">
-       <label class="control-label">父级类型:</label>
+       <label class="control-label">父级分类:</label>
        <!--<input type="text" class="form_datetime form-control" id="add_startTime" name="startTime" readonly="readonly"/>-->
        <select id="parentType" class="form-control" name="parentId">
 
        </select>
-       <label class="control-label">新建类型名:</label>
-       <input type="text" class="form-control" name="name"/>
+       <label class="control-label">分类名:</label>
+       <input type="text" class="form-control" id="typeName" name="name"/>
       </div>
      </form>
     </div>
     <div class="modal-footer">
      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-     <button type="button" class="btn btn-primary" onclick="">确定</button>
+     <button type="button" class="btn btn-primary" onclick="addType()">确定</button>
+    </div>
+   </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+ </div>
+
+ <!-- 编辑分类模态框（Modal） -->
+ <div class="modal fade" id="editGoodType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     <h4 class="modal-title" id="edit">编辑分类</h4>
+    </div>
+    <div class="modal-body">
+     <!--<input type="hidden" id="typeId"/>-->
+     <form id="editGoodTypeForm">
+      <div class="form-group">
+       <input type="hidden" id="id" name="id"/>
+       <label class="control-label" id="parentTitle">父级分类:</label>
+       <!--<input type="text" class="form_datetime form-control" id="add_startTime" name="startTime" readonly="readonly"/>-->
+       <select id="edit_parentType" class="form-control" name="parentId">
+          <option value=""></option>
+       </select>
+       <label class="control-label">分类名:</label>
+       <input type="text" class="form-control" id="edit_typeName" name="name"/>
+      </div>
+     </form>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+     <button type="button" class="btn btn-primary" onclick="updateGoodType()">修改</button>
     </div>
    </div><!-- /.modal-content -->
   </div><!-- /.modal -->

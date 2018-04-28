@@ -58,7 +58,7 @@ public class GoodTypeServiceImpl implements GoodTypeService {
      * @return
      */
     @Override
-    public Integer deleteGoodType(List<Long> list) {
+    public Integer deleteGoodType(List<Short> list) {
         return goodTypeMapper.deleteGoodType(list);
     }
 
@@ -70,6 +70,26 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     @Override
     public Integer insertGoodType(GoodType goodType) {
         return goodTypeMapper.insertGoodType(goodType);
+    }
+
+    /**
+     * 检查分类名
+     * @param goodType
+     * @return
+     */
+    @Override
+    public Integer checkTypeName(GoodType goodType) {
+        return goodTypeMapper.checkTypeName(goodType);
+    }
+
+    /**
+     * 更新商品分类信息
+     * @param goodType
+     * @return
+     */
+    @Override
+    public Integer updateGoodType(GoodType goodType) {
+        return goodTypeMapper.updateGoodType(goodType);
     }
 
 

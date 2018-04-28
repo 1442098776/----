@@ -52,6 +52,10 @@ function addGood() {
     }else {
         if($("#childType option:selected").val() != ""){
             if($("#name").val() != "" && $("#price").val() != "" && $("#stock").val() != ""){
+                if($("#price").val() != "" && $("#price").val() > $("#price").val()){
+                    layer.msg("销售价格不该比原价高");
+                    return;
+                }
                 $.ajax({
                     url:'/admin/addGood',
                     type:'POST',

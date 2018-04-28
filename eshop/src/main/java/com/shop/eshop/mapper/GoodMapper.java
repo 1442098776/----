@@ -47,7 +47,7 @@ public interface GoodMapper {
      * @param id
      * @return
      */
-    List<Good> getGoodByType(Integer id);
+    List<Long> getGoodByType(List<Short> id);
 
     /**
      * 搜索商品
@@ -80,8 +80,8 @@ public interface GoodMapper {
 
     /**
      * 根据类型删除商品
-     * @param type
+     * @param list
      * @return
      */
-    Integer deleteGoodByType(Short type);
+    Integer deleteGoodByType(List<Short> list);
 }

@@ -94,11 +94,21 @@ public class GoodServiceImpl implements GoodService {
 
     /**
      * 根据类型删除商品
-     * @param type
+     * @param list
      * @return
      */
     @Override
-    public Integer deleteGoodByType(Short type) {
-        return goodMapper.deleteGoodByType(type);
+    public Integer deleteGoodByType(List<Short> list) {
+        return goodMapper.deleteGoodByType(list);
+    }
+
+    /**
+     * 根据类型得到所有的商品id
+     * @param list
+     * @return
+     */
+    @Override
+    public List<Long> getGoodByType(List<Short> list) {
+        return goodMapper.getGoodByType(list);
     }
 }

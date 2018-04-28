@@ -19,7 +19,7 @@ function initOrSearchGood(input) {
         dataType:'JSON',
         async:false,
         success:function (goodList) {
-            console.info(goodList);
+            // console.info(goodList);
             List = goodList;
             getByPage(null);
         }
@@ -96,7 +96,7 @@ function getByPage(pageNow) {
                 str += '    </td>\n' +
                 '    <td class="center">\n' +
                 '     <a href="/introduction/'+List[i].id+'" title="查看" target="_blank"><button>查看商品</button></a>\n' +
-                '     <a href="edit_product.html" title="编辑"><button>编辑商品</button></a>\n' +
+                '     <a href="/admin/editGood/'+List[i].id+'" title="编辑"><button>编辑商品</button></a>\n' +
                 '    </td>\n' +
                 '   </tr>';
         }

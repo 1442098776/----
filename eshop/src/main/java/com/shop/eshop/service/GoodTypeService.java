@@ -30,7 +30,7 @@ public interface GoodTypeService {
      * @param list
      * @return
      */
-    Integer deleteGoodType(List<Long> list);
+    Integer deleteGoodType(List<Short> list);
 
     /**
      * 添加商品分类
@@ -38,4 +38,18 @@ public interface GoodTypeService {
      * @return
      */
     Integer insertGoodType(GoodType goodType);
+
+    /**
+     * 检查分类名是否已存在
+     * @param goodType
+     * @return
+     */
+    Integer checkTypeName(GoodType goodType);
+
+    /**
+     * 更新商品分类信息
+     * @param goodType
+     * @return
+     */
+    Integer updateGoodType(GoodType goodType);
 }

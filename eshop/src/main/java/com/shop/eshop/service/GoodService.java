@@ -59,8 +59,15 @@ public interface GoodService {
 
     /**
      * 根据类型删除商品
-     * @param type
+     * @param list
      * @return
      */
-    Integer deleteGoodByType(Short type);
+    Integer deleteGoodByType(List<Short> list);
+
+    /**
+     * 根据类型得到所有的商品id
+     * @param list
+     * @return
+     */
+    List<Long> getGoodByType(List<Short> list);
 }
