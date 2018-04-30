@@ -6,7 +6,7 @@
 <link href="../../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
  <script type="text/javascript" src="../../js/jquery-3.1.1.js"></script>
  <script type="text/javascript" src="../../adminJs/editGood.js"></script>
- <script type="text/javascript" src="../../adminJs/addGood.js"></script>
+ <script type="text/javascript" src="../../adminJs/goodCommon.js"></script>
  <script type="text/javascript" src="../../js/layer.js"></script>
 </head>
 <body>
@@ -15,9 +15,9 @@
     <span class="modular fl"><i class="add"></i><em>编辑产品</em></span>
     <span class="modular fr"><a href="product_list" class="pt-link-btn">产品列表</a></span>
   </div>
-  <form id="addGood" enctype="multipart/form-data" method="post">
+  <form id="editGood" enctype="multipart/form-data" method="post">
   <table class="list-style">
-   <input type="hidden" id="id" th:value="${id}"/>
+   <input type="hidden" id="id" name="id" th:value="${id}"/>
    <tr>
     <td style="text-align:right;width:15%;">产品名称：</td>
     <td><input type="text" name="name" id="name" class="textBox length-long"/></td>
@@ -128,7 +128,7 @@
    <!--</tr>-->
    <tr>
     <td style="text-align:right;"></td>
-    <td><input type="button" onclick="" value="修改商品" class="tdBtn"/></td>
+    <td><input type="button" onclick="updateGood()" value="修改商品" class="tdBtn"/></td>
    </tr>
   </table>
   </form>

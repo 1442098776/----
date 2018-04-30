@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -85,6 +86,23 @@ public class UserController {
     public String exit(HttpServletResponse response, HttpServletRequest request){
         request.getSession().invalidate();
         return "1";
+    }
+
+
+    /**
+     * 用户忘记密码
+     * @param user
+     * @return
+     */
+    @PostMapping("/userResetPassword")
+    public String resetPassword(User user){
+        user.setModifyTime(new Date());
+        Integer is_reset = userService.userResetPassword(user);
+        if(is_reset != null && is_reset > 0){
+            return "1";
+        }else {
+            return "0";
+        }
     }
 
     /**

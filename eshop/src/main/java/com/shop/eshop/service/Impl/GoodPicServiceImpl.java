@@ -14,8 +14,24 @@ public class GoodPicServiceImpl implements GoodPicService {
 
     @Autowired
     private GoodPicMapper goodPicMapper;
+
+    /**
+     * 保存商品图片信息
+     * @param goodPic
+     * @return
+     */
     @Override
     public Integer insertGoodPic(GoodPic goodPic) {
         return goodPicMapper.insertGoodPic(goodPic);
+    }
+
+    /**
+     * 根据商品id删除商品图片
+     * @param goodId
+     * @return
+     */
+    @Override
+    public Integer deleteGoodPicByGoodId(Long goodId) {
+        return goodPicMapper.deleteGoodPicByGoodId(goodId);
     }
 }

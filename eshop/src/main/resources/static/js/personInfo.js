@@ -87,7 +87,7 @@ function updataPassword() {
                     }else if(msg == 2){
                         layer.msg("原密码不正确");
                     }else{
-                        layer.msg("修改密码错处,请稍后重试");
+                        layer.msg("修改密码出错,请稍后重试");
                     }
                 }
             })

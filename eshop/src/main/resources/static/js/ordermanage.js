@@ -135,6 +135,9 @@ function getOrderByPage(pageNow) {
                 if(List[i].status == 2 || List[i].status == 3 ){
                     str += '<p class="order-info" onclick="updateOrder('+List[i].orderId+','+2+')" style="cursor: pointer">删除订单</p>';
                 }
+                if(List[i].status == 1){
+                    str += '<p class="order-info" onclick="updateOrder('+List[i].orderId+','+3+')" style="cursor: pointer">确认收货</p>';
+                }
                 str +=
                 '\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div></li>\n' +
                 '\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n' +
@@ -263,11 +266,14 @@ function getOrderByStatus(type) {
 function updateOrder(orderId,type) {
     var status = null;
     if (type == 1) {
-        status = 3;
+        status = 3;//取消订单
         var cancelTime = new Date();
     }
     if (type == 2) {
-        status = 4;
+        status = 4;//删除订单
+    }
+    if(type == 3){
+        status = 2;//完成订单
     }
     alert(orderId);
     $.ajax({

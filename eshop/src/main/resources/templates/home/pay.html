@@ -11,11 +11,13 @@
 
 		<link href="../basic/css/demo.css" rel="stylesheet" type="text/css" />
 		<link href="../css/cartstyle.css" rel="stylesheet" type="text/css" />
+		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
 		<link href="../css/paystyle.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
 		<script type="text/javascript" src="../js/address.js"></script>
 		<script type="text/javascript" src="../js/introduction.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 
 
 	</head>
@@ -300,7 +302,7 @@
 
 									<div id="holyshit269" class="submitOrder">
 										<div class="go-btn-wrap">
-											<a id="J_Go" href="javaScript:sureBuy()" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+											<a id="J_Go" href="javaScript:showModal()" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
 										</div>
 									</div>
 									<div class="clear"></div>
@@ -367,6 +369,26 @@
 					</div>
 				</form>
 			</div>
+		</div>
+
+		<!-- 编辑分类模态框（Modal） -->
+		<div class="modal fade" id="sureBuy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content" style="width: 300px;margin: auto;">
+					<!--<div class="modal-header">-->
+						<!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+						<!--<h4 class="modal-title" id="edit">编辑分类</h4>-->
+					<!--</div>-->
+					<div class="modal-body">
+						<!--<input type="hidden" id="typeId"/>-->
+						<img src="../img/pay.jpg"/>
+					</div>
+					<!--<div class="modal-footer">-->
+						<!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
+						<!--<button type="button" class="btn btn-primary" onclick="updateGoodType()">修改</button>-->
+					<!--</div>-->
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
 		</div>
 
 		<div class="clear"></div>

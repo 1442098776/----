@@ -22,7 +22,7 @@ function blurForVerityCode() {
             } else {
                 $("#user").prev().prev().text("");
                 $("#password").prev().prev().text("");
-                $("#code").prev().prev().text("验证码错误").attr("style","color:red;position: absolute; right: 30px;bottom: 140px;");
+                $("#code").prev().prev().text("验证码错误").attr("style","color:red;position: absolute; right: 42px;bottom: 140px;");
                 is_verity_success = false;
             }
         }
@@ -35,9 +35,6 @@ function checkVerityCode() {
     blurForVerityCode();
     changeVerityImg();
     if(is_verity_success){
-        //获取该网址，以便重新跳回
-        var prevLink = window.document.referrer;
-        console.info(prevLink);
         $.ajax({
             type : "POST", //请求方式
             url : "/admin/adminLogin", //请求路径
@@ -47,21 +44,16 @@ function checkVerityCode() {
             success : function(data) {
                 console.info("userlogin"+data);
                 if(data == 2){
-                    if(prevLink.trim() == "" ){
-                        location.href = "/admin/index";
-                    }else{
-                        location.href = prevLink;
-                    }
-
+                    location.href = "/admin/index";
                 }else if(data == 1){
-                    $("#user").prev().prev().text("账号不存在或异常").attr("style","color:red;position: absolute; right: 30px;top: 100px;");
+                    $("#user").prev().prev().text("账号不存在或异常").attr("style","color:red;position: absolute; right: 42px;top: 100px;");
                     $("#password").prev().prev().text("");
                 }else if(data == 3){
-                    $("#user").prev().prev().text("该账户没有权限登录管理系统").attr("style","color:red;position: absolute; right: 30px;top: 100px;");
+                    $("#user").prev().prev().text("该账户没有权限登录管理系统").attr("style","color:red;position: absolute; right: 42px;top: 100px;");
                     $("#password").prev().prev().text("");
                 }else{
                     $("#user").prev().prev().text("");
-                    $("#password").prev().prev().text("密码错误").attr("style","color:red;position: absolute; right: 30px;bottom: 220px;");
+                    $("#password").prev().prev().text("密码错误").attr("style","color:red;position: absolute; right: 42px;bottom: 220px;");
                 }
             }
         });

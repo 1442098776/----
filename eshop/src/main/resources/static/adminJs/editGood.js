@@ -1,6 +1,10 @@
 var List = null;
 var type = null;
 $(document).ready(function () {
+    initGoodInfo();
+})
+
+function initGoodInfo() {
     var id = $("#id").val();
     $.ajax({
         url:'/admin/toEditGood',
@@ -33,12 +37,13 @@ $(document).ready(function () {
                         for(var i = 0;i < typeList.length; i++){
                             for(var j = 0;j<typeList[i].goodTypes.length;j++){
                                 console.info("childType3"+childType);
-                               if(childType == typeList[i].goodTypes[j].id){
-                                   console.info("childType4"+childType);
-                                   flag = false;
-                               } else {
-                                   flag = true;
-                               }
+                                if(childType == typeList[i].goodTypes[j].id){
+                                    console.info("childType4"+childType);
+                                    flag = false;
+                                    break;
+                                } else {
+                                    flag = true;
+                                }
                             }
                             if(flag){
                                 str += '      <option value="'+typeList[i].id+'">'+typeList[i].name+'</option>\n';
@@ -63,30 +68,30 @@ $(document).ready(function () {
         }
     });
     getChildType();
-})
-
-
-function initSelect() {
-    $.ajax({
-        url:'/admin/getAllType',
-        type:'POST',
-        dataType:'JSON',
-        async:false,
-        success:function (typeList) {
-            List = typeList;
-            var parentType = window.document.getElementById("parentType");
-            var str = '<option value="">--请选择--</option>';
-            if(typeList.length > 0){
-                for(var i = 0;i < typeList.length; i++){
-                    str += '      <option value="'+typeList[i].id+'">'+typeList[i].name+'</option>\n';
-                }
-                parentType.innerHTML = str;
-            }else{
-                parentType.innerHTML = str;
-            }
-        }
-    })
 }
+
+
+// function initSelect() {
+//     $.ajax({
+//         url:'/admin/getAllType',
+//         type:'POST',
+//         dataType:'JSON',
+//         async:false,
+//         success:function (typeList) {
+//             List = typeList;
+//             var parentType = window.document.getElementById("parentType");
+//             var str = '<option value="">--请选择--</option>';
+//             if(typeList.length > 0){
+//                 for(var i = 0;i < typeList.length; i++){
+//                     str += '      <option value="'+typeList[i].id+'">'+typeList[i].name+'</option>\n';
+//                 }
+//                 parentType.innerHTML = str;
+//             }else{
+//                 parentType.innerHTML = str;
+//             }
+//         }
+//     })
+// }
 
 function getChildType() {
     var parentId = $("#parentType option:selected").val();
@@ -108,5 +113,38 @@ function getChildType() {
 
 
 function updateGood() {
-    
+    var formData = new FormData($("#editGood")[0]);
+    console.info(formData);
+    // var file = window.document.getElementById("FirstfileImg").files;
+    if($("#childType option:selected").val() != ""){
+        if($("#name").val() != "" && $("#price").val() != "" && $("#stock").val() != ""){
+            if($("#salePrice").val() != "" && $("#salePrice").val() > $("#price").val()){
+                layer.msg("销售价格不该比原价高");
+                return;
+            }
+            $.ajax({
+                url:'/admin/updateGoodInfo',
+                type:'POST',
+                dataType:'JSON',
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                data:formData,
+                success:function (msg) {
+                    if(msg == 1){
+                        layer.msg("修改商品成功");
+                        document.getElementById("ccc").innerHTML = "";
+                        initGoodInfo();
+                    }else {
+                        layer.msg("发生错误，修改商品失败");
+                    }
+                }
+            })
+        }else {
+            layer.msg("产品名称、价格、库存填写出错");
+        }
+    }else{
+        layer.msg("请选择类型");
+    }
 }

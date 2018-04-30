@@ -5,7 +5,7 @@ package com.shop.eshop.config;
         import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebAppConfig implements WebMvcConfigurer {
+public class ErrorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

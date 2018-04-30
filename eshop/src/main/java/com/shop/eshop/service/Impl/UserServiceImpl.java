@@ -95,6 +95,16 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 用户忘记密码
+     * @param user
+     * @return
+     */
+    @Override
+    public Integer userResetPassword(User user) {
+        return userMapper.userResetPassword(user);
+    }
+
+    /**
      * 用户的启用禁用
      * @param user
      * @return

@@ -21,4 +21,8 @@
         VALUES (#{picName},#{createTime},#{grade},#{goodId})
     </insert>
 
+    <delete id="deleteGoodPicByGoodId" parameterType="java.lang.Long">
+        DELETE FROM good_pic WHERE good_id = #{goodId}
+    </delete>
+
 </mapper>

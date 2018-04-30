@@ -34,10 +34,14 @@ function check(id) {
     return status;
 }
 
+/**
+ * 注册按钮
+ */
 function register() {
     var checkbox=window.document.getElementById("reader-me");
     var register=window.document.getElementById("register")
     if(checkbox.checked == true){
+        $("#protocol").modal('show');
         register.disabled=false;
     }else{
         register.disabled=true;
@@ -46,6 +50,7 @@ function register() {
 
 $(function() {
 
+    $("#protocol").modal('show');
     // 失去焦点异步查询是否唯一或者是否为空
     $(".syncVerity").blur(function () {
         if ($(this).val() == null | $(this).val() == "") {
@@ -104,7 +109,8 @@ $(function() {
         var inputPhone = $('#phone').val();
         console.info("inputPhone"+inputPhone);
         if (!phoneReg.test(inputPhone)) {
-            $(this).parent().prev().children().text("手机号格式错误，请输入正确手机号！").attr("style","color:red");
+            $(this).parent().prev().children().text("输入有误").attr("style","color:red");
+            $("#dyMobileButton").attr("disabled",true);
             phoneFlag = false;
         } else {
             var status = check("phone");
@@ -144,23 +150,70 @@ $(function() {
         var currentUrl = window.location.pathname;
         console.log(currentUrl);
         if(usernameFlag && phoneFlag && passwordFlag) {
-            $.ajax({
-                type : "POST", //请求方式
-                url : "/register2", //请求路径
-                cache : false,
-                data : $("#registerform").serialize(),  //传参 页数
-                dataType : 'json', //返回值类型
-                success : function(data) {
-                    console.log(data)
-                    if(data==1) {
-                        alert("添加成功！");
-                        location.href = "/login";
-                    } else {
-                        location.href = "/register";
-                        alert("注册失败");
+            if($("code").val() == code){
+                $.ajax({
+                    type : "POST", //请求方式
+                    url : "/register2", //请求路径
+                    cache : false,
+                    data : $("#registerform").serialize(),  //传参 页数
+                    dataType : 'json', //返回值类型
+                    success : function(data) {
+                        console.log(data)
+                        if(data==1) {
+                            layer.msg("添加成功！");
+                            location.href = "/login";
+                        } else {
+                            location.href = "/register";
+                            layer.msg("注册失败");
+                        }
                     }
-                }
-            });
+                });
+            }else {
+                layer.msg("验证码错误");
+            }
+
         }
     });
 });
+
+/**
+ * 获取手机短信验证码
+ * @type {null}
+ */
+var code = null;
+function getCode() {
+    var phone = $("#phone").val();
+    $.ajax({
+        url:'/register/code',
+        type:'POST',
+        data:{
+            phone:phone
+        },
+        dataType:'JSON',
+        async:false,
+        success:function (code) {
+            code = code;
+        }
+    })
+    var but = $("#dyMobileButton");
+    but.attr("disabled",true);
+    var time = 180;
+    var set = setInterval(function(){
+        but.val(--time+"s");
+    }, 1000);
+    setTimeout(function(){
+        but.attr("disabled",false).val("获取");
+        clearInterval(set);
+    }, 180000);
+}
+
+function agreeProtocol() {
+    $("#protocol").modal('hide');
+    var checkbox=window.document.getElementById("reader-me");
+    var register=window.document.getElementById("register")
+    checkbox.checked = true;
+    register.disabled = false;
+
+}
+
+

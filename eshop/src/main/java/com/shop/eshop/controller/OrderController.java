@@ -1,17 +1,8 @@
 package com.shop.eshop.controller;
 
-import com.shop.eshop.dto.MessageCheck;
-import com.shop.eshop.dto.OrderStatus;
-import com.shop.eshop.dto.OrderVo;
-import com.shop.eshop.dto.SureBuy;
-import com.shop.eshop.model.Address;
-import com.shop.eshop.model.Order;
-import com.shop.eshop.model.OrderDetail;
-import com.shop.eshop.model.User;
-import com.shop.eshop.service.AddressService;
-import com.shop.eshop.service.OrderManageService;
-import com.shop.eshop.service.OrderService;
-import com.shop.eshop.service.UserService;
+import com.shop.eshop.dto.*;
+import com.shop.eshop.model.*;
+import com.shop.eshop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +32,8 @@ public class OrderController {
     private OrderManageService orderManageService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private GoodService goodService;
     /**
      * 产生订单
      * @return
@@ -150,8 +143,20 @@ public class OrderController {
      */
     @PostMapping("/order/updateOrder")
     public String updateOrderStatus(OrderVo orderVo){
+        if(orderVo.getStatus() == 2){
+            orderVo.setReceiveTime(new Date());
+        }
         Integer is_update = orderManageService.updateOrderStatus(orderVo);
+
         if(is_update != null && is_update > 0){
+            if(orderVo.getStatus() == 2){
+                OrderVo orderVo1 = orderManageService.getOrderByOrderId(orderVo);
+                for(OrderDetailVo orderDetailVo:orderVo1.getOrderDetailVoList()){
+                    Good good = goodService.getGoodById(orderDetailVo.getGood().getId());
+                    good.setSaleNum(good.getSaleNum()+orderDetailVo.getGoodCount());
+                    goodService.updateGood(good);
+                }
+            }
             return "1";
         }else {
             return "0";
@@ -237,6 +242,13 @@ public class OrderController {
             Long day = (new Date().getTime() - order.getSendTime().getTime())/oneDay;
             if(day >= 14){
                 is_update = orderManageService.updateOrderStatus(orderVo);
+                //确认收货则修改销量
+                OrderVo orderVo1 = orderManageService.getOrderByOrderId(orderVo);
+                for(OrderDetailVo orderDetailVo:orderVo1.getOrderDetailVoList()){
+                    Good good = goodService.getGoodById(orderDetailVo.getGood().getId());
+                    good.setSaleNum(good.getSaleNum()+orderDetailVo.getGoodCount());
+                    goodService.updateGood(good);
+                }
                 if(is_update != null && is_update >0 ){
                     return "1";//成功
                 }else {

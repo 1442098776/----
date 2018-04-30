@@ -147,7 +147,59 @@ public class GoodController {
      */
     @PostMapping("/admin/updateGood")
     public String updateGood(Good good){
+        good.setModifyTime(new Date());
         Integer is_update = goodService.updateGood(good);
+        if(is_update != null && is_update > 0){
+            return "1";
+        }else {
+            return "0";
+        }
+    }
+    /**
+     * 更新商品详细信息
+     * @param good
+     * @return
+     */
+    @PostMapping("/admin/updateGoodInfo")
+    public String updateGoodInfo(Good good, @RequestParam(value = "file") MultipartFile[] files, HttpServletRequest request){
+        good.setModifyTime(new Date());
+        Integer is_update = goodService.updateGood(good);
+//        File file2 = new File("E:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+good.getId());
+        GoodPic goodPic = new GoodPic();
+        if(is_update != null && is_update > 0){
+            //这里能直接得到文件数组，怎么保存到服务器相信不用我多说了
+            if (files != null && files.length > 0) {
+                Integer is_delete = goodPicService.deleteGoodPicByGoodId(good.getId());
+                if(is_delete != null && is_delete > 0){
+//                    File[] fileList = file2.listFiles();
+//                    for (int i = 0; i < fileList.length; i++) {
+//                        //删除子文件
+//                        if (fileList[i].isFile()) {
+//                            fileList[i].delete();
+//                        }
+//                    }
+//                    file2.delete();
+                    for (int j = 0; j < files.length; j++) {
+                        MultipartFile file = files[j];
+                        if(j == 0){
+                            goodPic.setGrade(0);
+                        }else {
+                            goodPic.setGrade(1);
+                        }
+                        goodPic.setCreateTime(new Date());
+                        goodPic.setPicName(file.getOriginalFilename());
+                        goodPic.setGoodId(good.getId());
+                        Integer  is_insert_pic = goodPicService.insertGoodPic(goodPic);
+                        saveFile2(request, file,good.getId());//上传到项目的绝对地址
+//                        flag = saveFile2(request, file,good.getId());//上传到temp上
+                    }
+                }
+            }
+//        //写着测试，删了就可以
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println("集合里面的数据" + list.get(i));
+//        }
+        }
         if(is_update != null && is_update > 0){
             return "1";
         }else {
@@ -177,7 +229,7 @@ public class GoodController {
         //添加商品
         Integer is_insert = goodService.insertGood(good);
         Boolean flag = true;
-        File file2 = new File("D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+good.getId());
+        File file2 = new File("E:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+good.getId());
         GoodPic goodPic = new GoodPic();
         if(is_insert != null && is_insert > 0){
             //这里能直接得到文件数组，怎么保存到服务器相信不用我多说了
@@ -241,7 +293,7 @@ public class GoodController {
             try {
                 // 保存的文件路径(如果用的是Tomcat服务器，文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\upload\\文件夹中
                 // )D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/
-                String filePath = "D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"
+                String filePath = "E:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"
                         + id+"/" + file.getOriginalFilename();
                 System.out.println(filePath);
 //                list.add(file.getOriginalFilename());
@@ -307,4 +359,5 @@ public class GoodController {
         Good good = goodService.getGoodById(id);
         return good;
     }
+
 }

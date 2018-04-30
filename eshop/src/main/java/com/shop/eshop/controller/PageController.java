@@ -27,6 +27,15 @@ public class PageController {
     public String register(){
         return "register";
     }
+
+    /**
+     * 忘记密码
+     * @return
+     */
+    @RequestMapping("/forgetPassword")
+    public String forgetPassword(){
+        return "forgetPassword";
+    }
     @RequestMapping("/shopcart")
     public ModelAndView showCart(){
         ModelAndView mv = new ModelAndView();

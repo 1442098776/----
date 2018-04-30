@@ -13,6 +13,9 @@ $(document).ready(function () {
     });
 })
 
+/**
+ * 更新管理员信息
+ */
 function editAdmin() {
     $.ajax({
         url:'/admin/updateUser',
@@ -30,6 +33,9 @@ function editAdmin() {
     })
 }
 
+/**
+ * 重置密码
+ */
 function resetPassword() {
     $.ajax({
         url:'/admin/resetPassword',

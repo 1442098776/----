@@ -13,12 +13,13 @@ public class MyInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 
         boolean flag = true;
-        User user = (User) request.getSession().getAttribute("user");
-        if(user == null){
-            response.sendRedirect("/login");
-            flag = false;
-        }else {
+        User adminUser = (User) request.getSession().getAttribute("adminUser");
+//        System.out.println(adminUser.getRole());
+        if(adminUser != null && adminUser.getRole() != 1){
             flag = true;
+        }else {
+            response.sendRedirect("/admin");
+            flag = false;
         }
         return flag;
     }

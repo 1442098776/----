@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>左侧导航</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,11 +33,11 @@
    </ul>
   </li>
   
-  <li class="menu-list-title">
+  <li class="menu-list-title" th:if="${session.adminUser.role} eq 3">
    <span>用户管理</span>
    <i>◢</i>
   </li>
-  <li>
+  <li th:if="${session.adminUser.role} eq 3">
    <ul class="menu-children">
     <li><a href="user_list.html" title="用户列表" target="mainCont">用户列表</a></li>
     <li><a href="add_user.html" title="添加会员" target="mainCont">添加管理员</a></li>

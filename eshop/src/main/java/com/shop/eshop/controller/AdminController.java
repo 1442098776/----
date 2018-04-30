@@ -3,6 +3,7 @@ package com.shop.eshop.controller;
 import com.shop.eshop.model.User;
 import com.shop.eshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,11 +53,11 @@ public class AdminController {
      * @param request
      * @return
      */
-    @PostMapping("/admin/adminExit")
+    @GetMapping("/admin/adminExit")
     public ModelAndView adminExit(HttpServletRequest request){
         request.getSession().invalidate();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("admin");
+        mv.setViewName("admin/adminLogin");
         return mv;
     }
 

@@ -313,7 +313,7 @@ function sureBuy() {
     goodCount = goodCount.substring(0, goodCountlastindex);
     goodPrice = goodPrice.substring(0, goodPricelastindex);
 
-    alert(address);
+    // alert(address);
     var message = window.document.getElementById("message").value;
     $.ajax({
         url:'/order/createOrder',
@@ -355,6 +355,15 @@ function reduce(type) {
 
 function change() {
     goodTotal();
+}
+
+function showModal() {
+    $("#sureBuy").modal('show');
+    setTimeout("closeModal()",1000*5);
+}
+function closeModal() {
+    $("#sureBuy").modal('hide');
+    sureBuy();
 }
 
  

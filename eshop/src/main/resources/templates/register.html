@@ -11,12 +11,15 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
     <link rel="stylesheet" href="AmazeUI-2-4-2/assets/css/amazeui.min.css" type="text/css"/>
+
     <link href="css/loginstyle.css" rel="stylesheet" type="text/css"/>
     <script src="AmazeUI-2-4-2/assets/js/jquery.min.js"></script>
     <script src="AmazeUI-2-4-2/assets/js/amazeui.min.js"></script>
     <script type="text/javascript" src="js/register.js"></script>
+    <script type="text/javascript" src="js/layer.js"></script>
     <link rel="stylesheet" href="css/register.css" type="text/css"/>
-    <script th:src="@{js/jquery-3.1.1.js}" type="text/javascript"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -82,9 +85,9 @@
                             <div class="verification">
                                 <label for="code"><i class="am-icon-code-fork"></i></label>
                                 <input type="tel" name="" class="syncVerity" id="code" placeholder="请输入验证码">
-                                <a class="btn" href="javascript:void(0);" onclick="sendMobileCode();"
+                                <a class="btn" href="javascript:void(0);"
                                    id="sendMobileCode">
-                                    <span id="dyMobileButton">获取</span></a>
+                                    <input type="button" onclick="getCode();" value="获取" id="dyMobileButton"/></a>
                             </div>
 
                         </form>
@@ -98,14 +101,6 @@
                         </div>
                         <!--<hr>-->
                     </div>
-
-                    <!--<script>-->
-
-                        <!--$(function(){-->
-                            <!--$('#doc-my-tabs').tabs();-->
-                        <!--})-->
-                    <!--</script>-->
-
                 </div>
             </div>
 
@@ -113,6 +108,29 @@
     </div>
 </div>
     <div th:include="common/foot::footer"></div>
+<!-- 编辑分类模态框（Modal） -->
+<div class="modal fade" id="protocol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="edit">注册协议</h4>
+            </div>
+            <div class="modal-body">
+                【审慎阅读】您在申请注册流程中点击同意前，应当认真阅读以下协议。请您务必审慎阅读、充分理解协议中相关条款内容，其中包括：
+                1、与您约定免除或限制责任的条款；
+                2、与您约定法律适用和管辖的条款；
+                3、其他以粗体下划线标识的重要条款。
+                如您对协议有任何疑问，可向平台客服咨询。
+                【特别提示】当您按照注册页面提示填写信息、阅读并同意协议且完成全部注册程序后，即表示您已充分阅读、理解并接受协议的全部内容。如您在使用平台服务过程中与其他用户发生争议的，依您与其他用户达成的协议处理。
+                阅读协议的过程中，如果您不同意相关协议或其中任何条款约定，您应立即停止注册程序。
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="agreeProtocol()">同意协议</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 
 </body>
 

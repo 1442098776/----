@@ -70,4 +70,11 @@ public interface UserMapper {
      * @return
      */
     Integer insertAdmin(User user);
+
+    /**
+     * 用户忘记密码
+     * @param user
+     * @return
+     */
+    Integer userResetPassword(User user);
 }

@@ -94,4 +94,9 @@
     INSERT INTO `user`(user_name,email,password,phone,reg_time,role)
     VALUES (#{userName},#{email},#{password},#{phone},#{regTime},#{role})
   </insert>
+
+  <update id="userResetPassword" parameterType="com.shop.eshop.model.User">
+    UPDATE `user` set password = #{password},modify_time = #{modifyTime}
+    where phone = #{phone}
+  </update>
 </mapper>

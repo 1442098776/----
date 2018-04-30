@@ -12,4 +12,11 @@ public interface GoodPicMapper {
      * @return
      */
     Integer insertGoodPic(GoodPic goodPic);
+
+    /**
+     * 根据商品id删除商品图片
+     * @param goodId
+     * @return
+     */
+    Integer deleteGoodPicByGoodId(Long goodId);
 }
