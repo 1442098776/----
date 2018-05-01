@@ -1,13 +1,13 @@
 package com.shop.eshop.mapper;
 
 import com.shop.eshop.model.OrderDetail;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author zhanguo.huang
  * @date 2018-04-11
  */
-@Mapper
+@Repository
 public interface OrderDetailMapper {
 
     /**

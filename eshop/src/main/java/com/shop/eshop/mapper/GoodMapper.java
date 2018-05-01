@@ -2,11 +2,11 @@ package com.shop.eshop.mapper;
 
 import com.shop.eshop.dto.TypeCondition;
 import com.shop.eshop.model.Good;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
+@Repository
 public interface GoodMapper {
 
     /**

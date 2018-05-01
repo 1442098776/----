@@ -25,7 +25,7 @@ function initGoodType() {
                 }else {
                     str += '    <td class="center"></td>\n';
                 }
-                str += '    <td class="center"><button onclick="showEditModel('+goodTypeList[i].id+','+0+')" type="button">编辑</button></td>';
+                str += '    <td class="center"><button class="btn btn-default" onclick="showEditModel('+goodTypeList[i].id+','+0+')" type="button">编辑</button></td>';
                 for( var j = 0;j<goodTypeList[i].goodTypes.length;j++){
                     str += '<tr class="child'+goodTypeList[i].id+'" hidden>\n' +
                         '    <td  class="center"></td>\n' +
@@ -39,8 +39,8 @@ function initGoodType() {
                     }else {
                         str += '    <td class="center"></td>\n';
                     }
-                    str += '    <td class="center"><button onclick="showEditModel('+goodTypeList[i].goodTypes[j].id+','+goodTypeList[i].id+')" type="button">编辑</button>\n' +
-                        '    <button onclick="showModel('+goodTypeList[i].goodTypes[j].id+')" type="button">删除</button></td>\n' +
+                    str += '    <td class="center"><button onclick="showEditModel('+goodTypeList[i].goodTypes[j].id+','+goodTypeList[i].id+')"  class="btn btn-default" type="button">编辑</button>\n' +
+                        '    <button class="btn btn-danger" onclick="showModel('+goodTypeList[i].goodTypes[j].id+')" type="button">删除</button></td>\n' +
                         '   </tr>'
                 }
             }
@@ -162,6 +162,8 @@ function showEditModel(typeId,parentId) {
     var parentType = window.document.getElementById("edit_parentType");
     $("#id").val(typeId);
     if(parentId != 0){
+        $("#parentTitle").removeClass("hide");
+        $("#edit_parentType").removeClass("hide");
         var str = '';
         if(List.length > 0){
             for(var i = 0;i < List.length; i++){

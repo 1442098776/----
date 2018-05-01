@@ -1,9 +1,9 @@
 package com.shop.eshop.mapper;
 
 import com.shop.eshop.model.GoodPic;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
-@Mapper
+@Repository
 public interface GoodPicMapper {
 
     /**

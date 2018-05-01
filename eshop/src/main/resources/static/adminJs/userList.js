@@ -71,17 +71,17 @@ function getByPage(pageNow) {
             str += 
                 '    <td >\n';
             if(List[i].status == 1){
-                str += '<button type="button" onclick="updateUser('+List[i].userId+','+0+')">禁用</button>';
+                str += '<button type="button" class="btn btn-warning" onclick="updateUser('+List[i].userId+','+0+')">禁用</button>';
             }else{
-                str += '<button type="button" onclick="updateUser('+List[i].userId+','+1+')">启用</button>';
+                str += '<button type="button" class="btn btn-primary" onclick="updateUser('+List[i].userId+','+1+')">启用</button>';
             }
 
                if(List[i].role == 1){
-                   str += '     <button type="button" onclick="updateUser('+List[i].userId+','+2+')">设为管理员</button>\n';
+                   str += '     <button type="button" class="btn btn-primary" onclick="updateUser('+List[i].userId+','+2+')">设为管理员</button>\n';
                }else {
-                   str += '     <button type="button" onclick="updateUser('+List[i].userId+','+1+')">设为普通用户</button>\n' +
-                       '<a href="/admin/userDetail/'+List[i].userId+'" class="inline-block" title="编辑"><button type="button">编辑</button></a>\n'+
-                       '     <button type="button" onclick="deleteUser('+List[i].userId+')">删除</button>\n' ;
+                   str += '     <button type="button" class="btn btn-primary" onclick="updateUser('+List[i].userId+','+1+')">设为普通用户</button>\n' +
+                       '<a href="/admin/userDetail/'+List[i].userId+'" class="inline-block" title="编辑"><button class="btn btn-default" type="button">编辑</button></a>\n'+
+                       '     <button type="button" class="btn btn-danger" onclick="deleteUser('+List[i].userId+')">删除</button>\n' ;
                }
                 str += '    </td>\n' +
                 '   </tr>';

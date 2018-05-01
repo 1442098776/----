@@ -1,14 +1,14 @@
 package com.shop.eshop.mapper;
 
 import com.shop.eshop.model.Order;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * 订单Mapper
  * @author zhanguo.huang
  * @date 2018-04-11
  */
-@Mapper
+@Repository
 public interface OrderMapper {
 
     /**

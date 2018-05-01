@@ -4,9 +4,9 @@ import com.shop.eshop.model.Address;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
-@Mapper
+@Repository
 public interface AddressMapper {
 
     /**

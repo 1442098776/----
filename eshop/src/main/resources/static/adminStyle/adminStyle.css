@@ -77,11 +77,11 @@ input,button,select,img{vertical-align:middle;}
 /*top operate*/
 .operate{margin-bottom:8px;}
 /*start page*/
-.start-page{overflow:hidden;background:#555555;color:#cecece;margin:0;height:100%;}
+.start-page{overflow:hidden;background:#555555;color:#cecece;margin:0;}/*height:100%;}*/
 .start-page h1{font-size:16px;font-weight:bold;border-bottom:1px #343434 solid;height:40px;line-height:40px;}
 .start-page dt{height:35px;line-height:35px;font-size:15px;border-radius:3px 3px 0 0;font-weight:bold;background:#626262;border-bottom:1px #343434 solid;text-indent:1em;}
 .start-page dd{overflow:hidden;padding:1em 0;color:#fff;}
-.start-page dd li{float:left;width:33.33%;height:35px;line-height:35px;font-size:15px;}
+.start-page dd li{float:left;width:20%;height:35px;line-height:35px;font-size:15px;}
 /*orderDetail*/
 .orderDetail{margin:8px 0;overflow:hidden;}
 .orderDetail dt{font-size:18px;font-weight:bold;text-align:center;background:#ececec;color:#666;padding:0.5em 0;}

@@ -3,12 +3,11 @@ package com.shop.eshop.mapper;
 import com.shop.eshop.model.Cart;
 import com.shop.eshop.model.CartVO;
 import com.shop.eshop.model.User;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
+@Repository
 public interface CartMapper {
 
     List<CartVO> getCartSelect(List<Long> cartId);

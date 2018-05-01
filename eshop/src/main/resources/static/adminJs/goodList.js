@@ -6,6 +6,7 @@ $(document).ready(function () {
 
 var List = null;
 var searchKey = null;
+var page = null;
 function initOrSearchGood(input) {
     if(input != null){
         searchKey = $("#searchKey").val();
@@ -21,11 +22,12 @@ function initOrSearchGood(input) {
         success:function (goodList) {
             // console.info(goodList);
             List = goodList;
-            getByPage(null);
+            getByPage(page);
         }
     })
 }
 function getByPage(pageNow) {
+    page = pageNow;
     var my_pageNum = 1;
     if(pageNow != null){
         my_pageNum = pageNow;
@@ -46,9 +48,9 @@ function getByPage(pageNow) {
         }
         for(var i = (my_pageNum-1)*pageSize;i < limit;i++){
             str += '<tr>\n' +
+                '<td><input type="checkbox" name="items" class="middle children-checkbox"/></td>'+
                 '    <td>\n' +
                 '     <span>\n' +
-                '     <input type="checkbox" name="items" class="middle children-checkbox"/>\n' +
                 '     <i>'+List[i].id+'</i>\n' +
                 '     </span>\n' +
                 '    </td>\n'+
@@ -89,14 +91,15 @@ function getByPage(pageNow) {
                 '    </td>\n' +
                 '    <td class="center">\n';
             if(List[i].status == 1){
-                str +=  '<button type="button" onclick="upOrDownGood('+List[i].id+',0)">下架商品</button>';
+                str +=  '<button type="button" class="btn btn-primary" onclick="upOrDownGood('+List[i].id+',0)">下架</button>';
             }else {
-                str += '<button type="button" onclick="upOrDownGood('+List[i].id+',1)">上架商品</button>';
+                str += '<button type="button" class="btn btn-primary" onclick="upOrDownGood('+List[i].id+',1)">上架</button>';
             }
                 str += '    </td>\n' +
                 '    <td class="center">\n' +
-                '     <a href="/introduction/'+List[i].id+'" title="查看" target="_blank"><button>查看商品</button></a>\n' +
-                '     <a href="/admin/editGood/'+List[i].id+'" title="编辑"><button>编辑商品</button></a>\n' +
+                '     <a href="/introduction/'+List[i].id+'" title="查看" target="_blank"><button class="btn btn-default">查看</button></a>\n' +
+                '     <a href="/admin/editGood/'+List[i].id+'" title="编辑"><button class="btn btn-primary">编辑</button></a>\n' +
+                    '<button class="btn btn-danger" onclick="deleteTip('+List[i].id+')">删除</button>'+
                 '    </td>\n' +
                 '   </tr>';
         }
@@ -196,4 +199,95 @@ function upOrDownGood(goodId,status) {
             }
         }
     })
+}
+
+/**
+ * 单个删除模态框
+ * @param goodId
+ */
+function deleteTip(goodId) {
+    $("#goodId").val(goodId);
+    $("#deleteTip").modal('show');
+}
+
+/**
+ * 批量删除模态框
+ * @param goodId
+ */
+function deleteTip2() {
+    //获取所有的复选框列表
+    var checkboxTag = document.getElementsByName("items");
+    var Id = "";
+    for (var i = 0; i < checkboxTag.length; i++) {
+        if (checkboxTag[i].checked) {
+            // check_val.push(checkbox[i].value);
+            Id += checkboxTag[i].value + ',';
+            flag++;
+        }
+    }
+    var idLastIndex = Id.lastIndexOf(",");
+    Id = Id.substring(0, idLastIndex);
+    $("#goodId2").val(Id);
+    $("#deleteTip2").modal('show');
+}
+/**
+ *  全选与取消全选
+ */
+
+function selectAll() {
+    var checkboxTag = document.getElementsByName("items");
+    var selectAll = document.getElementById("del");
+    if(selectAll.checked){
+        for(i in checkboxTag){
+            checkboxTag[i].checked = true;
+        }
+    }else{
+        for(i in checkboxTag){
+            checkboxTag[i].checked = false;
+        }
+    }
+}
+
+function deleteGood(inputId) {
+    //获取所有的复选框列表
+    // var checkboxTag = document.getElementsByName("items");
+    var Id = "";
+    var flag = 0;
+    if(inputId == null){
+        // for (var i = 0; i < checkboxTag.length; i++) {
+        //     if (checkboxTag[i].checked) {
+        //         // check_val.push(checkbox[i].value);
+        //         Id += checkboxTag[i].value + ',';
+        //         flag++;
+        //     }
+        // }
+        // var idLastIndex = Id.lastIndexOf(",");
+        // Id = Id.substring(0, idLastIndex);
+        Id = $("#goodId2").val();
+        $("#deleteTip2").modal('hide');
+    }else {
+        Id = $("#goodId").val();;
+        $("#deleteTip").modal('hide');
+        flag++;
+    }
+    if (flag > 0) {
+        $.ajax({
+            url:'/admin/adminDeleteGood',
+            data:{
+                id:Id
+            },
+            type:'POST',
+            dataType:'JSON',
+            success:function (msg) {
+                if(msg == 1){
+                    layer.msg("删除成功");
+                    initOrSearchGood();
+                }else{
+                    layer.msg("发生错误请稍后刷新重试");
+                }
+            }
+        })
+    } else {
+        layer.msg("没有选择任何商品");
+    }
 }

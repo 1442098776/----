@@ -5,9 +5,43 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../adminStyle/adminStyle.css" rel="stylesheet" type="text/css" />
 <style>html,body{width:100%;height:100%;}</style>
-<script src="../js/jquery.js"></script>
-<script src="../js/eject.js"></script>
-<script src="../adminJs/public.js"></script>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/eject.js" type="text/javascript"></script>
+<script src="../adminJs/public.js" type="text/javascript"></script>
+<!--<script src="../adminJs/main.js" type="text/javascript"></script>-->
+ <script type="text/javascript">
+     $(document).ready(function () {
+         $.ajax({
+             url:'/admin/count',
+             type:'POST',
+             dataType:'JSON',
+             success:function (count) {
+                 console.info(count);
+                 window.document.getElementById("orderNum").innerText = count.orderNum;
+                 window.document.getElementById("orderNewNum").innerText = count.orderNewNum;
+                 window.document.getElementById("orderSendNum").innerText = count.orderSendNum;
+                 window.document.getElementById("orderFinishNum").innerText = count.orderFinishNum;
+                 window.document.getElementById("orderCancelNum").innerText = count.orderCancelNum;
+                 window.document.getElementById("dealSend").innerText = count.dealSend;
+                 window.document.getElementById("dealCancel").innerText = count.dealCancel;
+                 window.document.getElementById("dealNoFinish").innerText = count.dealNoFinish;
+                 window.document.getElementById("dealFinish").innerText = count.dealFinish;
+                 window.document.getElementById("goodNum").innerText = count.goodNum;
+                 window.document.getElementById("goodTypeNum").innerText = count.goodTypeNum;
+                 window.document.getElementById("userNum").innerText = count.userNum;
+                 window.document.getElementById("enableUser").innerText = count.enableUser;
+                 window.document.getElementById("disableUser").innerText = count.disableUser;
+                 window.document.getElementById("commonUser").innerText = count.commonUser;
+                 window.document.getElementById("systemManager").innerText = count.systemManager;
+             }
+         })
+     })
+ </script>
+ <style type="text/css">
+  li{
+   width: 20%;
+  }
+ </style>
 </head>
 <body>
 <div class="wrap start-page">
@@ -17,16 +51,40 @@
   <dd>
    <ul>
     <li>
+     <span>总订单：</span>
+     <span id="orderNum"></span>
+    </li>
+    <li>
      <span>待发货订单：</span>
-     <span>539</span>
+     <span id="orderNewNum"></span>
     </li>
     <li>
      <span>未确认订单：</span>
-     <span>23</span>
+     <span id="orderSendNum"></span>
     </li>
     <li>
      <span>已成交订单：</span>
-     <span>1282</span>
+     <span id="orderFinishNum"></span>
+    </li>
+    <li>
+     <span>已取消订单：</span>
+     <span id="orderCancelNum"></span>
+    </li>
+    <li>
+     <span>未完成金额：</span>
+     <span id="dealNoFinish"></span>
+    </li>
+    <li>
+     <span>待确认金额：</span>
+     <span id="dealSend"></span>
+    </li>
+    <li>
+     <span>已成交金额：</span>
+     <span id="dealFinish"></span>
+    </li>
+    <li>
+     <span>已取消金额：</span>
+     <span id="dealCancel"></span>
     </li>
    </ul>
   </dd>
@@ -41,12 +99,12 @@
      <!--<span>1252</span>-->
     <!--</li>-->
     <li>
-     <span>商品总数量：</span>
-     <span>13252</span>
+     <span>商品总数：</span>
+     <span id="goodNum"></span>
     </li>
     <li>
-     <span>商品类型：</span>
-     <span>1282.00元</span>
+     <span>商品类型数：</span>
+     <span id="goodTypeNum"></span>
     </li>
     <!--<li>-->
      <!--<span>酒吧类店铺：</span>-->
@@ -69,8 +127,24 @@
   <dd>
    <ul>
     <li>
-     <span>用户数量</span>
-     <span>356</span>
+     <span>用户：</span>
+     <span id="userNum"></span>
+    </li>
+    <li>
+     <span>可用用户：</span>
+     <span id="enableUser"></span>
+    </li>
+    <li>
+     <span>禁用用户：</span>
+     <span id="disableUser"></span>
+    </li>
+    <li>
+     <span>普通用户：</span>
+     <span id="commonUser"></span>
+    </li>
+    <li>
+     <span>系统管理员：</span>
+     <span id="systemManager"></span>
     </li>
     <!--<li>-->
      <!--<span>白金会员：</span>-->
@@ -124,10 +198,10 @@
      <span>安全模式：</span>
      <span>否</span>
     </li>
-    <li>
-     <span>安全模式GID:：</span>
-     <span>否</span>
-    </li>
+    <!--<li>-->
+     <!--<span>安全模式GID:：</span>-->
+     <!--<span>否</span>-->
+    <!--</li>-->
     <li>
      <span>时区设置：</span>
      <span>Europe/Paris</span>

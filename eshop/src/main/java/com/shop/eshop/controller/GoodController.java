@@ -107,15 +107,17 @@ public class GoodController {
             //删除商品图片
             for(int i = 0;i < goodIdList.size();i++){
                 System.out.println(goodIdList.get(i).toString());
-                File file = new File("D:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+goodIdList.get(i).toString());
+                File file = new File("E:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+goodIdList.get(i).toString());
                 File[] files = file.listFiles();
-                for (int j = 0; j < files.length; j++) {
-                    //删除子文件
-                    if (files[j].isFile()) {
-                        files[j].delete();
+                if(files != null) {
+                    for (int j = 0; j < files.length; j++) {
+                        //删除子文件
+                        if (files[j].isFile()) {
+                            files[j].delete();
+                        }
                     }
+                    file.delete();
                 }
-                file.delete();
             }
             if(is_delete_good != null && is_delete_good > 0){
                 return "1";
@@ -164,21 +166,23 @@ public class GoodController {
     public String updateGoodInfo(Good good, @RequestParam(value = "file") MultipartFile[] files, HttpServletRequest request){
         good.setModifyTime(new Date());
         Integer is_update = goodService.updateGood(good);
-//        File file2 = new File("E:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+good.getId());
+        File file2 = new File("E:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+good.getId());
         GoodPic goodPic = new GoodPic();
         if(is_update != null && is_update > 0){
             //这里能直接得到文件数组，怎么保存到服务器相信不用我多说了
             if (files != null && files.length > 0) {
                 Integer is_delete = goodPicService.deleteGoodPicByGoodId(good.getId());
                 if(is_delete != null && is_delete > 0){
-//                    File[] fileList = file2.listFiles();
-//                    for (int i = 0; i < fileList.length; i++) {
-//                        //删除子文件
-//                        if (fileList[i].isFile()) {
-//                            fileList[i].delete();
-//                        }
-//                    }
-//                    file2.delete();
+                    File[] fileList = file2.listFiles();
+                    if(fileList != null){
+                        for (int i = 0; i < fileList.length; i++) {
+                            //删除子文件
+                            if (fileList[i].isFile()) {
+                                fileList[i].delete();
+                            }
+                        }
+                        file2.delete();
+                    }
                     for (int j = 0; j < files.length; j++) {
                         MultipartFile file = files[j];
                         if(j == 0){
@@ -268,13 +272,15 @@ public class GoodController {
             Integer is_delete = goodService.deleteGoodById(good.getId());
             if(is_delete != null && is_delete > 0){
                 File[] filesw = file2.listFiles();
-                for (int j = 0; j < filesw.length; j++) {
-                    //删除子文件
-                    if (filesw[j].isFile()) {
-                        filesw[j].delete();
+                if(filesw != null){
+                    for (int j = 0; j < filesw.length; j++) {
+                        //删除子文件
+                        if (filesw[j].isFile()) {
+                            filesw[j].delete();
+                        }
                     }
+                    file2.delete();
                 }
-                file2.delete();
             }
             return "0";
         }
@@ -312,8 +318,13 @@ public class GoodController {
     }
 
 
-
-
+    /**
+     * 上传到temp下能够在不重启项目的情况下能及时显示
+     * @param request
+     * @param file
+     * @param id
+     * @return
+     */
     private boolean saveFile2(HttpServletRequest request,
                              MultipartFile file,Long id) {
         // 判断文件是否为空
@@ -358,6 +369,51 @@ public class GoodController {
     public Good adminToEditGood(Long id){
         Good good = goodService.getGoodById(id);
         return good;
+    }
+
+    /**
+     * 管理员删除商品
+     * @param id
+     * @return
+     */
+    @PostMapping("/admin/adminDeleteGood")
+    public String adminDeleteGood(String id,HttpServletRequest request){
+        if(id != "" && id != null){
+            String[] ids = id.split(",");
+            List<Long> goodIds = new ArrayList<>();
+            for(int i = 0;i < ids.length;i++){
+                goodIds.add(Long.parseLong(ids[i]));
+            }
+            Integer is_delete = null;
+            for(Long goodId:goodIds){
+                //删除temp下的文件
+                String filePath2 = request.getSession().getServletContext()
+                        .getRealPath("img/")
+                        + goodId;
+                File file = new File(filePath2);
+                //删除项目static目录下的文件
+//                File file = new File("E:/GitHub/shop/eshop/eshop/src/main/resources/static/img/"+goodId);
+                File[] files = file.listFiles();
+                if(files != null){
+                    for (int j = 0; j < files.length; j++) {
+                        //删除子文件
+                        if (files[j].isFile()) {
+                            files[j].delete();
+                        }
+                    }
+                    file.delete();
+                }
+                is_delete = goodService.deleteGoodById(goodId);
+            }
+
+            if(is_delete != null && is_delete > 0){
+                return "1";
+            }else {
+                return "0";
+            }
+        }else {
+            return "0";
+        }
     }
 
 }

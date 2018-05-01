@@ -3,7 +3,7 @@ package com.shop.eshop.mapper;
 import com.shop.eshop.dto.OrderStatus;
 import com.shop.eshop.dto.OrderVo;
 import com.shop.eshop.model.Order;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author zhanguo.huang
  * @date 2018-04-19
  */
-@Mapper
+@Repository
 public interface OrderManageMapper {
 
     /**

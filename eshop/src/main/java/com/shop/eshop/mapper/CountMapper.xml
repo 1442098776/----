@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.eshop.mapper.CountMapper">
+    <!--统计订单的数量-->
+    <select id="orderCount" resultType="com.shop.eshop.dto.Count">
+        SELECT count(*) as orderNum,
+        sum(status = 0)as orderNewNum,
+        sum(status = 1)as orderSendNum,
+        sum(status = 2)as orderFinishNum,
+        sum(status = 3) as orderCancelNum,
+        sum(case when status=2 then sum else 0 end) as dealFinish,
+        sum(case when status=0 then sum else 0 end) as dealNoFinish,
+        sum(case when status=1 then sum else 0 end) as dealSend,
+        sum(case when status=3 then sum else 0 end) as dealCancel from `order`
+    </select>
+    <!--统计用户的-->
+    <select id="userCount" resultType="com.shop.eshop.dto.Count">
+        SELECT count(*) as userNum,sum(status = 0)as disableUser,sum(status = 1)as enableUser,sum(role = 1)as commonUser,sum(role != 1) as systemManager FROM `user`
+    </select>
+
+    <select id="goodCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM good
+    </select>
+    <select id="goodTypeCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM good_type
+    </select>
+</mapper>

@@ -2,11 +2,11 @@ package com.shop.eshop.mapper;
 
 import com.shop.eshop.dto.UserQueryForm;
 import com.shop.eshop.model.User;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
+@Repository
 public interface UserMapper {
 
     /**

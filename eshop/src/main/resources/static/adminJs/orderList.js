@@ -91,14 +91,14 @@ function getOrderByPage(pageNow) {
             }
              str += '    </td>\n' +
                 '    <td class="center">\n' +
-                '     <a href="/order/orderDetail/'+List[i].orderId+'" class="inline-block" title="查看订单"><button style="text-decoration: none">订单详情</button></a>\n';
+                '     <a href="/order/orderDetail/'+List[i].orderId+'" class="inline-block" title="查看订单"><button class="btn btn-info" style="text-decoration: none">订单详情</button></a>\n';
             if(List[i].status == 2 || List[i].status == 3){
-                str += '     <button type="button" onclick="deleteOrder('+List[i].orderId+')">删除订单</button>\n';
+                str += '     <button type="button" class="btn btn-danger" onclick="deleteOrder('+List[i].orderId+')">删除订单</button>\n';
 
             }else if(List[i].status == 0){
-                str += '<button type="button" onclick="updateOrderStatus('+List[i].orderId+','+1+')">确认发货</button>';
+                str += '<button type="button" class="btn btn-primary" onclick="updateOrderStatus('+List[i].orderId+','+1+')">确认发货</button>';
             }else if(List[i].status == 1){
-                str += '<button type="button" onclick="updateOrderStatus('+List[i].orderId+','+2+')">完成订单</button>';
+                str += '<button type="button" class="btn btn-primary" onclick="updateOrderStatus('+List[i].orderId+','+2+')">完成订单</button>';
             }
             str +=
                 '    </td>\n' +
