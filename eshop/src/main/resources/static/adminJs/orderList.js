@@ -107,7 +107,7 @@ function getOrderByPage(pageNow) {
         orderList.innerHTML = str;
     }else{
         str += '<tr>\n' +
-            '    <td colspan="6" style="background-color:#e9e9e9;width: 100%;height: 100px;text-align: center;line-height: 100px;font-size: 24px;color: #9C9C9C">\n' +
+            '    <td colspan="7" style="background-color:#e9e9e9;width: 100%;height: 100px;text-align: center;line-height: 100px;font-size: 24px;color: #9C9C9C">\n' +
             '没有任何订单'+
             '    </td>\n' +
             '   </tr>';

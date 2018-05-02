@@ -1,9 +1,7 @@
 $(document).ready(function () {
     initOrSearchGood();
-    // getByPage(null);
     console.info(List);
 })
-
 var List = null;
 var searchKey = null;
 var page = null;
@@ -126,7 +124,6 @@ function getByPage(pageNow) {
                 "<span aria-hidden=\"true\">上一页</span>" +
                 "</a>" +
                 "</li>";
-
         }
         if(totalPage<=10){//当页码不超过10的时候，全部显示
             for(var i=1;i<=totalPage;i++){
@@ -138,25 +135,14 @@ function getByPage(pageNow) {
                 for(var i = 1; i <=5; i++) {
                     li+="<li onclick='getByPage("+i+")'><a href='#' >"+i+"</a></li>";
                 }
-                // li+="<li><a href='#' >..</a></li>"+
-                //     "<li onclick='getByPage("+totalPage+")'><a href='#' >"+totalPage+"</a></li>";
             }else if(my_pageNum >=totalPage-3){//如果当前页是接近最后几页的，输出 首页码+省略号+后面几页（包括当前页）。总页数大于10且当前页接近总页数(小于总页数-3)
-                // pages.push('<a class="page-link" href="javascript:void(0);">' + 1 + '</a> …');
-                // li+="<li onclick=getByPage(1)><a href='#' >"+1+"</a></li>"+
-                //     "<li><a href='#' >..</a></li>";
                 for(var i=totalPage-4;i<=totalPage;i++){
                     li+="<li onclick=getByPage("+i+")><a href='#' >"+i+"</a></li>";
                 }
             }else{ //剩下的情况，输出首页+省略号+中间几页（包含当前页）+省略号+最后一页。除开上面两个情况
-                // pages.push('<a class="page-link" href="javascript:void(0);">' + 1 + '</a> … ');
-                // li+="<li onclick=getByPage(1)><a href='#' >"+1+"</a></li>"+
-                //     "<li><a href='#' >..</a></li>";
                 for(var i=my_pageNum-2;i<=my_pageNum+2;i++){
                     li+="<li onclick=getByPage("+i+")><a href='#' >"+i+"</a></li>";
                 }
-                // pages.push(' … <a class="page-link" href="javascript:void(0);">' + total + '</a>');
-                // li+="<li><a href='#' >..</a></li>"+
-                //     "<li onclick=getByPage("+totalPage+")><a href='#' >"+totalPage+"</a></li>";
             }
         }
         // 如果不是最后一页

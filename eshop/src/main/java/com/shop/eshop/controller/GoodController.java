@@ -171,7 +171,15 @@ public class GoodController {
         if(is_update != null && is_update > 0){
             //这里能直接得到文件数组，怎么保存到服务器相信不用我多说了
             if (files != null && files.length > 0) {
-                Integer is_delete = goodPicService.deleteGoodPicByGoodId(good.getId());
+                Integer is_delete = 0;
+                if(files.length > 1){
+                    is_delete = goodPicService.deleteGoodPicByGoodId(good.getId());
+                }else {
+                    if(files[0].getOriginalFilename() != ""){
+                        is_delete = goodPicService.deleteGoodPicByGoodId(good.getId());
+                    }
+                }
+
                 if(is_delete != null && is_delete > 0){
                     File[] fileList = file2.listFiles();
                     if(fileList != null){
