@@ -74,7 +74,7 @@
       <th>小计</th>
      </tr>
      <tr th:each="orderDetailList:${orderVo.orderDetailVoList}">
-      <td th:each="goodPicMapper:${orderDetailList.good.goodPics}" th:if="!${goodPicMapper.grade}"><img th:src="@{'../img/'+${orderDetailList.good.id}+'/'+${goodPicMapper.picName}}" width="80px" height="80px" class="thumbnail"/></td>
+      <td th:each="goodPicMapper:${orderDetailList.good.goodPics}" th:if="!${goodPicMapper.grade}"><img th:src="@{'../../img/'+${orderDetailList.good.id}+'/'+${goodPicMapper.picName}}" width="80px" height="80px" class="thumbnail"/></td>
       <td th:text="${orderDetailList.good.name}">这里是产品名称哦</td>
       <td>
        <span>
@@ -102,16 +102,16 @@
      </tr>
     </table>
    </dd>
-   <dd>
-    <table class="noborder">
-     <tr>
-      <td width="10%" style="text-align:right;"><b>管理员操作：</b></td>
-      <td>
-       <textarea class="block" style="width:80%;height:35px;outline:none;"></textarea>
-      </td>
-     </tr>
-    </table>
-   </dd>
+   <!--<dd>-->
+    <!--<table class="noborder">-->
+     <!--<tr>-->
+      <!--<td width="10%" style="text-align:right;"><b>管理员操作：</b></td>-->
+      <!--<td>-->
+       <!--<textarea class="block" style="width:80%;height:35px;outline:none;"></textarea>-->
+      <!--</td>-->
+     <!--</tr>-->
+    <!--</table>-->
+   <!--</dd>-->
    <dd>
       <!-- Operation -->
 	  <div class="BatchOperation">

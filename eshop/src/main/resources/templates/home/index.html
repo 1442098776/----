@@ -178,7 +178,7 @@
 					getGood();
                 })
 			</script>
-			<div class="good_content" th:each="goodType,status:${goodTypeList}" th:if="${status.index} lt 1">
+			<div class="good_content">
 					<div class="good" th:each="good,status:${goodType.good} " th:if="${status.index} lt 8">
 						<a th:href="@{'/introduction/'+${good.id}}"><img th:each="goodpic : ${good.goodPics}" th:if="${goodpic.grade} eq 0" th:src="@{'img/'+${good.id}+'/'+${goodpic.picName}}"/>
 							<div>

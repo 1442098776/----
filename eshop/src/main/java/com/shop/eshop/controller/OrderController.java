@@ -145,6 +145,8 @@ public class OrderController {
     public String updateOrderStatus(OrderVo orderVo){
         if(orderVo.getStatus() == 2){
             orderVo.setReceiveTime(new Date());
+        }if(orderVo.getStatus() == 3){
+            orderVo.setCancelTime(new Date());
         }
         Integer is_update = orderManageService.updateOrderStatus(orderVo);
 
@@ -241,6 +243,7 @@ public class OrderController {
             System.out.println("========================");
             Long day = (new Date().getTime() - order.getSendTime().getTime())/oneDay;
             if(day >= 14){
+                orderVo.setReceiveTime(new Date());
                 is_update = orderManageService.updateOrderStatus(orderVo);
                 //确认收货则修改销量
                 OrderVo orderVo1 = orderManageService.getOrderByOrderId(orderVo);

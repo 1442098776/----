@@ -47,13 +47,13 @@
     <select id="getAllSonGood" parameterType="com.shop.eshop.dto.TypeCondition" resultMap="GoodMap">
         SELECT * from good
         <where>
-            status = 1 and
-                name LIKE concat("%",#{keyWord},"%")
+        status = 1 and  name LIKE concat("%",#{keyWord},"%")
             <if test="list != null">
-                or type IN
+                or (type IN
                 <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
                     #{item}
                 </foreach>
+                and status = 1)
             </if>
             <if test="type == 0">
                 order by sale_num desc,sale_price ASC

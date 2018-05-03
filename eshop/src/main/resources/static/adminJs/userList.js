@@ -32,7 +32,7 @@ function getByPage(pageNow) {
     }
     //获取分页器ul
     var ul=window.document.getElementById("ul");
-    var pageSize = 5;
+    var pageSize = 10;
     //计算总页数
     var totalPage = Math.ceil(List.length/pageSize);
 

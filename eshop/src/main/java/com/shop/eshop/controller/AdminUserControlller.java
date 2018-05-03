@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,8 +28,17 @@ public class AdminUserControlller {
      * @return
      */
     @PostMapping("/admin/getAllUser")
-    public List<User> getAllUser(UserQueryForm userQueryForm){
-        return userService.getAllUser(userQueryForm);
+    public List<User> getAllUser(UserQueryForm userQueryForm, HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("adminUser");
+        List<User> userList = userService.getAllUser(userQueryForm);
+        for(int i = 0;i < userList.size();i++){
+            User user1 = userList.get(i);
+            if(user1.getUserId() == user.getUserId()){
+                userList.remove(i);
+                break;
+            }
+        }
+        return userList;
     }
 
     /**
