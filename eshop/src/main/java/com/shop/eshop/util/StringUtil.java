@@ -1,10 +1,3 @@
-//�ӿ����ͣ��������ߴ������Žӿڣ�֧�ַ�����֤����š�����֪ͨ���ŵȡ�
-// �˻�ע�᣺��ͨ���õ�ַ��ͨ�˻�http://sms.ihuyi.com/register.html
-// ע�����
-//��1�������ڼ䣬����Ĭ�ϵ�ģ����в��ԣ�Ĭ��ģ������ӿ��ĵ���
-//��2����ʹ��APIID���鿴APIID���¼�û�����->��֤�����->��Ʒ����->APIID���� APIkey�����ýӿڣ�
-//��3���ô���������뻥�����߶��Žӿڲο�ʹ�ã��ͻ��ɸ���ʵ����Ҫ���б�д��
-
 package com.shop.eshop.util;
 
 import java.security.MessageDigest;
@@ -26,9 +19,9 @@ public class StringUtil {
 	}
 
 	/**
-	 * ת���ֽ�����Ϊ16�����ִ�
-	 * @param b �ֽ�����
-	 * @return 16�����ִ�
+	 * 转换字节数组为16进制字串
+	 * @param b 字节数组
+	 * @return 16进制字串
 	 */
 	public static String byteArrayToHexString(byte[] b) {
 		StringBuffer resultSb = new StringBuffer();
@@ -42,7 +35,9 @@ public class StringUtil {
 		String resultString = null;
 		try {
 			resultString = new String(origin);
+			// 生成一个MD5加密计算摘要
 			MessageDigest md = MessageDigest.getInstance("MD5");
+			// md.digest(resultString.getBytes())获得密文再转换成16进制字串
 			resultString = byteArrayToHexString(md.digest(resultString
 					.getBytes()));
 		} catch (Exception ex) {

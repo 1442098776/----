@@ -3,6 +3,7 @@ package com.shop.eshop.controller;
 import com.shop.eshop.dto.UserQueryForm;
 import com.shop.eshop.model.User;
 import com.shop.eshop.service.UserService;
+import com.shop.eshop.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,7 +86,9 @@ public class AdminUserControlller {
     @PostMapping("/admin/insertAdmin")
     public String insertAdmin(User user){
         if(user.getPassword() == ""){
-            user.setPassword("123456");
+            user.setPassword(StringUtil.MD5Encode("123456"));
+        }else{
+            user.setPassword(StringUtil.MD5Encode(user.getPassword()));
         }
         user.setRegTime(new Date());
         user.setRole(2);
@@ -116,7 +119,7 @@ public class AdminUserControlller {
      */
     @PostMapping("/admin/resetPassword")
     public String resetPassword(User user){
-        user.setPassword("123456");
+        user.setPassword(StringUtil.MD5Encode("123456"));
         user.setModifyTime(new Date());
         Integer is_update = userService.updateUserById(user);
         if(is_update != null && is_update > 0){
